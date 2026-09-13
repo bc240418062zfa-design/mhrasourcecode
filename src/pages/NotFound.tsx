@@ -1,16 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { Search } from 'lucide-react';
 
 export default function NotFound() {
   return (
     <div className="flex flex-col w-full items-center justify-center min-h-[70vh] px-margin-mobile lg:px-margin text-center">
-      <Helmet>
-        <title>404 Not Found | MIHORA.TECH</title>
-        <meta name="description" content="The page you are looking for does not exist." />
-      </Helmet>
-      
       <div className="space-y-space-md max-w-2xl">
         <div className="flex justify-center">
           <div className="w-24 h-24 rounded-full bg-surface-container-high flex items-center justify-center text-error border-2 border-error">

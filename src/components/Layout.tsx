@@ -1,6 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
 import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 
