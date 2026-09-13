@@ -1,7 +1,8 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase } from 'lucide-react';
+import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase, Sparkles, Sun, Moon } from 'lucide-react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
+import { BrandLogo } from './BrandLogo';
 
 interface SearchItem {
   title: string;
@@ -41,29 +42,31 @@ const SEARCH_CATALOG: SearchItem[] = [
 export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [theme, setTheme] = useState<'desert' | 'cyber'>('desert');
+  const [theme, setTheme] = useState<'desert' | 'cyber'>('cyber');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [avatarError, setAvatarError] = useState(false);
 
   useEffect(() => {
-    // Load theme from localStorage if available
+    // Load theme from localStorage if available, otherwise default to cyber
     const savedTheme = localStorage.getItem('mihora-theme');
-    if (savedTheme === 'cyber' || savedTheme === 'desert') {
+    if (savedTheme === 'desert' || savedTheme === 'cyber') {
       setTheme(savedTheme);
-      if (savedTheme === 'cyber') {
-        document.documentElement.removeAttribute('data-theme');
-      } else {
+      if (savedTheme === 'desert') {
         document.documentElement.setAttribute('data-theme', 'desert');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
       }
     } else {
-      document.documentElement.setAttribute('data-theme', 'desert');
+      // Default to cyber theme when user opens web
+      setTheme('cyber');
+      document.documentElement.removeAttribute('data-theme');
     }
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'desert' ? 'cyber' : 'desert';
+    const newTheme = theme === 'cyber' ? 'desert' : 'cyber';
     setTheme(newTheme);
     localStorage.setItem('mihora-theme', newTheme);
     if (newTheme === 'cyber') {
@@ -145,10 +148,6 @@ export default function Layout() {
                   <span className="font-label-md text-label-md text-secondary-container font-semibold tracking-widest">.TECH</span>
                 </div>
               </Link>
-              <div className="hidden xl:flex items-center gap-space-xs px-space-sm py-1 bg-surface-container-low rounded-DEFAULT">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
-                <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">HQ: PAKISTAN | OPS: GLOBAL | STATUS: ONLINE</span>
-              </div>
             </div>
             
             <nav className="hidden lg:flex items-center gap-space-md xl:gap-space-lg">
@@ -169,7 +168,7 @@ export default function Layout() {
             <div className="flex items-center gap-space-sm sm:gap-space-md">
               <button 
                 onClick={toggleTheme} 
-                className="flex items-center gap-space-xs px-2.5 sm:px-space-md py-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface rounded-DEFAULT transition-all" 
+                className="flex items-center gap-space-xs px-2.5 sm:px-space-md py-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface rounded-DEFAULT transition-all cursor-pointer" 
                 type="button" 
                 aria-label="Toggle Theme"
                 title={`Current theme: ${theme}. Click to switch.`}
@@ -205,7 +204,6 @@ export default function Layout() {
                 <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-secondary-container border border-surface-container-lowest"></span>
               </div>
 
-              {/* Mobile Menu Toggle Button */}
               <button
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
                 className="lg:hidden p-2 text-on-surface-variant hover:text-on-surface bg-surface-container-low rounded-DEFAULT transition-colors"
