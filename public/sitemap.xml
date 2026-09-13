@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://mihora.tech/</loc><priority>1.0</priority></url>
+  <url><loc>https://mihora.tech/services</loc><priority>0.8</priority></url>
+  <url><loc>https://mihora.tech/solutions</loc><priority>0.8</priority></url>
+  <url><loc>https://mihora.tech/industries</loc><priority>0.8</priority></url>
+  <url><loc>https://mihora.tech/engineering</loc><priority>0.8</priority></url>
+  <url><loc>https://mihora.tech/company</loc><priority>0.8</priority></url>
+  <url><loc>https://mihora.tech/insights</loc><priority>0.8</priority></url>
+  <url><loc>https://mihora.tech/careers</loc><priority>0.8</priority></url>
+  <url><loc>https://mihora.tech/contact</loc><priority>0.8</priority></url>
+  <url><loc>https://mihora.tech/legal</loc><priority>0.5</priority></url>
+</urlset>
