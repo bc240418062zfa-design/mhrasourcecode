@@ -330,11 +330,11 @@ export default function Layout() {
                 <span className="font-label-md text-label-md text-secondary-container font-semibold tracking-widest">.TECH</span>
               </div>
               <p className="font-label-md text-label-md text-secondary-fixed-dim uppercase tracking-wider">Technology Engineered for the Real World.</p>
-              <p className="font-body-sm text-body-sm text-on-surface-variant">Headquartered in Pakistan. Operating Worldwide. Sovereign Engineering &amp; Industrial Intelligence.</p>
+              <p className="font-body-sm text-body-sm text-on-surface-variant">Operating Dual Engineering Hubs in the UK &amp; Pakistan. Deploying Worldwide. Sovereign Engineering &amp; Industrial Intelligence.</p>
             </div>
             <div className="flex flex-wrap items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-space-md py-space-sm rounded-DEFAULT">
-              <div>UTC: <span className="text-secondary font-mono">STABLE</span></div>
-              <div>PKT (ISB): <span className="text-secondary font-mono">UTC+5 ACTIVE</span></div>
+              <div>UK (LON): <span className="text-secondary font-mono">UTC+0 ACTIVE</span></div>
+              <div>PK (ISB): <span className="text-secondary font-mono">UTC+5 ACTIVE</span></div>
               <div>DISPATCH: <span className="text-on-surface font-mono">hr@mihora.tech</span></div>
             </div>
           </div>

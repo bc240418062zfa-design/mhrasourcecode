@@ -13,16 +13,16 @@ import {
 
 const nodeData: Record<string, any> = {
   HQ: {
-    code: "// SOVEREIGN HUB: PK-ISB-01",
-    title: "Pakistan Central Engineering HQ",
-    desc: "Core architectural authority, systems telemetry operations center, R&D laboratories, and global dispatch coordinators.",
+    code: "// DUAL CORE HUB: PK-ISB-01",
+    title: "Pakistan Systems Architecture Hub",
+    desc: "Core architectural authority, systems telemetry operations center, R&D simulation laboratories, and global dispatch command.",
     lat: "33.6844° N",
     lon: "73.0479° E"
   },
   LON: {
-    code: "// GATEWAY: EMEA-UK-LON",
-    title: "London Engineering Satellite",
-    desc: "European enterprise client bridge, regulatory compliance alignment, and regional technical program delivery.",
+    code: "// DUAL CORE HUB: UK-LON-01",
+    title: "United Kingdom Engineering Hub",
+    desc: "EMEA operations headquarters, European enterprise delivery, regulatory ISO compliance alignment, and strategic engineering delivery.",
     lat: "51.5074° N",
     lon: "0.1278° W"
   },
@@ -130,7 +130,7 @@ const services = [
     tag: "DISCIPLINE: MT-05",
     sub: "CONTINUOUS TELEMETRY OPS",
     headline: "Sovereign Managed Technology & NOC",
-    body: "Around-the-clock systems monitoring from our central Pakistani NOC, tracking packet latencies, server thermals, database health, and cyber perimeter anomalies in real-time.",
+    body: "Around-the-clock systems monitoring from our dual UK & Pakistani NOC hubs, tracking packet latencies, server thermals, database health, and cyber perimeter anomalies in real-time.",
     sub1: "24/7/365 Network Operations Center (NOC) oversight",
     sub2: "Automated patch orchestration & vulnerability mitigation",
     sub3: "Remote desktop & hardware asset lifecycle management",
@@ -166,7 +166,7 @@ export default function Home() {
                 <span className="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span>
                 <span className="font-label-sm text-label-sm uppercase tracking-widest text-secondary-container">GLOBAL TECHNOLOGY &amp; ENGINEERING</span>
                 <span className="text-outline-variant text-label-sm">|</span>
-                <span className="font-label-sm text-label-sm text-on-surface-variant font-mono">SYS_VER 4.2.0 // PK-HQ</span>
+                <span className="font-label-sm text-label-sm text-on-surface-variant font-mono">SYS_VER 4.2.0 // DUAL HUB: UK &amp; PK</span>
               </div>
               <h1 className="font-headline-xl text-headline-xl text-on-surface tracking-tight uppercase font-bold max-w-4xl">
                 Technology Without <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-container">Boundaries.</span>
@@ -175,7 +175,7 @@ export default function Home() {
                 Digital systems. Physical infrastructure. Human engineering. Global delivery.
               </p>
               <p className="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
-                MIHORA.TECH is a sovereign technology and industrial engineering enterprise headquartered in Pakistan, orchestrating resilient software architectures, deep hardware networks, sovereign automation, and mission-critical field operations across five continents.
+                MIHORA.TECH is a sovereign technology and industrial engineering enterprise operating dual hubs across the United Kingdom and Pakistan, orchestrating resilient software architectures, deep hardware networks, sovereign automation, and mission-critical field operations across five continents.
               </p>
               <div className="pt-space-sm flex flex-wrap items-center gap-space-md">
                 <a href="mailto:hr@mihora.tech" className="inline-flex items-center gap-space-sm px-space-xl py-3.5 bg-primary-container hover:bg-secondary-container text-on-primary hover:text-on-secondary font-label-md text-label-md uppercase tracking-widest font-semibold rounded-DEFAULT transition-all shadow-[0_0_24px_var(--color-primary-container)]">
@@ -191,12 +191,12 @@ export default function Home() {
             <div className="lg:col-span-4 bg-surface-container-low p-space-md rounded-DEFAULT space-y-space-sm shadow-xl">
               <div className="flex items-center justify-between pb-space-xs">
                 <span className="font-label-sm text-label-sm text-secondary-container uppercase tracking-wider">// TELEMETRY ORBITAL</span>
-                <span className="font-label-sm text-label-sm text-on-surface-variant font-mono">33.6844° N, 73.0479° E</span>
+                <span className="font-label-sm text-label-sm text-on-surface-variant font-mono">LON (UK) &amp; ISB (PK)</span>
               </div>
               <div className="grid grid-cols-2 gap-space-xs font-mono text-label-sm">
                 <div className="p-space-xs bg-surface-container rounded-DEFAULT">
-                  <span className="text-outline block">ORIGIN HUB</span>
-                  <span className="text-on-surface font-semibold">ISB HQ / PK</span>
+                  <span className="text-outline block">ORIGIN HUBS</span>
+                  <span className="text-on-surface font-semibold">UK &amp; PAK DUAL</span>
                 </div>
                 <div className="p-space-xs bg-surface-container rounded-DEFAULT">
                   <span className="text-outline block">NETWORK SYNC</span>
@@ -225,9 +225,9 @@ export default function Home() {
                 <h2 className="font-headline-sm text-headline-sm text-on-surface uppercase font-bold">The MIHORA Global Engineering Network</h2>
               </div>
               <div className="flex items-center gap-space-md text-label-sm font-label-sm font-mono text-on-surface-variant">
-                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-secondary-container"></span>HQ ANCHOR</span>
-                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-primary-container"></span>REGIONAL HUB</span>
-                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-secondary"></span>EDGE SATELLITE</span>
+                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span>DUAL CORE HUBS (UK &amp; PK)</span>
+                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-primary-container"></span>REGIONAL GATEWAYS</span>
+                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-secondary"></span>EDGE SATELLITES</span>
               </div>
             </div>
             
@@ -243,9 +243,10 @@ export default function Home() {
               
               <svg className="w-full h-full relative z-10" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 500">
                 <g className="opacity-60" stroke="var(--color-primary-container)" strokeDasharray="4,4" strokeWidth="1.5">
-                  <line className="animate-pulse" x1="580" x2="480" y1="240" y2="170"></line>
+                  <line className="animate-pulse stroke-secondary-container stroke-[2.5]" x1="480" x2="580" y1="170" y2="240"></line>
                   <line x1="580" x2="520" y1="240" y2="280"></line>
                   <line x1="580" x2="730" y1="240" y2="300"></line>
+                  <line x1="480" x2="250" y1="170" y2="190"></line>
                   <line x1="580" x2="250" y1="240" y2="190"></line>
                   <line x1="580" x2="160" y1="240" y2="210"></line>
                   <line x1="580" x2="800" y1="240" y2="200"></line>
@@ -254,17 +255,26 @@ export default function Home() {
                 </g>
                 <circle className="opacity-30" cx="580" cy="240" fill="none" r="42" stroke="var(--color-secondary-container)" strokeWidth="0.75"></circle>
                 <circle className="opacity-20" cx="580" cy="240" fill="none" r="75" stroke="var(--color-secondary-container)" strokeWidth="0.5"></circle>
+
+                <circle className="opacity-30" cx="480" cy="170" fill="none" r="35" stroke="var(--color-secondary-container)" strokeWidth="0.75"></circle>
+                <circle className="opacity-20" cx="480" cy="170" fill="none" r="60" stroke="var(--color-secondary-container)" strokeWidth="0.5"></circle>
                 
+                {/* UK Hub */}
+                <g className="cursor-pointer group" onClick={() => setActiveNodeId('LON')}>
+                  <circle className="opacity-40 animate-ping" cx="480" cy="170" fill="var(--color-primary-container)" r="13"></circle>
+                  <circle cx="480" cy="170" fill="var(--color-secondary-container)" r="7.5"></circle>
+                  <circle cx="480" cy="170" fill="#ffffff" r="3"></circle>
+                  <text fill="#a5e7ff" fontFamily="JetBrains Mono" fontSize="11" fontWeight="700" x="410" y="148">UK HUB: LONDON</text>
+                  <text fill="#8d90a1" fontFamily="JetBrains Mono" fontSize="8" x="410" y="159">51.5074° N, 0.1278° W</text>
+                </g>
+
+                {/* Pakistan Hub */}
                 <g className="cursor-pointer group" onClick={() => setActiveNodeId('HQ')}>
                   <circle className="opacity-40 animate-ping" cx="580" cy="240" fill="var(--color-primary-container)" r="14"></circle>
                   <circle cx="580" cy="240" fill="var(--color-secondary-container)" r="8"></circle>
                   <circle cx="580" cy="240" fill="#ffffff" r="3"></circle>
-                  <text fill="#a5e7ff" fontFamily="JetBrains Mono" fontSize="12" fontWeight="700" x="596" y="235">HQ: PAKISTAN</text>
-                  <text fill="#8d90a1" fontFamily="JetBrains Mono" fontSize="9" x="596" y="249">33.6844° N, 73.0479° E</text>
-                </g>
-                <g className="cursor-pointer group" onClick={() => setActiveNodeId('LON')}>
-                  <circle cx="480" cy="170" fill="#b5c4ff" r="5"></circle>
-                  <text fill="#e1e2ec" fontFamily="JetBrains Mono" fontSize="10" x="440" y="155">LONDON (EMEA)</text>
+                  <text fill="#a5e7ff" fontFamily="JetBrains Mono" fontSize="11" fontWeight="700" x="596" y="235">PK HUB: ISLAMABAD</text>
+                  <text fill="#8d90a1" fontFamily="JetBrains Mono" fontSize="8" x="596" y="247">33.6844° N, 73.0479° E</text>
                 </g>
                 <g className="cursor-pointer group" onClick={() => setActiveNodeId('DXB')}>
                   <circle cx="520" cy="280" fill="#a5e7ff" r="5"></circle>

@@ -16,14 +16,14 @@ export default function Company() {
               A NEW CLASS OF <span className="text-secondary-container">ENGINEERING ENTERPRISE.</span>
             </h1>
             <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
-              Headquartered in Pakistan, operating globally. MIHORA.TECH is built on a simple thesis: the most complex problems require mastery of both code and the physical world.
+              Operating dual engineering hubs across the United Kingdom and Pakistan, delivering globally. MIHORA.TECH is built on a simple thesis: the most complex problems require mastery of both code and the physical world.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-space-md">
             <div className="bg-surface-container-low p-space-md rounded-DEFAULT space-y-2">
               <Globe className="text-secondary-container" size={24} />
               <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold">Global Reach</h3>
-              <p className="font-body-sm text-body-sm text-on-surface-variant">Operating across EMEA, APAC, and NA with centralized telemetry.</p>
+              <p className="font-body-sm text-body-sm text-on-surface-variant">Operating dual UK/PK hubs with field teams across EMEA, APAC, and North America.</p>
             </div>
             <div className="bg-surface-container-low p-space-md rounded-DEFAULT space-y-2">
               <Users className="text-secondary-container" size={24} />
@@ -66,26 +66,46 @@ export default function Company() {
           <div className="text-center space-y-space-xs max-w-3xl mx-auto">
             <div className="font-label-sm text-label-sm text-primary uppercase font-bold tracking-widest">// THE ENGINE</div>
             <h2 className="font-headline-lg text-headline-lg text-on-surface font-bold uppercase">Global Operating Model</h2>
-            <p className="font-body-md text-body-md text-on-surface-variant">Our hybrid workforce allows us to deliver high-tier engineering solutions across multiple time zones with uninterrupted velocity.</p>
+            <p className="font-body-md text-body-md text-on-surface-variant">Our dual-hub structure across the United Kingdom and Pakistan powers 24/7 engineering velocity, robust governance, and global physical field execution.</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
-            <div className="bg-surface-container p-space-xl rounded-DEFAULT shadow-lg flex flex-col items-start gap-space-md">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+            <div className="bg-surface-container p-space-lg rounded-DEFAULT shadow-lg flex flex-col items-start gap-space-md border-t-2 border-primary">
               <div className="w-12 h-12 bg-primary-container text-on-primary-container flex items-center justify-center rounded-full">
-                <span className="font-bold text-lg">HQ</span>
+                <span className="font-bold text-lg">UK</span>
               </div>
-              <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold uppercase">Sovereign Architecture Labs (PK)</h3>
+              <div>
+                <div className="font-mono text-label-sm text-secondary-container">DUAL HUB // EMEA HEADQUARTERS</div>
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold uppercase mt-1">United Kingdom Hub (London)</h3>
+              </div>
               <p className="font-body-md text-body-md text-on-surface-variant">
-                The core logic and architectural blueprints are drafted in our central R&D hubs. This is where massive datasets are processed, code is compiled, and hardware rigs are simulated before global dispatch.
+                Strategic client governance, enterprise architecture alignment, ISO/IEC standards compliance, and European operational command.
               </p>
             </div>
-            <div className="bg-surface-container p-space-xl rounded-DEFAULT shadow-lg flex flex-col items-start gap-space-md">
+
+            <div className="bg-surface-container p-space-lg rounded-DEFAULT shadow-lg flex flex-col items-start gap-space-md border-t-2 border-secondary-container">
               <div className="w-12 h-12 bg-secondary-container text-on-secondary-container flex items-center justify-center rounded-full">
+                <span className="font-bold text-lg">PK</span>
+              </div>
+              <div>
+                <div className="font-mono text-label-sm text-secondary-container">DUAL HUB // SYSTEMS &amp; R&amp;D CENTER</div>
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold uppercase mt-1">Pakistan Systems Labs (Islamabad)</h3>
+              </div>
+              <p className="font-body-md text-body-md text-on-surface-variant">
+                Core systems algorithms, distributed data processing, automated continuous integration pipelines, and full hardware rig simulations.
+              </p>
+            </div>
+
+            <div className="bg-surface-container p-space-lg rounded-DEFAULT shadow-lg flex flex-col items-start gap-space-md border-t-2 border-outline">
+              <div className="w-12 h-12 bg-surface-container-high text-on-surface flex items-center justify-center rounded-full">
                 <span className="font-bold text-lg">FD</span>
               </div>
-              <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold uppercase">Field Deployments (Global)</h3>
+              <div>
+                <div className="font-mono text-label-sm text-on-surface-variant">WORLDWIDE INFRASTRUCTURE</div>
+                <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold uppercase mt-1">Field Deployments (Global)</h3>
+              </div>
               <p className="font-body-md text-body-md text-on-surface-variant">
-                From laying fiber-optic trunks in the Middle East to configuring automated fulfillment sensors in North America, our field teams translate our code into physical reality.
+                Certified field engineering units active across EMEA, APAC, and North America for data center build-outs, fiber trunks, and rapid break-fix.
               </p>
             </div>
           </div>

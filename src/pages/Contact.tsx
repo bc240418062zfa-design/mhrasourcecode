@@ -70,8 +70,19 @@ export default function Contact() {
               <div className="bg-surface-container p-space-md rounded-DEFAULT flex gap-space-md items-start shadow-md">
                 <MapPin className="text-secondary-container mt-1 shrink-0" size={24} />
                 <div>
-                  <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold uppercase">Primary HQ (Pakistan)</h3>
-                  <p className="font-body-md text-body-md text-on-surface-variant">Systems Architecture &amp; Core Engineering Labs</p>
+                  <div className="font-mono text-label-sm text-secondary-container uppercase tracking-wider font-semibold">DUAL HUB // EMEA HEADQUARTERS</div>
+                  <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold uppercase">United Kingdom Hub (London)</h3>
+                  <p className="font-body-md text-body-md text-on-surface-variant">Strategic Delivery, Enterprise Architecture &amp; EMEA Operations</p>
+                  <p className="font-mono text-label-sm text-secondary pt-1">LAT: 51.5074° N // LNG: 0.1278° W</p>
+                </div>
+              </div>
+
+              <div className="bg-surface-container p-space-md rounded-DEFAULT flex gap-space-md items-start shadow-md">
+                <MapPin className="text-secondary-container mt-1 shrink-0" size={24} />
+                <div>
+                  <div className="font-mono text-label-sm text-secondary-container uppercase tracking-wider font-semibold">DUAL HUB // SYSTEMS &amp; R&amp;D CENTER</div>
+                  <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold uppercase">Pakistan Systems Hub (Islamabad)</h3>
+                  <p className="font-body-md text-body-md text-on-surface-variant">Core Systems Architecture, Simulation Labs &amp; Telemetry Command</p>
                   <p className="font-mono text-label-sm text-secondary pt-1">LAT: 33.6844° N // LNG: 73.0479° E</p>
                 </div>
               </div>
@@ -80,7 +91,7 @@ export default function Contact() {
                 <Globe className="text-secondary-container mt-1 shrink-0" size={24} />
                 <div>
                   <h3 className="font-headline-sm text-headline-sm text-on-surface font-bold uppercase">Global Deployments</h3>
-                  <p className="font-body-md text-body-md text-on-surface-variant">Active field engineering teams operating across EMEA &amp; APAC regions.</p>
+                  <p className="font-body-md text-body-md text-on-surface-variant">Active field engineering teams operating across UK, EMEA, APAC &amp; North America.</p>
                 </div>
               </div>
 

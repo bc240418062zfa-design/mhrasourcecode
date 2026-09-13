@@ -47,10 +47,10 @@ export default function Careers() {
                 <div className="text-outline uppercase text-xs">// OPEN ENGINEERING CADRES (CLICK TO APPLY)</div>
                 <div className="space-y-space-xs">
                   {[
-                    { role: "Sr. Distributed Systems Eng", loc: "HQ/REMOTE" },
-                    { role: "Lead Field Tech (Cabling/Racks)", loc: "ON-SITE" },
+                    { role: "Sr. Distributed Systems Eng", loc: "UK/REMOTE" },
+                    { role: "Lead Field Tech (Cabling/Racks)", loc: "EMEA/ON-SITE" },
                     { role: "Automation Architect (Python/K8s)", loc: "GLOBAL" },
-                    { role: "NOC Telemetry Specialist", loc: "PK-ISB" },
+                    { role: "NOC Telemetry Specialist", loc: "UK/PK HUBS" },
                   ].map((cadre, idx) => (
                     <button
                       key={idx}
@@ -149,7 +149,7 @@ export default function Careers() {
           <div className="text-center space-y-space-xs max-w-3xl mx-auto">
             <div className="font-label-sm text-label-sm text-secondary-container uppercase tracking-widest font-bold">// MOBILITY</div>
             <h2 className="font-headline-lg text-headline-lg text-on-surface font-bold uppercase tracking-tight">Global Relocation & Deployment</h2>
-            <p className="font-body-md text-body-md text-on-surface-variant">We source top engineering talent globally and sponsor complete relocation to our HQ or major operational zones across the EMEA and APAC regions.</p>
+            <p className="font-body-md text-body-md text-on-surface-variant">We source top engineering talent globally and sponsor complete relocation to our UK and Pakistan dual hubs or major operational zones across the EMEA and APAC regions.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-space-lg">

@@ -134,7 +134,7 @@ export default function Engineering() {
                 SYS_ARCH_VER: 4.8.2
               </span>
               <span className="text-outline">|</span>
-              <span className="text-on-surface-variant">ISB_NOC // 33.6844° N, 73.0479° E</span>
+              <span className="text-on-surface-variant">DUAL HUBS: LON / ISB // UK &amp; PK</span>
             </div>
           </div>
           
@@ -411,20 +411,20 @@ export default function Engineering() {
         <div className="w-full px-margin-mobile lg:px-margin space-y-space-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
             <div className="lg:col-span-5 space-y-space-md">
-              <div className="font-label-sm text-label-sm text-secondary tracking-widest uppercase font-mono">// SOVEREIGN HUB &amp; SPOKE</div>
+              <div className="font-label-sm text-label-sm text-secondary tracking-widest uppercase font-mono">// SOVEREIGN DUAL HUB &amp; SPOKE</div>
               <h2 className="font-headline-lg text-headline-lg text-on-surface font-bold uppercase tracking-tight leading-tight">
-                Pakistan Headquarters. <br/>
-                Global Operational Footprint.
+                United Kingdom &amp; Pakistan. <br/>
+                Dual-Hub Global Operational Footprint.
               </h2>
               <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                Our central engineering command hub in Pakistan coordinates worldwide infrastructure rollout, software architecture verification, and remote execution. By fusing localized on-the-ground precision with global ISO-grade technical compliance, we deliver unmatched sovereign speed and engineering density across continents.
+                Our synchronized engineering command hubs in London (United Kingdom) and Islamabad (Pakistan) coordinate worldwide infrastructure rollout, software architecture verification, and remote execution. By fusing UK strategic delivery with localized on-the-ground engineering precision and global ISO-grade compliance, we deliver unmatched sovereign speed and engineering density across continents.
               </p>
               <div className="space-y-space-sm pt-space-xs">
                 <div className="flex items-center gap-space-sm p-space-sm bg-surface-container-low rounded">
                   <Network className="text-secondary" />
                   <div>
-                    <div className="font-headline-sm text-headline-sm text-on-surface font-semibold">Centralized Architecture Command</div>
-                    <div className="font-body-sm text-body-sm text-on-surface-variant">Core systems design, automated testing pipelines, and hardware testing labs in Islamabad.</div>
+                    <div className="font-headline-sm text-headline-sm text-on-surface font-semibold">Dual Architectural Command</div>
+                    <div className="font-body-sm text-body-sm text-on-surface-variant">Core systems design, automated testing pipelines, and hardware testing labs synchronized across London and Islamabad.</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-space-sm p-space-sm bg-surface-container-low rounded">
@@ -468,9 +468,9 @@ export default function Engineering() {
                     </div>
                   </div>
                   <div className="self-center bg-primary-container p-space-md rounded shadow-[0_0_24px_var(--color-primary-container)] text-center space-y-1 z-10">
-                    <div className="font-label-sm text-label-sm text-secondary-container font-mono tracking-widest font-bold">GLOBAL HQ NOC</div>
-                    <div className="font-headline-sm text-headline-sm text-on-surface font-bold">ISLAMABAD, PAKISTAN</div>
-                    <div className="font-label-sm text-label-sm text-on-primary-container font-mono">33.6844° N, 73.0479° E // UTC+5</div>
+                    <div className="font-label-sm text-label-sm text-secondary-container font-mono tracking-widest font-bold">DUAL COMMAND NOC HUBS</div>
+                    <div className="font-headline-sm text-headline-sm text-on-surface font-bold">LONDON (UK) &amp; ISLAMABAD (PK)</div>
+                    <div className="font-label-sm text-label-sm text-on-primary-container font-mono">51.5074° N (LON) // 33.6844° N (ISB)</div>
                   </div>
                   <div className="flex justify-between items-end">
                     <div className="font-mono text-[10px] text-outline">
