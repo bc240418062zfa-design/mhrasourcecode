@@ -1,8 +1,10 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase, Sparkles, Sun, Moon } from 'lucide-react';
+import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase, Sparkles, Sun, Moon, Bot, Zap, CornerDownLeft } from 'lucide-react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { BrandLogo } from './BrandLogo';
+import { SEOHead } from './SEOHead';
+import { queryAIEngine, type AIResponse } from './AIEngine';
 
 interface SearchItem {
   title: string;
@@ -45,7 +47,10 @@ export default function Layout() {
   const [theme, setTheme] = useState<'desert' | 'cyber'>('cyber');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchMode, setSearchMode] = useState<'catalog' | 'ai'>('catalog');
   const [searchQuery, setSearchQuery] = useState('');
+  const [aiResponse, setAiResponse] = useState<AIResponse | null>(null);
+  const [isAiProcessing, setIsAiProcessing] = useState(false);
   const [avatarError, setAvatarError] = useState(false);
 
   useEffect(() => {
@@ -122,7 +127,20 @@ export default function Layout() {
   const handleSelectSearchItem = (path: string) => {
     setSearchOpen(false);
     setSearchQuery('');
+    setAiResponse(null);
     navigate(path);
+  };
+
+  const handleAskAI = (promptText?: string) => {
+    const q = promptText || searchQuery;
+    if (!q.trim()) return;
+    setIsAiProcessing(true);
+    setSearchMode('ai');
+    setTimeout(() => {
+      const res = queryAIEngine(q);
+      setAiResponse(res);
+      setIsAiProcessing(false);
+    }, 300);
   };
 
   const navLinks = [
@@ -138,6 +156,9 @@ export default function Layout() {
 
   return (
     <div className="flex flex-col w-full min-h-screen">
+      {/* Route-Aware Dynamic SEO Head */}
+      <SEOHead />
+
       <header className="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_16px_rgba(0,0,0,0.5)]">
         <div className="w-full px-margin-mobile lg:px-margin">
           <div className="h-20 flex items-center justify-between gap-space-md">
@@ -250,65 +271,245 @@ export default function Layout() {
         )}
       </header>
 
-      {/* Command Palette / Search Modal */}
+      {/* Command Palette / Search & AI Copilot Modal */}
       {searchOpen && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-start justify-center pt-24 px-4">
+        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-start justify-center pt-16 sm:pt-24 px-4">
           <div 
-            className="w-full max-w-2xl bg-surface-container-low border border-outline/30 rounded-DEFAULT shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+            className="w-full max-w-2xl bg-surface-container-low border border-outline/30 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150 flex flex-col max-h-[85vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-space-sm px-space-md py-space-sm bg-surface-container border-b border-outline/20">
-              <Search size={18} className="text-secondary" />
-              <input
-                type="text"
-                autoFocus
-                placeholder="Search services, solutions, engineering layers, papers..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-transparent text-on-surface font-body-md placeholder:text-outline focus:outline-none"
-              />
+            {/* Mode Switcher Tabs */}
+            <div className="flex items-center justify-between border-b border-outline/20 bg-surface-container-lowest px-4 py-2">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setSearchMode('catalog')}
+                  className={clsx(
+                    "px-3 py-1 rounded-md text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-1.5",
+                    searchMode === 'catalog' 
+                      ? "bg-surface-container-highest text-secondary font-semibold border border-secondary/30" 
+                      : "text-on-surface-variant hover:text-on-surface"
+                  )}
+                >
+                  <Search size={13} />
+                  <span>Index ({SEARCH_CATALOG.length})</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchMode('ai');
+                    if (searchQuery && !aiResponse) {
+                      handleAskAI(searchQuery);
+                    }
+                  }}
+                  className={clsx(
+                    "px-3 py-1 rounded-md text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-1.5",
+                    searchMode === 'ai' 
+                      ? "bg-secondary/15 text-secondary font-semibold border border-secondary/40 shadow-[0_0_12px_rgba(0,210,255,0.2)]" 
+                      : "text-on-surface-variant hover:text-on-surface"
+                  )}
+                >
+                  <Sparkles size={13} className="text-secondary animate-pulse" />
+                  <span>AI Copilot</span>
+                </button>
+              </div>
+
               <button 
                 onClick={() => setSearchOpen(false)}
-                className="p-1 text-on-surface-variant hover:text-on-surface font-mono text-xs bg-surface-container-highest px-2 py-0.5 rounded"
+                className="p-1 text-on-surface-variant hover:text-on-surface font-mono text-xs bg-surface-container-highest px-2 py-0.5 rounded cursor-pointer"
               >
                 ESC
               </button>
             </div>
 
-            <div className="max-h-96 overflow-y-auto divide-y divide-surface-container p-space-xs">
-              {filteredSearchResults.length > 0 ? (
-                filteredSearchResults.map((item, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => handleSelectSearchItem(item.path)}
-                    className="w-full text-left p-space-sm hover:bg-surface-container rounded-DEFAULT transition-all flex items-start justify-between gap-space-sm group"
-                  >
-                    <div className="space-y-0.5">
-                      <div className="flex items-center gap-2">
-                        <span className="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
-                          {item.title}
-                        </span>
-                        <span className="font-mono text-[10px] px-1.5 py-0.2 bg-surface-container-highest text-secondary-container rounded uppercase">
-                          {item.category}
-                        </span>
-                      </div>
-                      <p className="font-body-sm text-body-sm text-on-surface-variant">
-                        {item.description}
-                      </p>
-                    </div>
-                    <ArrowRight size={16} className="text-outline group-hover:text-secondary group-hover:translate-x-1 transition-all mt-1 flex-shrink-0" />
-                  </button>
-                ))
+            {/* Input Bar */}
+            <div className="flex items-center gap-space-sm px-space-md py-3 bg-surface-container border-b border-outline/20">
+              {searchMode === 'ai' ? (
+                <Bot size={20} className="text-secondary shrink-0" />
               ) : (
-                <div className="p-space-lg text-center font-body-md text-on-surface-variant">
-                  No matching architecture specifications found for "{searchQuery}".
+                <Search size={18} className="text-secondary shrink-0" />
+              )}
+              
+              <input
+                type="text"
+                autoFocus
+                placeholder={
+                  searchMode === 'ai' 
+                    ? "Ask AI Copilot: e.g. 'How does fiber cabling work?', '9-layer stack'..." 
+                    : "Search services, solutions, engineering layers, papers..."
+                }
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    if (searchMode === 'ai') {
+                      handleAskAI();
+                    } else if (filteredSearchResults.length > 0) {
+                      handleSelectSearchItem(filteredSearchResults[0].path);
+                    }
+                  }
+                }}
+                className="w-full bg-transparent text-on-surface font-body-md placeholder:text-outline focus:outline-none"
+              />
+
+              {searchMode === 'ai' ? (
+                <button
+                  onClick={() => handleAskAI()}
+                  disabled={!searchQuery.trim() || isAiProcessing}
+                  className="px-3 py-1 bg-secondary text-surface font-mono text-xs font-bold rounded flex items-center gap-1 hover:bg-secondary/90 transition-all disabled:opacity-50 cursor-pointer"
+                >
+                  <Sparkles size={13} />
+                  <span>Synthesize</span>
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleAskAI(searchQuery || 'Overview of sovereign architecture')}
+                  className="hidden sm:flex items-center gap-1 px-2.5 py-1 bg-surface-container-highest hover:bg-secondary/20 text-secondary font-mono text-[11px] rounded border border-secondary/30 transition-all"
+                  title="Ask AI Copilot about this search query"
+                >
+                  <Sparkles size={12} />
+                  <span>Ask AI</span>
+                </button>
+              )}
+            </div>
+
+            {/* Content Area */}
+            <div className="overflow-y-auto flex-1 p-space-sm max-h-[60vh]">
+              {searchMode === 'catalog' ? (
+                /* Catalog List */
+                <div className="divide-y divide-surface-container">
+                  {filteredSearchResults.length > 0 ? (
+                    filteredSearchResults.map((item, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleSelectSearchItem(item.path)}
+                        className="w-full text-left p-space-sm hover:bg-surface-container rounded-DEFAULT transition-all flex items-start justify-between gap-space-sm group"
+                      >
+                        <div className="space-y-0.5">
+                          <div className="flex items-center gap-2">
+                            <span className="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+                              {item.title}
+                            </span>
+                            <span className="font-mono text-[10px] px-1.5 py-0.2 bg-surface-container-highest text-secondary-container rounded uppercase">
+                              {item.category}
+                            </span>
+                          </div>
+                          <p className="font-body-sm text-body-sm text-on-surface-variant">
+                            {item.description}
+                          </p>
+                        </div>
+                        <ArrowRight size={16} className="text-outline group-hover:text-secondary group-hover:translate-x-1 transition-all mt-1 flex-shrink-0" />
+                      </button>
+                    ))
+                  ) : (
+                    <div className="p-space-lg text-center font-body-md text-on-surface-variant space-y-3">
+                      <div>No matching architecture catalog specifications for "{searchQuery}".</div>
+                      <button
+                        onClick={() => handleAskAI(searchQuery)}
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/20 hover:bg-secondary/30 border border-secondary/40 text-secondary rounded-DEFAULT font-mono text-xs font-bold"
+                      >
+                        <Sparkles size={14} />
+                        <span>Query AI Architecture Engine for "{searchQuery}"</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* AI Architecture Copilot View */
+                <div className="space-y-4 p-2">
+                  {/* Quick Suggestion Chips */}
+                  <div>
+                    <div className="font-mono text-[11px] uppercase tracking-wider text-outline mb-2">
+                      Suggested Architecture Queries:
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {[
+                        "How does physical fiber & cabling work?",
+                        "Explain the 9-Layer Architecture Stack",
+                        "What are your AI automation pipelines?",
+                        "Emergency 24/7 dispatch & SLAs",
+                        "Healthcare HIPAA & PACS compliance"
+                      ].map((prompt, i) => (
+                        <button
+                          key={i}
+                          onClick={() => {
+                            setSearchQuery(prompt);
+                            handleAskAI(prompt);
+                          }}
+                          className="px-2.5 py-1 bg-surface-container-high hover:bg-surface-container-highest border border-outline/25 hover:border-secondary/50 text-[11px] font-mono text-on-surface-variant hover:text-on-surface rounded transition-all text-left"
+                        >
+                          {prompt}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {isAiProcessing && (
+                    <div className="p-6 text-center space-y-3 bg-surface-container-lowest/60 rounded-xl border border-secondary/20">
+                      <div className="flex items-center justify-center gap-2 text-secondary font-mono text-xs animate-pulse">
+                        <Sparkles size={16} className="animate-spin" />
+                        <span>SYNTHESIZING SOVEREIGN ARCHITECTURAL KNOWLEDGE...</span>
+                      </div>
+                      <div className="w-48 h-1 bg-surface-container mx-auto overflow-hidden rounded-full">
+                        <div className="w-full h-full bg-secondary animate-[shimmer_1.5s_infinite] -translate-x-full" />
+                      </div>
+                    </div>
+                  )}
+
+                  {!isAiProcessing && aiResponse && (
+                    <div className="bg-surface-container-lowest p-4 sm:p-5 rounded-xl border border-secondary/30 shadow-lg space-y-4">
+                      {/* Telemetry Output Box */}
+                      <div className="px-3 py-1.5 bg-black/50 border border-secondary/30 rounded font-mono text-[11px] text-secondary overflow-x-auto">
+                        {aiResponse.telemetryCode}
+                      </div>
+
+                      {/* Summary */}
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2 font-mono text-xs uppercase text-secondary font-bold">
+                          <Bot size={14} />
+                          <span>Architectural Synthesis</span>
+                        </div>
+                        <p className="font-body-md text-sm text-on-surface leading-relaxed">
+                          {aiResponse.summary}
+                        </p>
+                      </div>
+
+                      {/* Architecture Points */}
+                      <div className="space-y-2 pt-2 border-t border-outline/15">
+                        <div className="font-mono text-[11px] uppercase tracking-wider text-outline">
+                          Key Technical Deductions:
+                        </div>
+                        <div className="space-y-1.5">
+                          {aiResponse.architecturePoints.map((pt, idx) => (
+                            <div key={idx} className="flex items-start gap-2 text-xs font-body-md text-on-surface-variant">
+                              <Zap size={13} className="text-secondary mt-0.5 shrink-0" />
+                              <span>{pt}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Recommended Navigation Action */}
+                      <div className="pt-3 border-t border-outline/15 flex items-center justify-between gap-3">
+                        <span className="font-mono text-[11px] text-outline hidden sm:inline">
+                          VERIFIED SPECIFICATION
+                        </span>
+                        <button
+                          onClick={() => handleSelectSearchItem(aiResponse.recommendedAction.path)}
+                          className="px-4 py-2 bg-secondary text-surface font-mono text-xs font-bold rounded-DEFAULT hover:bg-secondary/90 transition-all flex items-center gap-2 shadow-sm cursor-pointer ml-auto"
+                        >
+                          <span>{aiResponse.recommendedAction.label}</span>
+                          <ArrowRight size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
 
-            <div className="px-space-md py-2 bg-surface-container-lowest flex items-center justify-between text-[11px] font-mono text-outline">
-              <span>PROMPT: ↑↓ TO NAVIGATE • ↵ TO SELECT</span>
-              <span>MIHORA ARCH_DISCOVERY</span>
+            {/* Bottom Status Bar */}
+            <div className="px-space-md py-2.5 bg-surface-container-lowest border-t border-outline/20 flex items-center justify-between text-[11px] font-mono text-outline">
+              <span>PROMPT: ↑↓ TO NAVIGATE • ↵ TO SELECT • ESC TO CLOSE</span>
+              <span className="text-secondary font-semibold">MIHORA ARCH_DISCOVERY v2.6 // SEO &amp; AI ACTIVE</span>
             </div>
           </div>
         </div>
