@@ -1,21 +1,7 @@
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
 import { ShieldCheck, Scale, Cookie, Lock } from 'lucide-react';
 
 export default function Legal() {
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.hash) {
-      const element = document.getElementById(location.hash.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }, [location]);
-
   return (
     <div className="flex flex-col w-full">
       <section className="w-full bg-surface-container-lowest px-margin-mobile lg:px-margin py-space-xl lg:py-24 border-b border-surface-container">

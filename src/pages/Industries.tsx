@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Factory, Hospital, Store, GraduationCap, Server, Building, Globe } from 'lucide-react';
 
 export default function Industries() {

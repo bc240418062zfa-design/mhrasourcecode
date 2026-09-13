@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { 
   SlidersHorizontal, ChevronRight, ShieldCheck, Gauge, ArrowRight, 
-  Network, Globe, Shield, Terminal, Pointer
+  Network, Globe, Shield, Pointer
 } from 'lucide-react';
 
 const layerData: Record<number, any> = {

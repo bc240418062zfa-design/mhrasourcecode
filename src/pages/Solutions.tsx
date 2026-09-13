@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { 
   Terminal, PencilRuler, ArrowDown, AlertTriangle, Router, 
-  Cpu, Gauge, ShieldCheck, Database, Network, Server,
-  Activity, Factory, ArrowRight
+  Cpu, Network
 } from 'lucide-react';
 
 export default function Solutions() {
@@ -376,7 +375,34 @@ export default function Solutions() {
                   <td className="p-space-md">Payload &amp; State Telemetry</td>
                   <td className="p-space-md font-mono text-on-surface">99.99%</td>
                 </tr>
-                {/* Add more rows */}
+                <tr className="hover:bg-surface-container-high/50 transition-colors">
+                  <td className="p-space-md font-semibold text-on-surface flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-secondary-container"></span> Infrastructure Deployment</td>
+                  <td className="p-space-md">Datacenter, Racks &amp; Structured Cabling</td>
+                  <td className="p-space-md font-mono text-secondary">2 - 8 Weeks</td>
+                  <td className="p-space-md">Fluke OTDR / Link Loss Telemetry</td>
+                  <td className="p-space-md font-mono text-on-surface">99.999%</td>
+                </tr>
+                <tr className="hover:bg-surface-container-high/50 transition-colors">
+                  <td className="p-space-md font-semibold text-on-surface flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-secondary-container"></span> Remote Operations</td>
+                  <td className="p-space-md">Multi-Site Edge SCADA &amp; Environmental Probes</td>
+                  <td className="p-space-md font-mono text-secondary">3 - 6 Weeks</td>
+                  <td className="p-space-md">Real-Time Sensor &amp; Power Ingestion</td>
+                  <td className="p-space-md font-mono text-on-surface">99.98%</td>
+                </tr>
+                <tr className="hover:bg-surface-container-high/50 transition-colors">
+                  <td className="p-space-md font-semibold text-on-surface flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-secondary-container"></span> Technical Operations</td>
+                  <td className="p-space-md">24/7 Managed NOC &amp; SRE Incident Response</td>
+                  <td className="p-space-md font-mono text-secondary">Continuous SLA</td>
+                  <td className="p-space-md">Synthetic Probes &amp; P99 Latency Alerts</td>
+                  <td className="p-space-md font-mono text-on-surface">99.99%</td>
+                </tr>
+                <tr className="hover:bg-surface-container-high/50 transition-colors">
+                  <td className="p-space-md font-semibold text-on-surface flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-secondary-container"></span> Custom Engineering</td>
+                  <td className="p-space-md">Bespoke Hardware Bridges &amp; Specialized Rigs</td>
+                  <td className="p-space-md font-mono text-secondary">6 - 16 Weeks</td>
+                  <td className="p-space-md">Kernel Tracing &amp; Physical Bench Testing</td>
+                  <td className="p-space-md font-mono text-on-surface">Mission Critical</td>
+                </tr>
               </tbody>
             </table>
           </div>

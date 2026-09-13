@@ -1,7 +1,24 @@
-import React from 'react';
-import { Mail, Briefcase, MapPin, Globe, Plane, Home } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Globe, Plane, Home, Send, CheckCircle2, ArrowRight, X } from 'lucide-react';
 
 export default function Careers() {
+  const [modalRole, setModalRole] = useState<string | null>(null);
+  const [applied, setApplied] = useState(false);
+  const [applicantEmail, setApplicantEmail] = useState('');
+  const [githubUrl, setGithubUrl] = useState('');
+
+  const handleApply = (e: React.FormEvent) => {
+    e.preventDefault();
+    setApplied(true);
+  };
+
+  const handleClose = () => {
+    setModalRole(null);
+    setApplied(false);
+    setApplicantEmail('');
+    setGithubUrl('');
+  };
+
   return (
     <div className="flex flex-col w-full">
       <section id="join-engineering" className="relative w-full bg-surface-container-lowest overflow-hidden px-margin-mobile lg:px-margin py-space-xl lg:py-24 scroll-mt-24">
@@ -27,30 +44,105 @@ export default function Careers() {
                 </div>
               </div>
               <div className="lg:col-span-4 bg-surface-container p-space-md rounded-DEFAULT space-y-space-sm font-mono text-label-sm">
-                <div className="text-outline uppercase">// OPEN ENGINEERING CADRES</div>
+                <div className="text-outline uppercase text-xs">// OPEN ENGINEERING CADRES (CLICK TO APPLY)</div>
                 <div className="space-y-space-xs">
-                  <div className="p-space-xs bg-surface-container-lowest rounded-DEFAULT flex justify-between">
-                    <span className="text-on-surface">Sr. Distributed Systems Eng</span>
-                    <span className="text-secondary-container">HQ/REMOTE</span>
-                  </div>
-                  <div className="p-space-xs bg-surface-container-lowest rounded-DEFAULT flex justify-between">
-                    <span className="text-on-surface">Lead Field Tech (Cabling/Racks)</span>
-                    <span className="text-secondary-container">ON-SITE</span>
-                  </div>
-                  <div className="p-space-xs bg-surface-container-lowest rounded-DEFAULT flex justify-between">
-                    <span className="text-on-surface">Automation Architect (Python/K8s)</span>
-                    <span className="text-secondary-container">GLOBAL</span>
-                  </div>
-                  <div className="p-space-xs bg-surface-container-lowest rounded-DEFAULT flex justify-between">
-                    <span className="text-on-surface">NOC Telemetry Specialist</span>
-                    <span className="text-secondary-container">PK-ISB</span>
-                  </div>
+                  {[
+                    { role: "Sr. Distributed Systems Eng", loc: "HQ/REMOTE" },
+                    { role: "Lead Field Tech (Cabling/Racks)", loc: "ON-SITE" },
+                    { role: "Automation Architect (Python/K8s)", loc: "GLOBAL" },
+                    { role: "NOC Telemetry Specialist", loc: "PK-ISB" },
+                  ].map((cadre, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setModalRole(cadre.role)}
+                      className="w-full text-left p-space-xs bg-surface-container-lowest hover:bg-surface-container-high rounded-DEFAULT flex justify-between items-center transition-colors group cursor-pointer"
+                    >
+                      <span className="text-on-surface group-hover:text-primary transition-colors text-xs font-semibold">{cadre.role}</span>
+                      <span className="text-secondary-container text-xs">{cadre.loc}</span>
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Quick Application Modal */}
+      {modalRole && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-lg bg-surface-container-low border border-outline/30 rounded-DEFAULT shadow-2xl p-space-lg space-y-space-md relative animate-in fade-in zoom-in-95">
+            <button 
+              onClick={handleClose}
+              className="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface"
+            >
+              <X size={20} />
+            </button>
+
+            {applied ? (
+              <div className="text-center py-space-lg space-y-space-sm">
+                <div className="w-14 h-14 bg-secondary-container/20 text-secondary-container rounded-full flex items-center justify-center mx-auto">
+                  <CheckCircle2 size={32} />
+                </div>
+                <h3 className="font-headline-md text-headline-md text-on-surface font-bold uppercase">Transmission Received</h3>
+                <p className="font-body-md text-body-md text-on-surface-variant">
+                  Your credentials for <strong className="text-on-surface">{modalRole}</strong> have been routed to our Lead Architecture recruiter.
+                </p>
+                <div className="pt-space-sm">
+                  <button
+                    onClick={handleClose}
+                    className="px-space-lg py-2 bg-primary-container text-on-primary font-label-md text-label-md uppercase font-bold rounded-DEFAULT"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleApply} className="space-y-space-md">
+                <div>
+                  <div className="font-mono text-xs text-secondary-container tracking-wider uppercase">// CADRE APPLICATION INTAKE</div>
+                  <h3 className="font-headline-md text-headline-md text-on-surface font-bold uppercase">{modalRole}</h3>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-label-sm text-label-sm font-mono text-on-surface-variant block uppercase">Your Email *</label>
+                  <input
+                    type="email"
+                    required
+                    value={applicantEmail}
+                    onChange={(e) => setApplicantEmail(e.target.value)}
+                    placeholder="engineer@domain.com"
+                    className="w-full bg-surface-container border border-outline/30 focus:border-secondary p-space-sm rounded-DEFAULT text-on-surface font-body-sm text-body-sm focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-label-sm text-label-sm font-mono text-on-surface-variant block uppercase">GitHub / Portfolio / LinkedIn *</label>
+                  <input
+                    type="url"
+                    required
+                    value={githubUrl}
+                    onChange={(e) => setGithubUrl(e.target.value)}
+                    placeholder="https://github.com/..."
+                    className="w-full bg-surface-container border border-outline/30 focus:border-secondary p-space-sm rounded-DEFAULT text-on-surface font-body-sm text-body-sm focus:outline-none"
+                  />
+                </div>
+
+                <div className="pt-space-xs flex justify-between items-center">
+                  <span className="font-mono text-[11px] text-outline">MIHORA RECRUITMENT HQ</span>
+                  <button
+                    type="submit"
+                    className="inline-flex items-center gap-2 px-space-lg py-2.5 bg-primary-container hover:bg-secondary-container text-on-primary hover:text-on-secondary font-label-md text-label-md uppercase font-bold rounded-DEFAULT transition-all"
+                  >
+                    <Send size={15} />
+                    <span>Dispatch Credentials</span>
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
 
       <section id="global-relocation" className="w-full bg-surface px-margin-mobile lg:px-margin py-space-xl scroll-mt-24">
         <div className="max-w-7xl mx-auto space-y-space-xl">

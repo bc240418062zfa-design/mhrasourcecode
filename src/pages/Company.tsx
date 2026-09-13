@@ -1,5 +1,5 @@
 import React from 'react';
-import { Building, Globe, Users, Target, ShieldCheck, Zap, Mail, ArrowRight } from 'lucide-react';
+import { Building, Globe, Users, Target, ShieldCheck, Zap } from 'lucide-react';
 
 export default function Company() {
   return (

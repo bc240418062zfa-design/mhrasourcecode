@@ -1,19 +1,63 @@
-import { useEffect, useState } from 'react';
-import { Palette } from 'lucide-react';
+import { useEffect, useState, useMemo } from 'react';
+import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
+
+interface SearchItem {
+  title: string;
+  category: string;
+  path: string;
+  description: string;
+  icon?: string;
+}
+
+const SEARCH_CATALOG: SearchItem[] = [
+  { title: "Digital Engineering", category: "Services", path: "/services#digital", description: "Architected web, mobile, distributed backend microservices" },
+  { title: "Automation & Intelligence", category: "Services", path: "/services#automation", description: "Workflow orchestration, telemetry pipelines, and LLM tool routing" },
+  { title: "Physical Infrastructure", category: "Services", path: "/services#infra", description: "Server racks, SAN storage, cabling, enterprise switches" },
+  { title: "Field Engineering", category: "Services", path: "/services#field", description: "On-site dispatch, fiber splicing, Fluke verification" },
+  { title: "Managed Tech & 24/7 SRE", category: "Services", path: "/services#managed", description: "Persistent observability, latency alerts, proactive break-fix" },
+  { title: "Digital Transformation", category: "Solutions", path: "/solutions#digital-transformation", description: "Deconstructing legacy monoliths into distributed architectures" },
+  { title: "Business Automation", category: "Solutions", path: "/solutions#business-automation", description: "Autonomous orchestration engines and API bridges" },
+  { title: "Infrastructure Deployment", category: "Solutions", path: "/solutions#infrastructure-deployment", description: "Multi-site physical deployments and edge IoT arrays" },
+  { title: "Remote Operations", category: "Solutions", path: "/solutions#remote-operations", description: "SCADA and NOC telemetry systems with unified dashboards" },
+  { title: "Technical Operations", category: "Solutions", path: "/solutions#technical-operations", description: "Site Reliability Engineering with guaranteed SLAs" },
+  { title: "Custom Engineering", category: "Solutions", path: "/solutions#custom-engineering", description: "Bespoke hardware bridges, custom FPGA/compute rigs" },
+  { title: "Healthcare Systems", category: "Industries", path: "/industries#healthcare", description: "HIPAA/HL7 telemetry, DICOM imaging, hospital networking" },
+  { title: "Education Technology", category: "Industries", path: "/industries#education", description: "High-density campus wireless, student data sovereignty" },
+  { title: "Retail & Supply Chain", category: "Industries", path: "/industries#retail", description: "Omnichannel inventory sync, edge POS resilience" },
+  { title: "Technology Providers", category: "Industries", path: "/industries#technology", description: "Multi-tenant cloud infrastructure and devops pipelines" },
+  { title: "Logistics & Transport", category: "Industries", path: "/industries#logistics", description: "Fleet tracking, automated warehouse dispatch" },
+  { title: "9-Layer Architecture Stack", category: "Engineering", path: "/engineering#architecture", description: "Silicon to cloud full-span architectural layers" },
+  { title: "Hardware-Software Stack", category: "Engineering", path: "/engineering#hardware-software-stack", description: "Physical structured cabling and command telemetry" },
+  { title: "Reliability Telemetry", category: "Engineering", path: "/engineering#reliability-telemetry", description: "Axioms of production and 24/7 observability" },
+  { title: "Company Philosophy", category: "Company", path: "/company#philosophy", description: "Engineering principles, executive leadership, global footprint" },
+  { title: "Technical Papers", category: "Insights", path: "/insights#technical-papers", description: "Peer-reviewed architectural analysis and whitepapers" },
+  { title: "Join Engineering", category: "Careers", path: "/careers#join-engineering", description: "Open roles across systems design, software, and field engineering" },
+  { title: "Direct Dispatch & Contact", category: "Contact", path: "/contact", description: "Engage architecture team, request dispatch or schedule consult" },
+  { title: "Security & Compliance", category: "Legal", path: "/legal#security", description: "ISO 27001, SOC 2 Type II, and data sovereignty policies" }
+];
 
 export default function Layout() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [theme, setTheme] = useState<'desert' | 'cyber'>('desert');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [avatarError, setAvatarError] = useState(false);
 
   useEffect(() => {
     // Load theme from localStorage if available
     const savedTheme = localStorage.getItem('mihora-theme');
     if (savedTheme === 'cyber' || savedTheme === 'desert') {
       setTheme(savedTheme);
-      document.documentElement.setAttribute('data-theme', savedTheme);
+      if (savedTheme === 'cyber') {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'desert');
+      }
     } else {
       document.documentElement.setAttribute('data-theme', 'desert');
     }
@@ -30,12 +74,29 @@ export default function Layout() {
     }
   };
 
+  // Keyboard shortcut for search modal
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      } else if (e.key === 'Escape' && searchOpen) {
+        setSearchOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [searchOpen]);
+
+  // Centralized smooth hash scrolling
+  useEffect(() => {
+    setMobileMenuOpen(false);
     if (location.hash) {
       setTimeout(() => {
-        const element = document.getElementById(location.hash.replace('#', ''));
+        const id = location.hash.replace('#', '');
+        const element = document.getElementById(id);
         if (element) {
-          const y = element.getBoundingClientRect().top + window.scrollY - 100;
+          const y = element.getBoundingClientRect().top + window.scrollY - 90;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
       }, 100);
@@ -44,13 +105,42 @@ export default function Layout() {
     }
   }, [location.pathname, location.hash]);
 
+  const filteredSearchResults = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return SEARCH_CATALOG.slice(0, 8);
+    }
+    const q = searchQuery.toLowerCase();
+    return SEARCH_CATALOG.filter(
+      item => item.title.toLowerCase().includes(q) ||
+              item.description.toLowerCase().includes(q) ||
+              item.category.toLowerCase().includes(q)
+    );
+  }, [searchQuery]);
+
+  const handleSelectSearchItem = (path: string) => {
+    setSearchOpen(false);
+    setSearchQuery('');
+    navigate(path);
+  };
+
+  const navLinks = [
+    { label: 'Services', path: '/services' },
+    { label: 'Solutions', path: '/solutions' },
+    { label: 'Industries', path: '/industries' },
+    { label: 'Engineering', path: '/engineering' },
+    { label: 'Company', path: '/company' },
+    { label: 'Insights', path: '/insights' },
+    { label: 'Careers', path: '/careers' },
+    { label: 'Contact', path: '/contact' },
+  ];
+
   return (
     <div className="flex flex-col w-full min-h-screen">
       <header className="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_16px_rgba(0,0,0,0.5)]">
         <div className="w-full px-margin-mobile lg:px-margin">
           <div className="h-20 flex items-center justify-between gap-space-md">
             <div className="flex items-center gap-space-lg">
-              <Link to="/" className="flex items-center gap-space-sm group">
+              <Link to="/" className="flex items-center gap-space-sm group" onClick={() => setMobileMenuOpen(false)}>
                 <div className="flex items-center gap-space-xs">
                   <span className="font-headline-md text-headline-md font-bold tracking-tight text-on-surface group-hover:text-primary transition-colors">MIHORA</span>
                   <span className="font-label-md text-label-md text-secondary-container font-semibold tracking-widest">.TECH</span>
@@ -62,30 +152,170 @@ export default function Layout() {
               </div>
             </div>
             
-            <nav className="hidden lg:flex items-center gap-space-lg">
-              <Link to="/services" className={clsx("font-label-md text-label-md uppercase tracking-wider transition-colors", location.pathname === '/services' ? 'text-secondary font-semibold' : 'text-on-surface-variant hover:text-on-surface')}>Services</Link>
-              <Link to="/solutions" className={clsx("font-label-md text-label-md uppercase tracking-wider transition-colors", location.pathname === '/solutions' ? 'text-secondary font-semibold' : 'text-on-surface-variant hover:text-on-surface')}>Solutions</Link>
-              <Link to="/industries" className={clsx("font-label-md text-label-md uppercase tracking-wider transition-colors", location.pathname === '/industries' ? 'text-secondary font-semibold' : 'text-on-surface-variant hover:text-on-surface')}>Industries</Link>
-              <Link to="/engineering" className={clsx("font-label-md text-label-md uppercase tracking-wider transition-colors", location.pathname === '/engineering' ? 'text-secondary font-semibold' : 'text-on-surface-variant hover:text-on-surface')}>Engineering</Link>
-              <Link to="/company" className={clsx("font-label-md text-label-md uppercase tracking-wider transition-colors", location.pathname === '/company' ? 'text-secondary font-semibold' : 'text-on-surface-variant hover:text-on-surface')}>Company</Link>
-              <Link to="/insights" className={clsx("font-label-md text-label-md uppercase tracking-wider transition-colors", location.pathname === '/insights' ? 'text-secondary font-semibold' : 'text-on-surface-variant hover:text-on-surface')}>Insights</Link>
-              <Link to="/careers" className={clsx("font-label-md text-label-md uppercase tracking-wider transition-colors", location.pathname === '/careers' ? 'text-secondary font-semibold' : 'text-on-surface-variant hover:text-on-surface')}>Careers</Link>
+            <nav className="hidden lg:flex items-center gap-space-md xl:gap-space-lg">
+              {navLinks.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={clsx(
+                    "font-label-md text-label-md uppercase tracking-wider transition-colors",
+                    location.pathname === item.path ? 'text-secondary font-semibold' : 'text-on-surface-variant hover:text-on-surface'
+                  )}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </nav>
 
-            <div className="flex items-center gap-space-md">
-              <button onClick={toggleTheme} className="flex items-center gap-space-sm px-space-md py-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface rounded-DEFAULT transition-all" type="button" aria-label="Toggle Theme">
+            <div className="flex items-center gap-space-sm sm:gap-space-md">
+              <button 
+                onClick={toggleTheme} 
+                className="flex items-center gap-space-xs px-2.5 sm:px-space-md py-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface rounded-DEFAULT transition-all" 
+                type="button" 
+                aria-label="Toggle Theme"
+                title={`Current theme: ${theme}. Click to switch.`}
+              >
                 <Palette size={16} />
-                <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline">Theme</span>
+                <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-mono text-[11px]">{theme}</span>
               </button>
-              <button className="hidden sm:flex items-center gap-space-sm px-space-md py-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface rounded-DEFAULT transition-all" type="button">
-                <span className="font-label-sm text-label-sm uppercase tracking-wider">Search Arch</span>
-                <kbd className="px-1.5 py-0.5 bg-surface-container-highest text-on-surface rounded-DEFAULT font-label-sm text-label-sm">⌘K</kbd>
+
+              <button 
+                onClick={() => setSearchOpen(true)}
+                className="flex items-center gap-space-xs px-2.5 sm:px-space-md py-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface rounded-DEFAULT transition-all cursor-pointer" 
+                type="button"
+                aria-label="Search Architecture"
+              >
+                <Search size={16} className="text-secondary" />
+                <span className="font-label-sm text-label-sm uppercase tracking-wider hidden sm:inline">Search Arch</span>
+                <kbd className="hidden sm:inline-block px-1.5 py-0.5 bg-surface-container-highest text-on-surface rounded-DEFAULT font-mono text-[10px]">⌘K</kbd>
               </button>
-              <img alt="Profile" className="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1W7mTkcjfde58ftTkHapTWnynFj8n5msj0P01I3udcUaFEjxKi4feBE799Sq8XBugOoqod3n0cyWjhPbV_-Me8C3WXAxKeadPxjAZfb_L3Y559tdO5r7CLCVk_fhR-oebyIaSKWWoGY5XN10AqMaNo8qk5OXgGib-UmNd4fips9doACvIWj-hcC48bXpud-QRmD1Uyo9zZk3nua7F--FVlzRmklWMK6wrA8bTZdrqyQgkryWRhtRvqiuSuBcx2yFj3mYLTaXvABsQ" />
+
+              <div className="relative group">
+                {!avatarError ? (
+                  <img 
+                    alt="MIHORA Tech Principal" 
+                    className="w-8 h-8 rounded-full object-cover border border-outline/30" 
+                    src="https://lh3.googleusercontent.com/aida/AEtjO1W7mTkcjfde58ftTkHapTWnynFj8n5msj0P01I3udcUaFEjxKi4feBE799Sq8XBugOoqod3n0cyWjhPbV_-Me8C3WXAxKeadPxjAZfb_L3Y559tdO5r7CLCVk_fhR-oebyIaSKWWoGY5XN10AqMaNo8qk5OXgGib-UmNd4fips9doACvIWj-hcC48bXpud-QRmD1Uyo9zZk3nua7F--FVlzRmklWMK6wrA8bTZdrqyQgkryWRhtRvqiuSuBcx2yFj3mYLTaXvABsQ" 
+                    onError={() => setAvatarError(true)}
+                  />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-surface-container-high border border-secondary/40 flex items-center justify-center font-mono text-xs font-bold text-secondary">
+                    MH
+                  </div>
+                )}
+                <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-secondary-container border border-surface-container-lowest"></span>
+              </div>
+
+              {/* Mobile Menu Toggle Button */}
+              <button
+                onClick={() => setMobileMenuOpen((prev) => !prev)}
+                className="lg:hidden p-2 text-on-surface-variant hover:text-on-surface bg-surface-container-low rounded-DEFAULT transition-colors"
+                aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                type="button"
+              >
+                {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
             </div>
           </div>
         </div>
+
+        {/* Mobile Navigation Drawer */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-t border-surface-container bg-surface-container-lowest/98 px-margin-mobile py-space-md shadow-2xl backdrop-blur-2xl animate-in fade-in slide-in-from-top-4 duration-200">
+            <div className="flex flex-col space-y-1 pb-space-sm font-label-md text-label-md uppercase tracking-wider">
+              {navLinks.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={clsx(
+                    "px-space-sm py-2.5 rounded-DEFAULT transition-colors flex items-center justify-between",
+                    location.pathname === item.path
+                      ? "bg-surface-container text-secondary font-bold"
+                      : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
+                  )}
+                >
+                  <span>{item.label}</span>
+                  <ArrowRight size={14} className="opacity-40" />
+                </Link>
+              ))}
+            </div>
+
+            <div className="pt-space-sm border-t border-surface-container flex flex-col sm:flex-row gap-space-xs font-mono text-xs text-on-surface-variant">
+              <a
+                href="mailto:hr@mihora.tech"
+                className="w-full py-2.5 text-center bg-primary-container text-on-primary font-bold rounded-DEFAULT tracking-wider uppercase"
+              >
+                DISPATCH: HR@MIHORA.TECH
+              </a>
+            </div>
+          </div>
+        )}
       </header>
+
+      {/* Command Palette / Search Modal */}
+      {searchOpen && (
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-start justify-center pt-24 px-4">
+          <div 
+            className="w-full max-w-2xl bg-surface-container-low border border-outline/30 rounded-DEFAULT shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-space-sm px-space-md py-space-sm bg-surface-container border-b border-outline/20">
+              <Search size={18} className="text-secondary" />
+              <input
+                type="text"
+                autoFocus
+                placeholder="Search services, solutions, engineering layers, papers..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-transparent text-on-surface font-body-md placeholder:text-outline focus:outline-none"
+              />
+              <button 
+                onClick={() => setSearchOpen(false)}
+                className="p-1 text-on-surface-variant hover:text-on-surface font-mono text-xs bg-surface-container-highest px-2 py-0.5 rounded"
+              >
+                ESC
+              </button>
+            </div>
+
+            <div className="max-h-96 overflow-y-auto divide-y divide-surface-container p-space-xs">
+              {filteredSearchResults.length > 0 ? (
+                filteredSearchResults.map((item, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleSelectSearchItem(item.path)}
+                    className="w-full text-left p-space-sm hover:bg-surface-container rounded-DEFAULT transition-all flex items-start justify-between gap-space-sm group"
+                  >
+                    <div className="space-y-0.5">
+                      <div className="flex items-center gap-2">
+                        <span className="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+                          {item.title}
+                        </span>
+                        <span className="font-mono text-[10px] px-1.5 py-0.2 bg-surface-container-highest text-secondary-container rounded uppercase">
+                          {item.category}
+                        </span>
+                      </div>
+                      <p className="font-body-sm text-body-sm text-on-surface-variant">
+                        {item.description}
+                      </p>
+                    </div>
+                    <ArrowRight size={16} className="text-outline group-hover:text-secondary group-hover:translate-x-1 transition-all mt-1 flex-shrink-0" />
+                  </button>
+                ))
+              ) : (
+                <div className="p-space-lg text-center font-body-md text-on-surface-variant">
+                  No matching architecture specifications found for "{searchQuery}".
+                </div>
+              )}
+            </div>
+
+            <div className="px-space-md py-2 bg-surface-container-lowest flex items-center justify-between text-[11px] font-mono text-outline">
+              <span>PROMPT: ↑↓ TO NAVIGATE • ↵ TO SELECT</span>
+              <span>MIHORA ARCH_DISCOVERY</span>
+            </div>
+          </div>
+        </div>
+      )}
 
       <main className="w-full pt-20 bg-surface min-h-screen flex-1">
         <Outlet />
