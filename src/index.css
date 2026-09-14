@@ -318,9 +318,15 @@
 
 /* Ultra-Crisp Architectural Visual FX */
 .bg-tech-grid {
-  background-image: linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background-image: linear-gradient(to right, rgba(56, 189, 248, 0.07) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(56, 189, 248, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+:root[data-theme="light"] .bg-tech-grid,
+:root:not(.dark) .bg-tech-grid {
+  background-image: linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
 }
 
 .bg-tech-dots {
@@ -328,26 +334,73 @@
   background-size: 24px 24px;
 }
 
+:root[data-theme="light"] .bg-tech-dots,
+:root:not(.dark) .bg-tech-dots {
+  background-image: radial-gradient(rgba(2, 132, 199, 0.15) 1.2px, transparent 1.2px);
+}
+
 .glass-panel {
-  background: rgba(13, 26, 54, 0.65);
+  background: rgba(13, 26, 54, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(56, 189, 248, 0.18);
 }
 
-.glow-card {
-  position: relative;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+:root[data-theme="light"] .glass-panel,
+:root:not(.dark) .glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(203, 213, 225, 0.7);
 }
 
-.glow-card:hover {
+.glow-card {
+  position: relative;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root[data-theme="light"] .glow-card,
+:root:not(.dark) .glow-card {
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 0 1px 1px rgba(203, 213, 225, 0.5);
+}
+
+:root[data-theme="light"] .glow-card:hover,
+:root:not(.dark) .glow-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(0, 85, 255, 0.12), 0 0 0 1px rgba(0, 85, 255, 0.35);
+}
+
+:root.dark .glow-card,
+:root[data-theme="cyber"] .glow-card {
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.6);
+}
+
+:root.dark .glow-card:hover,
+:root[data-theme="cyber"] .glow-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 45px -10px rgba(0, 102, 255, 0.45), 0 0 1px 1px rgba(0, 240, 255, 0.45);
+}
+
+.luxury-card {
+  background: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-outline);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-card:hover {
+  border-color: var(--color-primary);
   transform: translateY(-3px);
-  box-shadow: 0 16px 40px -12px rgba(0, 102, 255, 0.45), 0 0 1px 1px rgba(0, 240, 255, 0.45);
 }
 
 .neon-border {
   border: 1px solid rgba(0, 240, 255, 0.35);
   box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+}
+
+:root[data-theme="light"] .neon-border,
+:root:not(.dark) .neon-border {
+  border: 1px solid rgba(0, 85, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 85, 255, 0.1);
 }
 
 /* SVG animated dash line utility */

@@ -1,11 +1,12 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase, Sparkles, Sun, Moon, Bot, Zap, CornerDownLeft, Clock, Activity, Wifi } from 'lucide-react';
+import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase, Sparkles, Sun, Moon, Bot, Zap, CornerDownLeft, Clock, Activity, Wifi, Volume2, VolumeX } from 'lucide-react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
 import { BrandLogo } from './BrandLogo';
 import { SEOHead } from './SEOHead';
 import { queryAIEngine, type AIResponse } from './AIEngine';
+import { isSoundEnabled, toggleSound, playUiChime } from '../utils/audio';
 
 interface SearchItem {
   title: string;
@@ -47,6 +48,7 @@ export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
   const [theme, setTheme] = useState<'cyber' | 'light'>('light');
+  const [soundOn, setSoundOn] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchMode, setSearchMode] = useState<'catalog' | 'ai'>('catalog');
@@ -59,6 +61,15 @@ export default function Layout() {
   const [timeIslamabad, setTimeIslamabad] = useState('');
   const [simulatedPing, setSimulatedPing] = useState(18.4);
   const [hudExpanded, setHudExpanded] = useState(false);
+
+  useEffect(() => {
+    setSoundOn(isSoundEnabled());
+  }, []);
+
+  const handleToggleSound = () => {
+    const newState = toggleSound();
+    setSoundOn(newState);
+  };
 
   useEffect(() => {
     const updateClocks = () => {
@@ -257,6 +268,37 @@ export default function Layout() {
                     <Moon size={17} className="text-secondary fill-secondary/20 shrink-0" />
                     <span className="font-label-sm text-label-sm uppercase tracking-wider hidden sm:inline font-mono text-[11px] font-bold text-secondary whitespace-nowrap">
                       DARK
+                    </span>
+                  </>
+                )}
+              </button>
+
+              {/* Sound Audio Synthesizer FX Toggle Button */}
+              <button 
+                id="sound-toggle-header-btn"
+                onClick={handleToggleSound}
+                className={clsx(
+                  "shrink-0 flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 border rounded-lg transition-all cursor-pointer shadow-sm active:scale-95",
+                  soundOn 
+                    ? "bg-primary/10 border-primary text-primary" 
+                    : "bg-surface-container hover:bg-surface-container-high border-outline text-on-surface-variant hover:text-on-surface"
+                )}
+                type="button"
+                aria-label={soundOn ? "Mute UI Audio" : "Enable UI Audio Synthesizer"}
+                title={soundOn ? "UI Audio Synthesizer Active. Click to mute." : "Enable UI Audio Synthesizer chimes."}
+              >
+                {soundOn ? (
+                  <>
+                    <Volume2 size={16} className="text-primary shrink-0 animate-pulse" />
+                    <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-mono text-[11px] font-bold whitespace-nowrap">
+                      AUDIO ON
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <VolumeX size={16} className="shrink-0 opacity-60" />
+                    <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-mono text-[11px] whitespace-nowrap">
+                      MUTE
                     </span>
                   </>
                 )}
