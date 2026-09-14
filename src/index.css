@@ -73,9 +73,79 @@
   --font-body-md: 'Hanken Grotesk', sans-serif;
 }
 
-:root {
+:root,
+:root[data-theme="light"],
+:root[data-theme="titanium"],
+:root[data-theme="desert"] {
   /* ==========================================================================
-     PRIMARY THEME: "OBSIDIAN CYBER" (Ultra-High Contrast Sovereign Dark)
+     PRIMARY DEFAULT THEME: "TITANIUM DAYLIGHT" (Architectural Luxury White)
+     Clean, crisp executive daylight mode like Apple, Stripe, and Linear
+     ========================================================================== */
+  --sys-background: #f8fafc;
+  --sys-surface-container-lowest: #ffffff;
+  --sys-surface: #ffffff;
+  --sys-surface-container-low: #f8fafc;
+  --sys-surface-container: #f1f5f9;
+  --sys-surface-container-high: #ffffff;
+  --sys-surface-container-highest: #e2e8f0;
+  --sys-surface-dim: #e2e8f0;
+  --sys-surface-bright: #ffffff;
+  --sys-surface-variant: #e2e8f0;
+
+  /* High-legibility executive typography */
+  --sys-on-background: #0f172a;
+  --sys-on-surface: #0f172a;
+  --sys-on-surface-variant: #334155;
+  --sys-inverse-surface: #0f172a;
+  --sys-inverse-on-surface: #f8fafc;
+
+  /* Executive Deep Cobalt Primary */
+  --sys-primary: #0055ff;
+  --sys-primary-container: #0040c0;
+  --sys-on-primary: #ffffff;
+  --sys-on-primary-container: #eff6ff;
+  --sys-primary-fixed: #2563eb;
+  --sys-primary-fixed-dim: #1d4ed8;
+  --sys-on-primary-fixed: #ffffff;
+  --sys-on-primary-fixed-variant: #1e3a8a;
+  --sys-inverse-primary: #3b82f6;
+
+  /* Vibrant Sapphire / Sky Cyan Secondary */
+  --sys-secondary: #0284c7;
+  --sys-secondary-container: #0369a1;
+  --sys-on-secondary: #ffffff;
+  --sys-on-secondary-container: #f0f9ff;
+  --sys-secondary-fixed: #0ea5e9;
+  --sys-secondary-fixed-dim: #0284c7;
+  --sys-on-secondary-fixed: #ffffff;
+  --sys-on-secondary-fixed-variant: #075985;
+
+  /* Precision Forest Green */
+  --sys-tertiary: #059669;
+  --sys-tertiary-container: #064e3b;
+  --sys-on-tertiary: #ffffff;
+  --sys-on-tertiary-container: #ecfdf5;
+  --sys-tertiary-fixed: #10b981;
+  --sys-tertiary-fixed-dim: #059669;
+  --sys-on-tertiary-fixed: #ffffff;
+  --sys-on-tertiary-fixed-variant: #065f46;
+
+  /* Precision Crisp Slate Borders */
+  --sys-outline: #cbd5e1;
+  --sys-outline-variant: #e2e8f0;
+  --sys-surface-tint: #0055ff;
+
+  --sys-error: #dc2626;
+  --sys-error-container: #fee2e2;
+  --sys-on-error: #ffffff;
+  --sys-on-error-container: #7f1d1d;
+}
+
+:root[data-theme="cyber"],
+:root[data-theme="dark"],
+:root.dark {
+  /* ==========================================================================
+     ALTERNATIVE THEME: "OBSIDIAN CYBER" (Ultra-High Contrast Sovereign Dark)
      Inspired by Linear, Vercel, Stripe & the official MIHORA 3D Royal Emblem
      ========================================================================== */
   --sys-background: #030712;
@@ -89,7 +159,7 @@
   --sys-surface-bright: #1f376a;
   --sys-surface-variant: #101e3d;
 
-  /* Typography - Ultra-crisp slate whites and silvers (Eliminating muddy lavender) */
+  /* Typography - Ultra-crisp slate whites and silvers */
   --sys-on-background: #f8fafc;
   --sys-on-surface: #f8fafc;
   --sys-on-surface-variant: #94a3b8;
@@ -139,73 +209,6 @@
   --sys-on-error-container: #fecaca;
 }
 
-:root[data-theme="titanium"],
-:root[data-theme="light"],
-:root[data-theme="desert"] {
-  /* ==========================================================================
-     SECONDARY THEME: "TITANIUM DAYLIGHT" (Architectural Luxury Enterprise)
-     Clean, crisp executive daylight mode like Apple, Stripe, and Linear
-     ========================================================================== */
-  --sys-background: #f8fafc;
-  --sys-surface-container-lowest: #ffffff;
-  --sys-surface: #f1f5f9;
-  --sys-surface-container-low: #ffffff;
-  --sys-surface-container: #f8fafc;
-  --sys-surface-container-high: #ffffff;
-  --sys-surface-container-highest: #e2e8f0;
-  --sys-surface-dim: #e2e8f0;
-  --sys-surface-bright: #ffffff;
-  --sys-surface-variant: #e2e8f0;
-
-  /* High-legibility executive typography */
-  --sys-on-background: #0f172a;
-  --sys-on-surface: #0f172a;
-  --sys-on-surface-variant: #475569;
-  --sys-inverse-surface: #0f172a;
-  --sys-inverse-on-surface: #f8fafc;
-
-  /* Executive Deep Cobalt Primary */
-  --sys-primary: #0055ff;
-  --sys-primary-container: #0040c0;
-  --sys-on-primary: #ffffff;
-  --sys-on-primary-container: #eff6ff;
-  --sys-primary-fixed: #2563eb;
-  --sys-primary-fixed-dim: #1d4ed8;
-  --sys-on-primary-fixed: #ffffff;
-  --sys-on-primary-fixed-variant: #1e3a8a;
-  --sys-inverse-primary: #3b82f6;
-
-  /* Vibrant Sapphire / Sky Cyan Secondary */
-  --sys-secondary: #0284c7;
-  --sys-secondary-container: #0369a1;
-  --sys-on-secondary: #ffffff;
-  --sys-on-secondary-container: #f0f9ff;
-  --sys-secondary-fixed: #0ea5e9;
-  --sys-secondary-fixed-dim: #0284c7;
-  --sys-on-secondary-fixed: #ffffff;
-  --sys-on-secondary-fixed-variant: #075985;
-
-  /* Precision Forest Green */
-  --sys-tertiary: #059669;
-  --sys-tertiary-container: #064e3b;
-  --sys-on-tertiary: #ffffff;
-  --sys-on-tertiary-container: #ecfdf5;
-  --sys-tertiary-fixed: #10b981;
-  --sys-tertiary-fixed-dim: #059669;
-  --sys-on-tertiary-fixed: #ffffff;
-  --sys-on-tertiary-fixed-variant: #065f46;
-
-  /* Precision Crisp Slate Borders */
-  --sys-outline: #cbd5e1;
-  --sys-outline-variant: #e2e8f0;
-  --sys-surface-tint: #0055ff;
-
-  --sys-error: #dc2626;
-  --sys-error-container: #fee2e2;
-  --sys-on-error: #ffffff;
-  --sys-on-error-container: #7f1d1d;
-}
-
 @utility text-label-sm { font-size: 10px; line-height: 14px; font-weight: 600; }
 @utility text-label-lg { font-size: 14px; line-height: 20px; font-weight: 500; }
 @utility text-headline-sm { font-size: 20px; line-height: 28px; font-weight: 600; }
@@ -246,8 +249,71 @@
   100% { transform: translateX(-100%); }
 }
 
+@keyframes signalFlow {
+  from { stroke-dashoffset: 40; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes radarSweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseRadar {
+  0% { r: 6px; opacity: 0.9; stroke-width: 2px; }
+  50% { opacity: 0.5; }
+  100% { r: 48px; opacity: 0; stroke-width: 0.5px; }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: translateY(1000%); opacity: 0; }
+}
+
+@keyframes shimmerSlide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes livePulseBeacon {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.7);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 8px rgba(0, 240, 255, 0);
+  }
+}
+
 @utility animate-marquee {
   animation: marquee 25s linear infinite;
+}
+
+@utility animate-signal-flow {
+  animation: signalFlow 1.8s linear infinite;
+}
+
+@utility animate-radar {
+  animation: radarSweep 6s linear infinite;
+}
+
+@utility animate-float {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+@utility animate-scanline {
+  animation: scanline 8s ease-in-out infinite;
+}
+
+@utility animate-live-beacon {
+  animation: livePulseBeacon 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 /* Ultra-Crisp Architectural Visual FX */
@@ -284,16 +350,46 @@
   box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
 }
 
+/* SVG animated dash line utility */
+.flow-line {
+  stroke-dasharray: 6, 6;
+  animation: signalFlow 1.4s linear infinite;
+}
+
+.flow-line-reverse {
+  stroke-dasharray: 6, 6;
+  animation: signalFlow 1.4s linear infinite reverse;
+}
+
 /* Premium Gradient Button Utility */
 .btn-primary-gradient {
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(135deg, #0055ff 0%, #00d2ff 100%);
   color: #ffffff;
   box-shadow: 0 0 28px rgba(0, 102, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
   transition: all 0.25s ease;
 }
 
+.btn-primary-gradient::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  animation: shimmerSlide 4.5s infinite;
+}
+
 .btn-primary-gradient:hover {
   background: linear-gradient(135deg, #0066ff 0%, #00f0ff 100%);
   box-shadow: 0 0 36px rgba(0, 240, 255, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }

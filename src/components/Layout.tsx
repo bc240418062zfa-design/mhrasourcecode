@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase, Sparkles, Sun, Moon, Bot, Zap, CornerDownLeft } from 'lucide-react';
+import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase, Sparkles, Sun, Moon, Bot, Zap, CornerDownLeft, Clock, Activity, Wifi } from 'lucide-react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
 import { BrandLogo } from './BrandLogo';
 import { SEOHead } from './SEOHead';
@@ -45,34 +46,66 @@ const SEARCH_CATALOG: SearchItem[] = [
 export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [theme, setTheme] = useState<'cyber' | 'light'>('cyber');
+  const [theme, setTheme] = useState<'cyber' | 'light'>('light');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchMode, setSearchMode] = useState<'catalog' | 'ai'>('catalog');
   const [searchQuery, setSearchQuery] = useState('');
   const [aiResponse, setAiResponse] = useState<AIResponse | null>(null);
   const [isAiProcessing, setIsAiProcessing] = useState(false);
+  
+  // Real-time live synchronized hub clocks & telemetry
+  const [timeLondon, setTimeLondon] = useState('');
+  const [timeIslamabad, setTimeIslamabad] = useState('');
+  const [simulatedPing, setSimulatedPing] = useState(18.4);
+  const [hudExpanded, setHudExpanded] = useState(false);
 
   useEffect(() => {
-    // Load theme from localStorage if available, otherwise default to cyber dark
+    const updateClocks = () => {
+      const now = new Date();
+      setTimeLondon(now.toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour12: false }));
+      setTimeIslamabad(now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Karachi', hour12: false }));
+    };
+    updateClocks();
+    const timer = setInterval(updateClocks, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSimulatedPing(Number((17.4 + Math.random() * 1.9).toFixed(1)));
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    // Load theme from localStorage if available, default to white daylight
     const savedTheme = localStorage.getItem('mihora-theme');
-    if (savedTheme === 'light' || savedTheme === 'titanium' || savedTheme === 'desert') {
+    if (savedTheme === 'cyber' || savedTheme === 'dark') {
+      setTheme('cyber');
+      document.documentElement.setAttribute('data-theme', 'cyber');
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
       setTheme('light');
       document.documentElement.setAttribute('data-theme', 'light');
-    } else {
-      setTheme('cyber');
-      document.documentElement.removeAttribute('data-theme');
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
     }
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'cyber' ? 'light' : 'cyber';
+    const newTheme = theme === 'light' ? 'cyber' : 'light';
     setTheme(newTheme);
     localStorage.setItem('mihora-theme', newTheme);
     if (newTheme === 'cyber') {
-      document.documentElement.removeAttribute('data-theme');
+      document.documentElement.setAttribute('data-theme', 'cyber');
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
     } else {
       document.documentElement.setAttribute('data-theme', 'light');
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
     }
   };
 
@@ -154,20 +187,20 @@ export default function Layout() {
       {/* Route-Aware Dynamic SEO Head */}
       <SEOHead />
 
-      <header className="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/85 backdrop-blur-2xl border-b border-outline/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)] transition-all">
+      <header className="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-2xl border-b border-outline/30 shadow-sm transition-all">
         <div className="w-full px-margin-mobile lg:px-margin">
-          <div className="h-20 flex items-center justify-between gap-space-md">
-            <div className="flex items-center gap-space-lg">
-              <Link to="/" className="flex items-center gap-3 group" onClick={() => setMobileMenuOpen(false)}>
-                <BrandLogo className="w-9 h-9 sm:w-10 sm:h-10 group-hover:scale-105 transition-transform" />
+          <div className="h-20 flex items-center justify-between gap-2 sm:gap-space-md">
+            <div className="flex items-center gap-space-lg shrink-0">
+              <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group" onClick={() => setMobileMenuOpen(false)}>
+                <BrandLogo className="w-9 h-9 sm:w-10 sm:h-10 group-hover:scale-105 transition-transform shrink-0" />
                 <div className="flex items-center tracking-tight">
-                  <span className="font-headline-md text-headline-md font-extrabold text-on-surface tracking-tighter group-hover:text-secondary transition-colors">MIHORA</span>
-                  <span className="font-label-md text-label-md text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-container font-black tracking-widest ml-1">.TECH</span>
+                  <span className="font-headline-md text-headline-md font-extrabold text-on-surface tracking-tighter group-hover:text-primary transition-colors">MIHORA</span>
+                  <span className="font-label-md text-label-md text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-black tracking-widest ml-1">.TECH</span>
                 </div>
               </Link>
             </div>
             
-            <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2">
+            <nav className="hidden xl:flex items-center gap-1.5 2xl:gap-2">
               {navLinks.map((item) => {
                 const isActive = location.pathname === item.path;
                 return (
@@ -175,10 +208,10 @@ export default function Layout() {
                     key={item.path}
                     to={item.path}
                     className={clsx(
-                      "font-label-md text-label-md uppercase tracking-wider transition-all px-3 py-1.5 rounded-lg font-semibold",
+                      "font-label-md text-label-md uppercase tracking-wider transition-all px-2.5 2xl:px-3 py-1.5 rounded-lg font-semibold whitespace-nowrap",
                       isActive 
-                        ? 'text-secondary bg-surface-container border border-secondary/35 shadow-[0_0_14px_rgba(0,210,255,0.25)]' 
-                        : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container/50'
+                        ? 'text-primary bg-surface-container border border-primary/40 shadow-sm' 
+                        : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60'
                     )}
                   >
                     {item.label}
@@ -187,53 +220,105 @@ export default function Layout() {
               })}
             </nav>
 
-            <div className="flex items-center gap-space-sm sm:gap-space-md">
+            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+              {/* Live Real-time Dual-Hub Clock Pill (Ultra-wide Desktop) */}
+              <div className="hidden 2xl:flex items-center gap-2 px-3 py-1.5 bg-surface-container/80 border border-outline/40 rounded-lg font-mono text-[11px] text-on-surface-variant shrink-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                  <span className="text-primary font-bold">LON:</span>
+                  <span className="text-on-surface">{timeLondon || '10:50:14'}</span>
+                </div>
+                <span className="text-outline/60">|</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+                  <span className="text-secondary font-bold">ISB:</span>
+                  <span className="text-on-surface">{timeIslamabad || '15:50:14'}</span>
+                </div>
+              </div>
+
+              {/* Theme Toggle Button - Fully Visible Across ALL Screen Breakpoints */}
               <button 
+                id="theme-toggle-header-btn"
                 onClick={toggleTheme} 
-                className="flex items-center gap-1.5 px-3 py-2 bg-surface-container/90 hover:bg-surface-container-high border border-outline/30 hover:border-secondary/50 text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]" 
+                className="shrink-0 flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 bg-surface-container hover:bg-surface-container-high border border-outline hover:border-primary text-on-surface rounded-lg transition-all cursor-pointer shadow-sm hover:shadow-md active:scale-95" 
                 type="button" 
                 aria-label="Toggle Theme"
-                title={`Theme: ${theme === 'cyber' ? 'Obsidian Cyber (Dark)' : 'Titanium Daylight (Light)'}. Click to switch.`}
+                title={`Active Theme: ${theme === 'light' ? 'White Daylight' : 'Obsidian Dark'}. Click to switch.`}
               >
-                {theme === 'cyber' ? (
+                {theme === 'light' ? (
                   <>
-                    <Moon size={15} className="text-secondary" />
-                    <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-mono text-[11px] font-bold text-secondary">DARK</span>
+                    <Sun size={17} className="text-amber-500 fill-amber-500/20 shrink-0" />
+                    <span className="font-label-sm text-label-sm uppercase tracking-wider hidden sm:inline font-mono text-[11px] font-bold text-on-surface whitespace-nowrap">
+                      WHITE
+                    </span>
                   </>
                 ) : (
                   <>
-                    <Sun size={15} className="text-primary" />
-                    <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-mono text-[11px] font-bold text-primary">LIGHT</span>
+                    <Moon size={17} className="text-secondary fill-secondary/20 shrink-0" />
+                    <span className="font-label-sm text-label-sm uppercase tracking-wider hidden sm:inline font-mono text-[11px] font-bold text-secondary whitespace-nowrap">
+                      DARK
+                    </span>
                   </>
                 )}
               </button>
 
+              {/* Search Architecture Button */}
               <button 
                 onClick={() => setSearchOpen(true)}
-                className="flex items-center gap-space-xs px-3 sm:px-3.5 py-2 bg-surface-container/90 hover:bg-surface-container-high border border-outline/30 hover:border-secondary/50 text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.15)]" 
+                className="shrink-0 flex items-center gap-1.5 px-2.5 sm:px-3 py-2 bg-surface-container hover:bg-surface-container-high border border-outline hover:border-primary text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer shadow-sm active:scale-95" 
                 type="button"
                 aria-label="Search Architecture"
               >
-                <Search size={15} className="text-secondary" />
-                <span className="font-label-sm text-label-sm uppercase tracking-wider hidden sm:inline font-semibold">Search Arch</span>
-                <kbd className="hidden sm:inline-block px-1.5 py-0.5 bg-surface-container-highest border border-outline/40 text-on-surface rounded font-mono text-[10px]">⌘K</kbd>
+                <Search size={16} className="text-primary shrink-0" />
+                <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-semibold whitespace-nowrap">Search</span>
+                <kbd className="hidden lg:inline-block px-1.5 py-0.5 bg-surface-container-highest border border-outline text-on-surface rounded font-mono text-[10px]">⌘K</kbd>
               </button>
 
+              {/* Mobile / Tablet Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
-                className="lg:hidden p-2 text-on-surface-variant hover:text-on-surface bg-surface-container border border-outline/25 rounded-lg transition-colors"
+                className="xl:hidden shrink-0 p-2 text-on-surface-variant hover:text-on-surface bg-surface-container border border-outline rounded-lg transition-colors active:scale-95"
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 type="button"
               >
-                {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile / Tablet Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-surface-container bg-surface-container-lowest/98 px-margin-mobile py-space-md shadow-2xl backdrop-blur-2xl animate-in fade-in slide-in-from-top-4 duration-200">
+          <div className="xl:hidden border-t border-outline/30 bg-surface-container-lowest/98 px-margin-mobile py-space-md shadow-2xl backdrop-blur-2xl animate-in fade-in slide-in-from-top-4 duration-200">
+            {/* Dedicated Theme Switcher Card for Mobile/Tablet */}
+            <div className="mb-3 p-3 rounded-xl bg-surface-container border border-outline/50 flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                {theme === 'light' ? (
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center border border-amber-500/30">
+                    <Sun size={18} className="text-amber-500" />
+                  </div>
+                ) : (
+                  <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center border border-secondary/30">
+                    <Moon size={18} className="text-secondary" />
+                  </div>
+                )}
+                <div>
+                  <div className="text-xs font-mono font-bold text-on-surface">
+                    {theme === 'light' ? 'Daylight (White Theme)' : 'Obsidian (Cyber Dark)'}
+                  </div>
+                  <div className="text-[10px] text-on-surface-variant font-mono">
+                    System Appearance
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={toggleTheme}
+                className="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest border border-outline text-xs font-mono font-bold text-on-surface transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
+              >
+                <span>Switch to {theme === 'light' ? 'Dark' : 'White'}</span>
+              </button>
+            </div>
+
             <div className="flex flex-col space-y-1 pb-space-sm font-label-md text-label-md uppercase tracking-wider">
               {navLinks.map((item) => (
                 <Link
@@ -241,9 +326,9 @@ export default function Layout() {
                   to={item.path}
                   onClick={() => setMobileMenuOpen(false)}
                   className={clsx(
-                    "px-space-sm py-2.5 rounded-DEFAULT transition-colors flex items-center justify-between",
+                    "px-space-sm py-2.5 rounded-lg transition-colors flex items-center justify-between",
                     location.pathname === item.path
-                      ? "bg-surface-container text-secondary font-bold"
+                      ? "bg-surface-container text-primary font-bold border border-primary/30"
                       : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
                   )}
                 >
@@ -253,10 +338,10 @@ export default function Layout() {
               ))}
             </div>
 
-            <div className="pt-space-sm border-t border-surface-container flex flex-col sm:flex-row gap-space-xs font-mono text-xs text-on-surface-variant">
+            <div className="pt-space-sm border-t border-outline/30 flex flex-col sm:flex-row gap-space-xs font-mono text-xs text-on-surface-variant">
               <a
                 href="mailto:hr@mihora.tech"
-                className="w-full py-2.5 text-center bg-primary-container text-on-primary font-bold rounded-DEFAULT tracking-wider uppercase"
+                className="w-full py-2.5 text-center bg-primary text-on-primary font-bold rounded-lg tracking-wider uppercase shadow-sm"
               >
                 DISPATCH: HR@MIHORA.TECH
               </a>
@@ -266,14 +351,27 @@ export default function Layout() {
       </header>
 
       {/* Command Palette / Search & AI Copilot Modal */}
-      {searchOpen && (
-        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-start justify-center pt-16 sm:pt-24 px-4">
-          <div 
-            className="w-full max-w-2xl bg-surface-container-low border border-outline/30 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150 flex flex-col max-h-[85vh]"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {searchOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-start justify-center pt-16 sm:pt-24 px-4"
+            onClick={() => setSearchOpen(false)}
           >
-            {/* Mode Switcher Tabs */}
-            <div className="flex items-center justify-between border-b border-outline/20 bg-surface-container-lowest px-4 py-2">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: -15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -10 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full max-w-2xl bg-surface-container-low border border-secondary/35 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Subtle Scanline Effect on Search Modal */}
+              <div className="absolute inset-0 pointer-events-none bg-scanline opacity-10"></div>
+              {/* Mode Switcher Tabs */}
+              <div className="flex items-center justify-between border-b border-outline/20 bg-surface-container-lowest px-4 py-2 relative z-10">
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setSearchMode('catalog')}
@@ -501,17 +599,129 @@ export default function Layout() {
             </div>
 
             {/* Bottom Status Bar */}
-            <div className="px-space-md py-2.5 bg-surface-container-lowest border-t border-outline/20 flex items-center justify-between text-[11px] font-mono text-outline">
+            <div className="px-space-md py-2.5 bg-surface-container-lowest border-t border-outline/20 flex items-center justify-between text-[11px] font-mono text-outline relative z-10">
               <span>PROMPT: ↑↓ TO NAVIGATE • ↵ TO SELECT • ESC TO CLOSE</span>
               <span className="text-secondary font-semibold">MIHORA ARCH_DISCOVERY v2.6 // SEO &amp; AI ACTIVE</span>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
+    </AnimatePresence>
 
-      <main className="w-full pt-20 bg-surface min-h-screen flex-1">
-        <Outlet />
+      <main className="w-full pt-20 bg-surface min-h-screen flex-1 overflow-x-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full"
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
       </main>
+
+      {/* Floating Interactive Live Telemetry HUD Widget */}
+      <div className="fixed bottom-5 right-5 z-40">
+        <AnimatePresence mode="wait">
+          {!hudExpanded ? (
+            <motion.button
+              key="collapsed-hud"
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              onClick={() => setHudExpanded(true)}
+              className="flex items-center gap-2.5 px-3.5 py-2 bg-surface-container-low/95 hover:bg-surface-container border border-secondary/35 hover:border-secondary text-on-surface rounded-full shadow-2xl backdrop-blur-xl transition-all cursor-pointer group hover:scale-105"
+              title="Open Live Telemetry Command HUD"
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary-container"></span>
+              </span>
+              <span className="font-mono text-[11px] font-bold text-secondary">
+                {simulatedPing}ms
+              </span>
+              <span className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider hidden sm:inline">
+                • 2 HUBS SYNCED
+              </span>
+              <Activity size={13} className="text-secondary" />
+            </motion.button>
+          ) : (
+            <motion.div
+              key="expanded-hud"
+              initial={{ opacity: 0, scale: 0.92, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 12 }}
+              transition={{ duration: 0.2 }}
+              className="w-80 sm:w-96 bg-surface-container-low/95 border border-secondary/40 p-4 rounded-2xl shadow-2xl backdrop-blur-2xl space-y-3 font-mono text-xs"
+            >
+              <div className="flex items-center justify-between pb-2 border-b border-outline/20">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                  <span className="font-bold text-secondary uppercase tracking-wider text-[11px]">
+                    MIHORA ORBITAL TELEMETRY
+                  </span>
+                </div>
+                <button
+                  onClick={() => setHudExpanded(false)}
+                  className="text-on-surface-variant hover:text-on-surface p-1 rounded hover:bg-surface-container cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 text-[11px]">
+                <div className="p-2 bg-surface-container-lowest/80 rounded border border-outline/15">
+                  <span className="text-outline block text-[9px]">UK COMMAND (LON)</span>
+                  <span className="text-secondary font-bold">{timeLondon || '10:50:14'}</span>
+                  <span className="text-[9px] text-tertiary block">ONLINE • UTC+0</span>
+                </div>
+                <div className="p-2 bg-surface-container-lowest/80 rounded border border-outline/15">
+                  <span className="text-outline block text-[9px]">PAK COMMAND (ISB)</span>
+                  <span className="text-secondary font-bold">{timeIslamabad || '15:50:14'}</span>
+                  <span className="text-[9px] text-tertiary block">ONLINE • UTC+5</span>
+                </div>
+              </div>
+
+              <div className="space-y-1.5 pt-1">
+                <div className="flex justify-between text-[10px]">
+                  <span className="text-on-surface-variant">QUORUM LATENCY</span>
+                  <span className="text-secondary font-bold">{simulatedPing} MS</span>
+                </div>
+                <div className="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-primary via-secondary to-tertiary rounded-full transition-all duration-500"
+                    style={{ width: `${Math.min(100, Math.max(20, (simulatedPing / 30) * 100))}%` }}
+                  />
+                </div>
+                <div className="flex justify-between text-[9px] text-outline">
+                  <span>PACKET DROP: 0.00%</span>
+                  <span>AIR-GAPPED SRE</span>
+                </div>
+              </div>
+
+              <div className="pt-2 border-t border-outline/15 flex items-center justify-between">
+                <Link
+                  to="/engineering#reliability-telemetry"
+                  onClick={() => setHudExpanded(false)}
+                  className="text-secondary hover:underline text-[11px] flex items-center gap-1"
+                >
+                  <span>Telemetry Specs</span>
+                  <ArrowRight size={12} />
+                </Link>
+                <a
+                  href="mailto:hr@mihora.tech"
+                  className="px-2.5 py-1 bg-secondary text-surface text-[10px] font-bold rounded hover:bg-secondary/90 transition-all"
+                >
+                  DISPATCH
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       <footer className="w-full bg-surface-container-lowest/95 border-t border-outline/20 py-space-xl text-on-surface mt-auto bg-tech-grid">
         <div className="w-full px-margin-mobile lg:px-margin space-y-space-xl">
@@ -527,10 +737,20 @@ export default function Layout() {
               <p className="font-label-md text-label-md text-secondary-container uppercase tracking-wider font-semibold">Technology Engineered for the Real World.</p>
               <p className="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">Operating Synchronized Sovereign Engineering Command Hubs across London (UK) &amp; Islamabad (Pakistan). Deploying Worldwide with 24/7 Kinetic &amp; Digital Field Capabilities.</p>
             </div>
-            <div className="flex flex-wrap items-center gap-3 font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low/90 border border-outline/20 px-4 py-3 rounded-xl shadow-lg">
-              <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>LON (UK): <span className="text-secondary font-mono font-bold">UTC+0 ACTIVE</span></div>
+            <div className="flex flex-wrap items-center gap-3 font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low/90 border border-outline/20 px-4 py-3 rounded-xl shadow-lg font-mono">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+                <span>LON (UK):</span>
+                <span className="text-secondary font-bold">{timeLondon || '10:50:14'}</span>
+                <span className="text-secondary-container text-[10px]">UTC+0</span>
+              </div>
               <span className="text-outline/40">|</span>
-              <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>ISB (PK): <span className="text-secondary font-mono font-bold">UTC+5 ACTIVE</span></div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+                <span>ISB (PK):</span>
+                <span className="text-secondary font-bold">{timeIslamabad || '15:50:14'}</span>
+                <span className="text-secondary-container text-[10px]">UTC+5</span>
+              </div>
               <span className="text-outline/40">|</span>
               <div>DISPATCH: <a href="mailto:hr@mihora.tech" className="text-secondary hover:underline font-mono font-bold">hr@mihora.tech</a></div>
             </div>

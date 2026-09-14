@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowRight, Cpu, Terminal, Pointer, ShieldCheck, Gauge, 
   Network, Globe, Shield, Router, RefreshCw, Grid, Smartphone,
@@ -8,7 +9,7 @@ import {
   Building, Cloud, Eye, Settings, Wrench, Ruler, Cable, Video, 
   AlertTriangle, HardHat, Headset, Monitor, ArrowDown, Users, 
   PencilRuler, Hospital, Store, GraduationCap, Mail, Zap, ArrowUpRight,
-  Activity, RefreshCcw
+  Activity, RefreshCcw, Wifi, Radio, Layers
 } from 'lucide-react';
 
 const nodeData: Record<string, any> = {
@@ -149,6 +150,18 @@ export default function Home() {
 
   const [expandedStack, setExpandedStack] = useState<number | null>(null);
 
+  // Live telemetry simulation
+  const [livePing, setLivePing] = useState(18.4);
+  const [livePackets, setLivePackets] = useState(248190);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLivePing(Number((17.3 + Math.random() * 2.1).toFixed(1)));
+      setLivePackets(prev => prev + Math.floor(Math.random() * 18) + 7);
+    }, 2400);
+    return () => clearInterval(timer);
+  }, []);
+
   const toggleStack = (index: number) => {
     setExpandedStack(prev => prev === index ? null : index);
   };
@@ -161,7 +174,12 @@ export default function Home() {
         <div className="pointer-events-none absolute bottom-0 right-0 w-96 h-96 bg-secondary-container/10 blur-[130px]"></div>
         <div className="w-full px-margin-mobile lg:px-margin relative z-10 space-y-space-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-end">
-            <div className="lg:col-span-8 space-y-space-md">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-8 space-y-space-md"
+            >
               <div className="inline-flex flex-wrap items-center gap-space-sm px-3.5 py-1.5 bg-surface-container-low/90 backdrop-blur-md rounded-full border border-secondary/20 shadow-lg">
                 <span className="w-2.5 h-2.5 rounded-full bg-secondary-container animate-ping"></span>
                 <span className="font-label-sm text-label-sm uppercase tracking-widest text-secondary-container font-mono font-bold">SOVEREIGN TECH &amp; DUAL-HUB ARCHITECTURE</span>
@@ -178,7 +196,7 @@ export default function Home() {
                 MIHORA.TECH is an elite sovereign engineering authority operating synchronized command hubs across London (UK) and Islamabad (Pakistan). We architect resilient software networks, execute physical server infrastructures, deploy autonomous workflows, and command 24/7 global field operations across five continents.
               </p>
               <div className="pt-space-sm flex flex-wrap items-center gap-space-md">
-                <a href="mailto:hr@mihora.tech" className="inline-flex items-center gap-space-sm px-7 py-4 btn-primary-gradient font-label-md text-label-md uppercase tracking-widest font-bold rounded-xl transition-all">
+                <a href="mailto:hr@mihora.tech" className="inline-flex items-center gap-space-sm px-7 py-4 btn-primary-gradient font-label-md text-label-md uppercase tracking-widest font-bold rounded-xl transition-all hover:scale-105 shadow-[0_0_25px_rgba(0,240,255,0.35)]">
                   <Terminal size={17} />
                   <span>DISPATCH: HR@MIHORA.TECH</span>
                 </a>
@@ -188,12 +206,17 @@ export default function Home() {
                   <ArrowUpRight size={15} className="text-secondary" />
                 </Link>
               </div>
-            </div>
+            </motion.div>
             {/* Telemetry HUD Card */}
-            <div className="lg:col-span-4 bg-surface-container-low/95 border border-secondary/20 p-space-md rounded-xl space-y-space-sm shadow-2xl backdrop-blur-md">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="lg:col-span-4 bg-surface-container-low/95 border border-secondary/20 p-space-md rounded-xl space-y-space-sm shadow-2xl backdrop-blur-md hover:border-secondary/40 transition-colors"
+            >
               <div className="flex items-center justify-between pb-space-xs border-b border-surface-container-highest">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+                  <span className="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span>
                   <span className="font-label-sm text-label-sm text-secondary-container uppercase tracking-wider font-mono font-bold">// TELEMETRY ORBITAL</span>
                 </div>
                 <span className="font-label-sm text-label-sm text-on-surface-variant font-mono">LON (UK) &amp; ISB (PK)</span>
@@ -208,24 +231,27 @@ export default function Home() {
                   <span className="text-secondary-container font-semibold">99.998% UPTIME</span>
                 </div>
                 <div className="p-2.5 bg-surface-container/90 rounded-lg border border-outline/10">
-                  <span className="text-outline block text-[10px]">ACTIVE PATHS</span>
-                  <span className="text-on-surface font-semibold">14 GLOBAL RUNGS</span>
+                  <span className="text-outline block text-[10px]">TOTAL PACKETS</span>
+                  <span className="text-on-surface font-semibold">{livePackets.toLocaleString()}</span>
                 </div>
                 <div className="p-2.5 bg-surface-container/90 rounded-lg border border-outline/10">
                   <span className="text-outline block text-[10px]">DISPATCH MS</span>
-                  <span className="text-secondary-container font-semibold">18.4 MS AVG</span>
+                  <span className="text-secondary-container font-semibold">{livePing} MS LIVE</span>
                 </div>
               </div>
               <div className="space-y-1 pt-1">
                 <div className="flex justify-between text-[10px] font-mono text-outline">
                   <span>SYSTEM LATENCY QUORUM</span>
-                  <span className="text-secondary">SUB-20MS</span>
+                  <span className="text-secondary font-bold">{livePing} MS ACTIVE</span>
                 </div>
                 <div className="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-primary-container via-secondary-container to-secondary w-4/5 animate-pulse"></div>
+                  <div 
+                    className="h-full bg-gradient-to-r from-primary-container via-secondary-container to-secondary rounded-full transition-all duration-500"
+                    style={{ width: `${Math.min(100, Math.max(25, (livePing / 25) * 100))}%` }}
+                  ></div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
           
           {/* Interactive Global Engineering Network Canvas */}
@@ -253,8 +279,8 @@ export default function Home() {
               </svg>
               
               <svg className="w-full h-full relative z-10" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 500">
-                <g className="opacity-60" stroke="var(--color-primary-container)" strokeDasharray="4,4" strokeWidth="1.5">
-                  <line className="animate-pulse stroke-secondary-container stroke-[2.5]" x1="480" x2="580" y1="170" y2="240"></line>
+                {/* Background Network Topology Grid */}
+                <g className="opacity-40" stroke="var(--color-primary-container)" strokeDasharray="4,4" strokeWidth="1.2">
                   <line x1="580" x2="520" y1="240" y2="280"></line>
                   <line x1="580" x2="730" y1="240" y2="300"></line>
                   <line x1="480" x2="250" y1="170" y2="190"></line>
@@ -264,9 +290,41 @@ export default function Home() {
                   <line x1="580" x2="840" y1="240" y2="390"></line>
                   <line x1="580" x2="500" y1="240" y2="390"></line>
                 </g>
+
+                {/* Animated Dynamic Optical Data Flow Lines */}
+                <line className="flow-line stroke-secondary stroke-[2.5]" x1="480" x2="580" y1="170" y2="240" strokeDasharray="8,8"></line>
+                <line className="flow-line-reverse stroke-secondary-container stroke-[2]" x1="580" x2="520" y1="240" y2="280" strokeDasharray="6,6"></line>
+                <line className="flow-line stroke-secondary stroke-[2]" x1="580" x2="730" y1="240" y2="300" strokeDasharray="6,6"></line>
+                <line className="flow-line-reverse stroke-primary stroke-[2]" x1="480" x2="250" y1="170" y2="190" strokeDasharray="6,6"></line>
+                <line className="flow-line stroke-secondary stroke-[1.5]" x1="580" x2="800" y1="240" y2="200" strokeDasharray="6,6"></line>
+                
+                {/* Moving Optical Light Pulses (SVG Native Animation) */}
+                <circle r="3.5" fill="#00f0ff">
+                  <animate attributeName="cx" values="480;580;480" dur="4s" repeatCount="indefinite" />
+                  <animate attributeName="cy" values="170;240;170" dur="4s" repeatCount="indefinite" />
+                </circle>
+                <circle r="2.8" fill="#00d2ff">
+                  <animate attributeName="cx" values="580;730;580" dur="5s" repeatCount="indefinite" />
+                  <animate attributeName="cy" values="240;300;240" dur="5s" repeatCount="indefinite" />
+                </circle>
+                <circle r="2.8" fill="#4d88ff">
+                  <animate attributeName="cx" values="480;250;480" dur="5.5s" repeatCount="indefinite" />
+                  <animate attributeName="cy" values="170;190;170" dur="5.5s" repeatCount="indefinite" />
+                </circle>
+
+                {/* Animated Concentric Radar Pulse Rings - Pakistan Hub */}
+                <circle cx="580" cy="240" r="15" fill="none" stroke="var(--color-secondary)" strokeWidth="1">
+                  <animate attributeName="r" values="8;50;65" dur="2.8s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.8;0.2;0" dur="2.8s" repeatCount="indefinite" />
+                </circle>
                 <circle className="opacity-30" cx="580" cy="240" fill="none" r="42" stroke="var(--color-secondary-container)" strokeWidth="0.75"></circle>
                 <circle className="opacity-20" cx="580" cy="240" fill="none" r="75" stroke="var(--color-secondary-container)" strokeWidth="0.5"></circle>
 
+                {/* Animated Concentric Radar Pulse Rings - UK Hub */}
+                <circle cx="480" cy="170" r="12" fill="none" stroke="var(--color-secondary-container)" strokeWidth="1">
+                  <animate attributeName="r" values="6;42;55" dur="3.2s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.8;0.2;0" dur="3.2s" repeatCount="indefinite" />
+                </circle>
                 <circle className="opacity-30" cx="480" cy="170" fill="none" r="35" stroke="var(--color-secondary-container)" strokeWidth="0.75"></circle>
                 <circle className="opacity-20" cx="480" cy="170" fill="none" r="60" stroke="var(--color-secondary-container)" strokeWidth="0.5"></circle>
                 
@@ -317,19 +375,29 @@ export default function Home() {
                 </g>
               </svg>
               
-              <div className="absolute bottom-4 left-4 right-4 md:right-auto md:w-96 bg-surface-container/95 backdrop-blur-md p-space-md rounded-DEFAULT shadow-2xl transition-all">
-                <div className="flex items-center justify-between pb-1">
-                  <span className="font-label-sm text-label-sm text-secondary-container font-mono">{activeNode.code}</span>
-                  <span className="w-2 h-2 rounded-full bg-secondary-container"></span>
-                </div>
-                <div className="font-headline-sm text-headline-sm text-on-surface font-bold">{activeNode.title}</div>
-                <div className="font-body-sm text-body-sm text-on-surface-variant mt-1">{activeNode.desc}</div>
-                <div className="mt-space-sm pt-space-xs flex justify-between font-label-sm text-label-sm font-mono text-outline">
-                  <span>LAT: <span className="text-secondary">{activeNode.lat}</span></span>
-                  <span>LON: <span className="text-secondary">{activeNode.lon}</span></span>
-                  <span>STATE: <span className="text-secondary-container font-semibold">ACTIVE</span></span>
-                </div>
-              </div>
+              {/* Active Node Detail Card with Motion Animation */}
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={activeNodeId}
+                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                  transition={{ duration: 0.22 }}
+                  className="absolute bottom-4 left-4 right-4 md:right-auto md:w-96 bg-surface-container/95 backdrop-blur-md p-space-md rounded-xl border border-secondary/30 shadow-2xl transition-all"
+                >
+                  <div className="flex items-center justify-between pb-1">
+                    <span className="font-label-sm text-label-sm text-secondary-container font-mono">{activeNode.code}</span>
+                    <span className="w-2.5 h-2.5 rounded-full bg-secondary-container animate-ping"></span>
+                  </div>
+                  <div className="font-headline-sm text-headline-sm text-on-surface font-bold">{activeNode.title}</div>
+                  <div className="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">{activeNode.desc}</div>
+                  <div className="mt-space-sm pt-space-xs flex justify-between font-label-sm text-label-sm font-mono text-outline border-t border-outline/15">
+                    <span>LAT: <span className="text-secondary">{activeNode.lat}</span></span>
+                    <span>LON: <span className="text-secondary">{activeNode.lon}</span></span>
+                    <span>STATE: <span className="text-secondary-container font-semibold">ACTIVE</span></span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -543,76 +611,85 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="bg-surface-container-low/95 border border-outline/20 p-space-lg lg:p-space-xl rounded-2xl shadow-2xl transition-all">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
-              <div className="lg:col-span-7 space-y-space-md">
-                <div className="flex items-center gap-space-sm">
-                  <span className="px-3 py-1 bg-surface-container font-mono text-label-sm text-secondary-container font-bold rounded-md border border-secondary-container/20">{activeService.tag}</span>
-                  <span className="font-label-sm text-label-sm text-outline font-mono uppercase tracking-wider">{activeService.sub}</span>
-                </div>
-                <h3 className="font-headline-md text-headline-md text-on-surface font-extrabold uppercase tracking-tight">{activeService.headline}</h3>
-                <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">{activeService.body}</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-space-xs">
-                  <div className="p-3.5 bg-surface-container/80 border border-outline/10 rounded-xl hover:border-secondary/40 transition-colors">
-                    <span className="font-label-sm text-label-sm text-secondary block font-mono font-bold">01 // PLATFORM DEV</span>
-                    <span className="font-body-sm text-body-sm text-on-surface font-medium">{activeService.sub1}</span>
+          <div className="bg-surface-container-low/95 border border-outline/20 p-space-lg lg:p-space-xl rounded-2xl shadow-2xl transition-all overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={activeServiceIdx}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center"
+              >
+                <div className="lg:col-span-7 space-y-space-md">
+                  <div className="flex items-center gap-space-sm">
+                    <span className="px-3 py-1 bg-surface-container font-mono text-label-sm text-secondary-container font-bold rounded-md border border-secondary-container/20">{activeService.tag}</span>
+                    <span className="font-label-sm text-label-sm text-outline font-mono uppercase tracking-wider">{activeService.sub}</span>
                   </div>
-                  <div className="p-3.5 bg-surface-container/80 border border-outline/10 rounded-xl hover:border-secondary/40 transition-colors">
-                    <span className="font-label-sm text-label-sm text-secondary block font-mono font-bold">02 // ARCHITECTURE</span>
-                    <span className="font-body-sm text-body-sm text-on-surface font-medium">{activeService.sub2}</span>
-                  </div>
-                  <div className="p-3.5 bg-surface-container/80 border border-outline/10 rounded-xl hover:border-secondary/40 transition-colors">
-                    <span className="font-label-sm text-label-sm text-secondary block font-mono font-bold">03 // APIS &amp; INTEGRATIONS</span>
-                    <span className="font-body-sm text-body-sm text-on-surface font-medium">{activeService.sub3}</span>
-                  </div>
-                  <div className="p-3.5 bg-surface-container/80 border border-outline/10 rounded-xl hover:border-secondary/40 transition-colors">
-                    <span className="font-label-sm text-label-sm text-secondary block font-mono font-bold">04 // CODE RESILIENCE</span>
-                    <span className="font-body-sm text-body-sm text-on-surface font-medium">{activeService.sub4}</span>
-                  </div>
-                </div>
-                <div className="pt-space-xs">
-                  <Link to="/services" className="inline-flex items-center gap-space-sm px-5 py-2.5 bg-secondary/15 hover:bg-secondary/25 border border-secondary/30 text-secondary font-label-md text-label-md uppercase font-bold font-mono rounded-lg transition-all">
-                    <span>[ INITIATE SERVICE BRIEFING ]</span>
-                    <ArrowUpRight size={15} />
-                  </Link>
-                </div>
-              </div>
-              <div className="lg:col-span-5 bg-surface-container/90 border border-outline/20 p-space-md rounded-xl space-y-space-sm shadow-xl">
-                <div className="flex items-center justify-between text-label-sm font-mono text-outline">
-                  <span>SYSTEM ARCH_BLUEPRINT</span>
-                  <span className="text-secondary-container">STATUS: RESOLVED</span>
-                </div>
-                <div className="h-64 bg-surface-container-lowest rounded-DEFAULT p-space-md flex flex-col justify-between font-mono text-xs text-secondary relative overflow-hidden">
-                  <div className="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-primary-container/10 pointer-events-none"></div>
-                  <div className="space-y-1">
-                    <div className="text-outline-variant">// SCHEMA RUNTIME TELEMETRY</div>
-                    <div>&gt; INGEST: API_GATEWAY_V3</div>
-                    <div>&gt; PROTOCOL: gRPC / WEBSOCKET / TLS1.3</div>
-                    <div>&gt; PIPELINE: DISTRIBUTED REPLICATION</div>
-                  </div>
-                  <div className="space-y-1.5 py-2">
-                    <div className="flex items-center justify-between text-[10px] text-outline">
-                      <span>THROUGHPUT</span>
-                      <span>{activeService.bar1} OPTIMAL</span>
+                  <h3 className="font-headline-md text-headline-md text-on-surface font-extrabold uppercase tracking-tight">{activeService.headline}</h3>
+                  <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">{activeService.body}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-space-xs">
+                    <div className="p-3.5 bg-surface-container/80 border border-outline/10 rounded-xl hover:border-secondary/40 transition-colors">
+                      <span className="font-label-sm text-label-sm text-secondary block font-mono font-bold">01 // PLATFORM DEV</span>
+                      <span className="font-body-sm text-body-sm text-on-surface font-medium">{activeService.sub1}</span>
                     </div>
-                    <div className="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
-                      <div className="h-full bg-secondary-container transition-all duration-500" style={{ width: activeService.bar1 }}></div>
+                    <div className="p-3.5 bg-surface-container/80 border border-outline/10 rounded-xl hover:border-secondary/40 transition-colors">
+                      <span className="font-label-sm text-label-sm text-secondary block font-mono font-bold">02 // ARCHITECTURE</span>
+                      <span className="font-body-sm text-body-sm text-on-surface font-medium">{activeService.sub2}</span>
                     </div>
-                    <div className="flex items-center justify-between text-[10px] text-outline">
-                      <span>RESILIENCE QUORUM</span>
-                      <span>3/3 NODES SYNCED</span>
+                    <div className="p-3.5 bg-surface-container/80 border border-outline/10 rounded-xl hover:border-secondary/40 transition-colors">
+                      <span className="font-label-sm text-label-sm text-secondary block font-mono font-bold">03 // APIS &amp; INTEGRATIONS</span>
+                      <span className="font-body-sm text-body-sm text-on-surface font-medium">{activeService.sub3}</span>
                     </div>
-                    <div className="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
-                      <div className="h-full bg-primary transition-all duration-500" style={{ width: activeService.bar2 }}></div>
+                    <div className="p-3.5 bg-surface-container/80 border border-outline/10 rounded-xl hover:border-secondary/40 transition-colors">
+                      <span className="font-label-sm text-label-sm text-secondary block font-mono font-bold">04 // CODE RESILIENCE</span>
+                      <span className="font-body-sm text-body-sm text-on-surface font-medium">{activeService.sub4}</span>
                     </div>
                   </div>
-                  <div className="text-[11px] text-on-surface-variant flex justify-between">
-                    <span>DISPATCH: MIHORA_CORE</span>
-                    <span className="text-secondary-container">HASH: 0x88F10B</span>
+                  <div className="pt-space-xs">
+                    <Link to="/services" className="inline-flex items-center gap-space-sm px-5 py-2.5 bg-secondary/15 hover:bg-secondary/25 border border-secondary/30 text-secondary font-label-md text-label-md uppercase font-bold font-mono rounded-lg transition-all">
+                      <span>[ INITIATE SERVICE BRIEFING ]</span>
+                      <ArrowUpRight size={15} />
+                    </Link>
                   </div>
                 </div>
-              </div>
-            </div>
+                <div className="lg:col-span-5 bg-surface-container/90 border border-outline/20 p-space-md rounded-xl space-y-space-sm shadow-xl">
+                  <div className="flex items-center justify-between text-label-sm font-mono text-outline">
+                    <span>SYSTEM ARCH_BLUEPRINT</span>
+                    <span className="text-secondary-container">STATUS: RESOLVED</span>
+                  </div>
+                  <div className="h-64 bg-surface-container-lowest rounded-DEFAULT p-space-md flex flex-col justify-between font-mono text-xs text-secondary relative overflow-hidden">
+                    <div className="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-primary-container/10 pointer-events-none"></div>
+                    <div className="space-y-1">
+                      <div className="text-outline-variant">// SCHEMA RUNTIME TELEMETRY</div>
+                      <div>&gt; INGEST: API_GATEWAY_V3</div>
+                      <div>&gt; PROTOCOL: gRPC / WEBSOCKET / TLS1.3</div>
+                      <div>&gt; PIPELINE: DISTRIBUTED REPLICATION</div>
+                    </div>
+                    <div className="space-y-1.5 py-2">
+                      <div className="flex items-center justify-between text-[10px] text-outline">
+                        <span>THROUGHPUT</span>
+                        <span>{activeService.bar1} OPTIMAL</span>
+                      </div>
+                      <div className="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+                        <div className="h-full bg-secondary-container transition-all duration-500" style={{ width: activeService.bar1 }}></div>
+                      </div>
+                      <div className="flex items-center justify-between text-[10px] text-outline">
+                        <span>RESILIENCE QUORUM</span>
+                        <span>3/3 NODES SYNCED</span>
+                      </div>
+                      <div className="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+                        <div className="h-full bg-primary transition-all duration-500" style={{ width: activeService.bar2 }}></div>
+                      </div>
+                    </div>
+                    <div className="text-[11px] text-on-surface-variant flex justify-between">
+                      <span>DISPATCH: MIHORA_CORE</span>
+                      <span className="text-secondary-container">HASH: 0x88F10B</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </section>
@@ -639,23 +716,49 @@ export default function Home() {
               { id: 3, title: "Structured Cabling & PDU Distribution", desc: "Fiber optic splicing (single-mode & multi-mode), Cat6A patch panel termination, intelligent rack PDUs, ATS failover, and battery UPS arrays.", spec: "FLUKE CERTIFIED LINK VERIFICATION // ZERO ELECTROMAGNETIC LEAK" },
               { id: 2, title: "Physical Installation & Surveillance", desc: "CCTV NVR/DVR arrays, biometric turnstiles, environmental humidity/temperature probes, server room cooling containment, and perimeter sensors.", spec: "NEMA-RATED ENCLOSURES // TAMPER DETECTION CIRCUITS" },
               { id: 1, title: "Kinetic Field Dispatch & Break-Fix", desc: "Hands-on engineering trucks, ladder work, cable pulling, on-site diagnostics, component replacement, and physical asset decommissioning.", spec: "GLOBAL RAPID DISPATCH PROTOCOL // FIELD TOOLSETS CALIBRATED" },
-            ].map(layer => (
-              <div key={layer.id} className="p-space-md bg-surface-container-low hover:bg-surface-container rounded-DEFAULT cursor-pointer transition-all" onClick={() => toggleStack(layer.id)}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-space-md">
-                    <span className="text-secondary-container font-bold">L-0{layer.id}</span>
-                    <span className="text-on-surface font-bold uppercase font-headline-sm text-headline-sm">{layer.title}</span>
+            ].map(layer => {
+              const isExpanded = expandedStack === layer.id;
+              return (
+                <div 
+                  key={layer.id} 
+                  className={clsx(
+                    "p-space-md rounded-xl cursor-pointer transition-all border",
+                    isExpanded 
+                      ? "bg-surface-container border-secondary/40 shadow-lg" 
+                      : "bg-surface-container-low hover:bg-surface-container/70 border-outline/15"
+                  )} 
+                  onClick={() => toggleStack(layer.id)}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-space-md">
+                      <span className={clsx("font-bold transition-colors", isExpanded ? "text-secondary" : "text-secondary-container")}>
+                        L-0{layer.id}
+                      </span>
+                      <span className="text-on-surface font-bold uppercase font-headline-sm text-headline-sm">{layer.title}</span>
+                    </div>
+                    <span className="text-secondary text-xs flex items-center gap-1 font-bold">
+                      {isExpanded ? "[-] COLLAPSE" : "[+] EXPAND LAYER"}
+                    </span>
                   </div>
-                  <span className="text-secondary text-sm">[EXPAND LAYER]</span>
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div 
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-space-sm font-body-sm text-body-sm text-on-surface-variant space-y-1.5 border-t border-outline/15 mt-3">
+                          <p>{layer.desc}</p>
+                          <div className="text-xs text-secondary font-mono font-semibold">SPEC: {layer.spec}</div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-                {expandedStack === layer.id && (
-                  <div className="pt-space-sm font-body-sm text-body-sm text-on-surface-variant space-y-1">
-                    <p>{layer.desc}</p>
-                    <div className="text-xs text-secondary-container font-mono">SPEC: {layer.spec}</div>
-                  </div>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

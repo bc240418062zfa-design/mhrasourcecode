@@ -1,9 +1,26 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" class="light" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('mihora-theme');
+          if (saved === 'cyber' || saved === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+            document.documentElement.setAttribute('data-theme', 'cyber');
+          } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+            document.documentElement.setAttribute('data-theme', 'light');
+          }
+        } catch(e) {}
+      })();
+    </script>
+
     <!-- Primary SEO Meta Tags (Founders & Brand Heavy) -->
     <meta name="google-site-verification" content="googlefb6d7fd888a3a4a2" />
     <title>MIHORA.TECH | Founded by M. Matti ul Hasnain &amp; Omema Iqbal | Sovereign Engineering</title>
@@ -41,7 +58,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="favicon.svg" />
-    <meta name="theme-color" content="#090d16" />
+    <meta name="theme-color" content="#ffffff" />
     
     <!-- Fonts Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

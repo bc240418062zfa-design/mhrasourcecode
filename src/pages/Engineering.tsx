@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   SlidersHorizontal, ChevronRight, ShieldCheck, Gauge, ArrowRight, 
-  Network, Globe, Shield, Pointer
+  Network, Globe, Shield, Pointer, Activity
 } from 'lucide-react';
 
 const layerData: Record<number, any> = {
@@ -237,69 +238,89 @@ export default function Engineering() {
             </div>
 
             {/* Detail Panel */}
-            <div className="lg:col-span-7 bg-surface-container-low p-space-lg rounded flex flex-col justify-between relative overflow-hidden shadow-2xl">
-              <div className="space-y-space-lg">
-                <div className="flex flex-wrap items-center justify-between gap-space-sm pb-space-md bg-surface-container/50 p-space-md rounded">
-                  <div className="space-y-1">
-                    <div className="font-label-sm text-label-sm text-secondary-container font-mono tracking-widest">{data.code}</div>
-                    <div className="font-headline-md text-headline-md text-on-surface font-bold">{data.title}</div>
-                  </div>
-                  <span className="px-space-md py-1 bg-surface-container-highest text-secondary font-label-sm text-label-sm rounded uppercase tracking-wider font-mono">{data.tier}</span>
-                </div>
-                
-                <div className="space-y-space-sm">
-                  <div className="font-label-sm text-label-sm uppercase text-outline tracking-wider font-bold">ARCHITECTURAL SCHEMATIC &amp; DIRECTIVES</div>
-                  <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                    {data.description}
-                  </p>
-                </div>
-                
-                <div className="space-y-space-xs">
-                  <div className="font-label-sm text-label-sm uppercase text-outline tracking-wider font-bold">CORE PROTOCOL &amp; COMPONENT STACK</div>
-                  <div className="flex flex-wrap gap-2">
-                    {data.tags.map((tag: string, i: number) => (
-                      <span key={i} className="font-label-sm text-label-sm px-2.5 py-1 bg-surface-container-high text-on-surface rounded font-mono">{tag}</span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs">
-                  <div className="bg-surface-container p-space-md rounded space-y-space-xs">
-                    <div className="flex items-center gap-space-xs text-primary font-label-sm text-label-sm uppercase tracking-wider font-bold">
-                      <ShieldCheck size={16} /> Verification Metric
+            <div className="lg:col-span-7 bg-surface-container-low p-space-lg rounded-2xl flex flex-col justify-between relative overflow-hidden shadow-2xl border border-outline/20">
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={activeLayer}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-space-lg"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-space-sm pb-space-md bg-surface-container/50 p-space-md rounded-xl border border-outline/10">
+                    <div className="space-y-1">
+                      <div className="font-label-sm text-label-sm text-secondary-container font-mono tracking-widest">{data.code}</div>
+                      <div className="font-headline-md text-headline-md text-on-surface font-bold">{data.title}</div>
                     </div>
-                    <div className="font-headline-sm text-headline-sm text-on-surface font-mono font-bold">{data.kpi1}</div>
-                    <div className="font-label-sm text-label-sm text-on-surface-variant">{data.kpi1Sub}</div>
+                    <span className="px-space-md py-1 bg-surface-container-highest text-secondary font-label-sm text-label-sm rounded uppercase tracking-wider font-mono border border-secondary/20">{data.tier}</span>
                   </div>
-                  <div className="bg-surface-container p-space-md rounded space-y-space-xs">
-                    <div className="flex items-center gap-space-xs text-secondary-container font-label-sm text-label-sm uppercase tracking-wider font-bold">
-                      <Gauge size={16} /> Execution Telemetry
+                  
+                  <div className="space-y-space-sm">
+                    <div className="font-label-sm text-label-sm uppercase text-outline tracking-wider font-bold">// ARCHITECTURAL SCHEMATIC &amp; DIRECTIVES</div>
+                    <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                      {data.description}
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-space-xs">
+                    <div className="font-label-sm text-label-sm uppercase text-outline tracking-wider font-bold">// CORE PROTOCOL &amp; COMPONENT STACK</div>
+                    <div className="flex flex-wrap gap-2">
+                      {data.tags.map((tag: string, i: number) => (
+                        <span key={i} className="font-label-sm text-label-sm px-2.5 py-1 bg-surface-container-high text-on-surface rounded font-mono border border-outline/10 hover:border-secondary/30 transition-colors">{tag}</span>
+                      ))}
                     </div>
-                    <div className="font-headline-sm text-headline-sm text-on-surface font-mono font-bold">{data.kpi2}</div>
-                    <div className="font-label-sm text-label-sm text-on-surface-variant">{data.kpi2Sub}</div>
                   </div>
-                </div>
 
-                <div className="bg-surface-container-lowest p-space-md rounded">
-                  <div className="flex items-center justify-between pb-space-sm font-label-sm text-label-sm text-outline">
-                    <span className="font-mono">LIVE_TELEMETRY_TRACING</span>
-                    <span className="text-secondary-fixed-dim font-mono">SYNC: LOCKED</span>
-                  </div>
-                  <div className="w-full h-24 flex items-end gap-1.5 pt-2">
-                    {[45, 65, 35, 80, 95, 70, 85, 60, 90].map((h, i) => (
-                      <div key={i} className={clsx(
-                        "flex-1 rounded-t flex items-end justify-center pb-1",
-                        i === 5 ? "bg-primary text-on-primary" : i === 6 ? "bg-secondary-container text-on-secondary" : i === 8 ? "bg-secondary-fixed-dim text-on-surface" : "bg-primary-container/40 text-secondary"
-                      )} style={{ height: `${h}%` }}>
-                        <span className="font-mono text-[9px]">T{i+1}</span>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs">
+                    <div className="bg-surface-container p-space-md rounded-xl space-y-space-xs border border-outline/10">
+                      <div className="flex items-center gap-space-xs text-primary font-label-sm text-label-sm uppercase tracking-wider font-bold">
+                        <ShieldCheck size={16} /> Verification Metric
                       </div>
-                    ))}
+                      <div className="font-headline-sm text-headline-sm text-on-surface font-mono font-bold">{data.kpi1}</div>
+                      <div className="font-label-sm text-label-sm text-on-surface-variant">{data.kpi1Sub}</div>
+                    </div>
+                    <div className="bg-surface-container p-space-md rounded-xl space-y-space-xs border border-outline/10">
+                      <div className="flex items-center gap-space-xs text-secondary-container font-label-sm text-label-sm uppercase tracking-wider font-bold">
+                        <Gauge size={16} /> Execution Telemetry
+                      </div>
+                      <div className="font-headline-sm text-headline-sm text-on-surface font-mono font-bold">{data.kpi2}</div>
+                      <div className="font-label-sm text-label-sm text-on-surface-variant">{data.kpi2Sub}</div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="pt-space-md flex items-center justify-between font-label-sm text-label-sm text-outline">
+
+                  <div className="bg-surface-container-lowest p-space-md rounded-xl border border-outline/15">
+                    <div className="flex items-center justify-between pb-space-sm font-label-sm text-label-sm text-outline">
+                      <span className="font-mono flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-secondary-container animate-ping"></span>
+                        LIVE_TELEMETRY_TRACING
+                      </span>
+                      <span className="text-secondary-fixed-dim font-mono">SYNC: LOCKED // {data.title}</span>
+                    </div>
+                    <div className="w-full h-24 flex items-end gap-1.5 pt-2">
+                      {[45, 65, 35, 80, 95, 70, 85, 60, 90].map((h, i) => {
+                        // Dynamic calculation based on activeLayer
+                        const computedHeight = Math.min(100, Math.max(20, (h * (1 + (activeLayer * 0.05))) % 100));
+                        return (
+                          <div 
+                            key={i} 
+                            className={clsx(
+                              "flex-1 rounded-t flex items-end justify-center pb-1 transition-all duration-500",
+                              i === 5 ? "bg-primary text-on-primary" : i === 6 ? "bg-secondary-container text-on-secondary" : i === 8 ? "bg-secondary-fixed-dim text-on-surface" : "bg-primary-container/40 text-secondary"
+                            )} 
+                            style={{ height: `${computedHeight}%` }}
+                          >
+                            <span className="font-mono text-[9px]">T{i+1}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+              <div className="pt-space-md flex items-center justify-between font-label-sm text-label-sm text-outline border-t border-outline/10 mt-space-md">
                 <span className="font-mono">MIHORA INDUSTRIAL COMPLIANCE: MIL-STD &amp; ISO-27001</span>
-                <Link to="/contact" className="text-secondary hover:text-primary transition-colors flex items-center gap-1">
+                <Link to="/contact" className="text-secondary hover:text-primary transition-colors flex items-center gap-1 font-bold font-mono">
                   <span>Inspect Raw Manifest</span>
                   <ArrowRight size={14} />
                 </Link>
