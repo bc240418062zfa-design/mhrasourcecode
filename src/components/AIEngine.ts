@@ -13,6 +13,22 @@ const KNOWLEDGE_BASE: Array<{
   response: AIResponse;
 }> = [
   {
+    keywords: ['founder', 'founders', 'hasnain', 'matti', 'omema', 'iqbal', 'who founded', 'owner', 'ceo', 'leadership'],
+    response: {
+      summary: "MIHORA.TECH was founded by M. Matti ul Hasnain (Co-Founder & Principal Systems Architect) and Omema Iqbal (Co-Founder & Operations Director) to pioneer sovereign full-stack engineering, physical datacenter infrastructure, and 24/7 global telemetry operations.",
+      architecturePoints: [
+        "M. Matti ul Hasnain commands systems architecture, sovereign low-latency cloud design, and physical datacenter hardware deployments.",
+        "Omema Iqbal directs global operations, international enterprise governance, dual-hub delivery frameworks, and multi-jurisdiction compliance.",
+        "Operating synchronized dual engineering command centers in Islamabad (Pakistan) and London (UK)."
+      ],
+      recommendedAction: {
+        label: "View Leadership & Founders Profile",
+        path: "/company#leadership"
+      },
+      telemetryCode: "GOVERNANCE_EXEC // FOUNDERS_VERIFIED: M. MATTI UL HASNAIN & OMEMA IQBAL [ACTIVE]"
+    }
+  },
+  {
     keywords: ['infra', 'physical', 'cable', 'cabling', 'fiber', 'switch', 'rack', 'hardware', 'datacenter', 'server'],
     response: {
       summary: "MIHORA Physical Infrastructure division delivers sovereign hardware topology: custom server rack containment, certified Fluke fiber/copper verification, SAN enterprise arrays, and high-density leaf-spine network switches.",
@@ -61,51 +77,19 @@ const KNOWLEDGE_BASE: Array<{
     }
   },
   {
-    keywords: ['dispatch', 'emergency', 'contact', 'call', 'rfp', 'urgent', 'field', 'consult'],
+    keywords: ['field', 'fluke', 'splicing', 'cctv', 'surveillance', 'dispatch', 'break-fix'],
     response: {
-      summary: "MIHORA maintains 24/7 rapid architectural dispatch. Dual engineering hubs in London and Pakistan allow continuous timezone coverage with under 15-minute emergency SLA responses.",
+      summary: "MIHORA Field Engineering deploys boots-on-the-ground technical teams with calibrated fusion splicers and Fluke DSX-8000 certifiers for emergency break-fix and site commissioning.",
       architecturePoints: [
-        "Tier-3 Systems Architects available for live incident triage and architecture design.",
-        "Field Engineering teams equipped for on-site fiber splicing, rack assembly, and node recovery.",
-        "Direct encrypted comms via hr@mihora.tech or the secure dispatch portal."
+        "Rapid 4-hour SLA physical emergency dispatch across active regional coverage zones.",
+        "End-to-end OTDR fiber loss certification and structured low-voltage certification.",
+        "Industrial CCTV, access control, and biometric hardware installations."
       ],
       recommendedAction: {
-        label: "Initiate Priority Dispatch Protocol",
-        path: "/contact"
+        label: "View Field Engineering Capabilities",
+        path: "/services#field"
       },
-      telemetryCode: "DISPATCH_COMM // GATEWAY_STATUS: DUAL_HUB_READY [UK: ACTIVE • PK: ACTIVE]"
-    }
-  },
-  {
-    keywords: ['health', 'healthcare', 'hipaa', 'dicom', 'hl7', 'hospital', 'patient'],
-    response: {
-      summary: "Our Healthcare Practice enforces strict HIPAA, HL7, and DICOM compliance through isolated zero-trust networks, encrypted PACS storage, and resilient edge node redundancy.",
-      architecturePoints: [
-        "End-to-end TLS 1.3 encryption with cryptographic air-gapping for sensitive clinical records.",
-        "Deterministic failover ensuring hospital patient monitors never experience network drops.",
-        "Automated compliance audit trails meeting stringent international medical regulations."
-      ],
-      recommendedAction: {
-        label: "Examine Healthcare Systems Architecture",
-        path: "/industries#healthcare"
-      },
-      telemetryCode: "HL7_ENGINE // COMPLIANCE_MONITOR: ZERO_VIOLATIONS • LATENCY 4ms [SECURED]"
-    }
-  },
-  {
-    keywords: ['security', 'compliance', 'soc', 'iso', 'sovereignty', 'gdpr', 'privacy'],
-    response: {
-      summary: "MIHORA Security Architecture is built upon Zero Trust Principles, ISO 27001 certifications, SOC 2 Type II controls, and complete cryptographic data sovereignty.",
-      architecturePoints: [
-        "No multi-tenant data bleed; customers retain complete control of their cryptographic keys.",
-        "Continuous automated vulnerability scanning across all 9 architectural stack layers.",
-        "Guaranteed 99.999% uptime with contractually bound financial SLA commitments."
-      ],
-      recommendedAction: {
-        label: "View Security Governance & Compliance",
-        path: "/legal#security"
-      },
-      telemetryCode: "SEC_OPS // AUDIT_VERIFICATION: SOC2_TYPE2 • ISO_27001 [COMPLIANT]"
+      telemetryCode: "FIELD_OPS // DISPATCH_READY: FLUKE_CALIBRATED • OTDR_READY [ACTIVE]"
     }
   },
   {
@@ -138,7 +122,7 @@ export function queryAIEngine(prompt: string): AIResponse {
 
   // Fallback intelligent response for any general engineering question
   return {
-    summary: `Analyzing query: "${prompt}". MIHORA.TECH architects custom digital systems, physical infrastructure, and automated telemetry pipelines designed for sovereign resilience.`,
+    summary: `Analyzing query: "${prompt}". MIHORA.TECH, founded by M. Matti ul Hasnain and Omema Iqbal, architects custom digital systems, physical infrastructure, and automated telemetry pipelines designed for sovereign resilience.`,
     architecturePoints: [
       "Custom-tailored architectural blueprints matching your exact operational constraints.",
       "Comprehensive 9-layer stack integration avoiding single points of failure.",

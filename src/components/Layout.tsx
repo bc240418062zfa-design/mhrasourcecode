@@ -35,6 +35,7 @@ const SEARCH_CATALOG: SearchItem[] = [
   { title: "Hardware-Software Stack", category: "Engineering", path: "/engineering#hardware-software-stack", description: "Physical structured cabling and command telemetry" },
   { title: "Reliability Telemetry", category: "Engineering", path: "/engineering#reliability-telemetry", description: "Axioms of production and 24/7 observability" },
   { title: "Company Philosophy", category: "Company", path: "/company#philosophy", description: "Engineering principles, executive leadership, global footprint" },
+  { title: "Founders & Executive Leadership", category: "Company", path: "/company#leadership", description: "Founded by M. Matti ul Hasnain & Omema Iqbal - Systems Architecture & Global Operations" },
   { title: "Technical Papers", category: "Insights", path: "/insights#technical-papers", description: "Peer-reviewed architectural analysis and whitepapers" },
   { title: "Join Engineering", category: "Careers", path: "/careers#join-engineering", description: "Open roles across systems design, software, and field engineering" },
   { title: "Direct Dispatch & Contact", category: "Contact", path: "/contact", description: "Engage architecture team, request dispatch or schedule consult" },
@@ -51,7 +52,6 @@ export default function Layout() {
   const [searchQuery, setSearchQuery] = useState('');
   const [aiResponse, setAiResponse] = useState<AIResponse | null>(null);
   const [isAiProcessing, setIsAiProcessing] = useState(false);
-  const [avatarError, setAvatarError] = useState(false);
 
   useEffect(() => {
     // Load theme from localStorage if available, otherwise default to cyber
@@ -159,75 +159,65 @@ export default function Layout() {
       {/* Route-Aware Dynamic SEO Head */}
       <SEOHead />
 
-      <header className="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_16px_rgba(0,0,0,0.5)]">
+      <header className="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/85 backdrop-blur-2xl border-b border-outline/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)] transition-all">
         <div className="w-full px-margin-mobile lg:px-margin">
           <div className="h-20 flex items-center justify-between gap-space-md">
             <div className="flex items-center gap-space-lg">
-              <Link to="/" className="flex items-center gap-space-sm group" onClick={() => setMobileMenuOpen(false)}>
-                <div className="flex items-center gap-space-xs">
-                  <span className="font-headline-md text-headline-md font-bold tracking-tight text-on-surface group-hover:text-primary transition-colors">MIHORA</span>
-                  <span className="font-label-md text-label-md text-secondary-container font-semibold tracking-widest">.TECH</span>
+              <Link to="/" className="flex items-center gap-3 group" onClick={() => setMobileMenuOpen(false)}>
+                <BrandLogo className="w-9 h-9 sm:w-10 sm:h-10 group-hover:scale-105 transition-transform" />
+                <div className="flex items-center tracking-tight">
+                  <span className="font-headline-md text-headline-md font-extrabold text-on-surface tracking-tighter group-hover:text-secondary transition-colors">MIHORA</span>
+                  <span className="font-label-md text-label-md text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-container font-black tracking-widest ml-1">.TECH</span>
                 </div>
               </Link>
             </div>
             
-            <nav className="hidden lg:flex items-center gap-space-md xl:gap-space-lg">
-              {navLinks.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={clsx(
-                    "font-label-md text-label-md uppercase tracking-wider transition-colors",
-                    location.pathname === item.path ? 'text-secondary font-semibold' : 'text-on-surface-variant hover:text-on-surface'
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
+            <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2">
+              {navLinks.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={clsx(
+                      "font-label-md text-label-md uppercase tracking-wider transition-all px-3 py-1.5 rounded-lg font-semibold",
+                      isActive 
+                        ? 'text-secondary bg-surface-container border border-secondary/35 shadow-[0_0_14px_rgba(0,210,255,0.25)]' 
+                        : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container/50'
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             <div className="flex items-center gap-space-sm sm:gap-space-md">
               <button 
                 onClick={toggleTheme} 
-                className="flex items-center gap-space-xs px-2.5 sm:px-space-md py-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface rounded-DEFAULT transition-all cursor-pointer" 
+                className="flex items-center gap-space-xs px-3 py-2 bg-surface-container/90 hover:bg-surface-container-high border border-outline/25 text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer shadow-sm" 
                 type="button" 
                 aria-label="Toggle Theme"
                 title={`Current theme: ${theme}. Click to switch.`}
               >
-                <Palette size={16} />
-                <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-mono text-[11px]">{theme}</span>
+                <Palette size={16} className="text-secondary" />
+                <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-mono text-[11px] font-bold">{theme}</span>
               </button>
 
               <button 
                 onClick={() => setSearchOpen(true)}
-                className="flex items-center gap-space-xs px-2.5 sm:px-space-md py-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface rounded-DEFAULT transition-all cursor-pointer" 
+                className="flex items-center gap-space-xs px-3 sm:px-3.5 py-2 bg-surface-container/90 hover:bg-surface-container-high border border-outline/25 hover:border-secondary/40 text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer shadow-sm" 
                 type="button"
                 aria-label="Search Architecture"
               >
                 <Search size={16} className="text-secondary" />
-                <span className="font-label-sm text-label-sm uppercase tracking-wider hidden sm:inline">Search Arch</span>
-                <kbd className="hidden sm:inline-block px-1.5 py-0.5 bg-surface-container-highest text-on-surface rounded-DEFAULT font-mono text-[10px]">⌘K</kbd>
+                <span className="font-label-sm text-label-sm uppercase tracking-wider hidden sm:inline font-semibold">Search Arch</span>
+                <kbd className="hidden sm:inline-block px-1.5 py-0.5 bg-surface-container-highest border border-outline/30 text-on-surface rounded font-mono text-[10px]">⌘K</kbd>
               </button>
-
-              <div className="relative group">
-                {!avatarError ? (
-                  <img 
-                    alt="MIHORA Tech Principal" 
-                    className="w-8 h-8 rounded-full object-cover border border-outline/30" 
-                    src="https://lh3.googleusercontent.com/aida/AEtjO1W7mTkcjfde58ftTkHapTWnynFj8n5msj0P01I3udcUaFEjxKi4feBE799Sq8XBugOoqod3n0cyWjhPbV_-Me8C3WXAxKeadPxjAZfb_L3Y559tdO5r7CLCVk_fhR-oebyIaSKWWoGY5XN10AqMaNo8qk5OXgGib-UmNd4fips9doACvIWj-hcC48bXpud-QRmD1Uyo9zZk3nua7F--FVlzRmklWMK6wrA8bTZdrqyQgkryWRhtRvqiuSuBcx2yFj3mYLTaXvABsQ" 
-                    onError={() => setAvatarError(true)}
-                  />
-                ) : (
-                  <div className="w-8 h-8 rounded-full bg-surface-container-high border border-secondary/40 flex items-center justify-center font-mono text-xs font-bold text-secondary">
-                    MH
-                  </div>
-                )}
-                <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-secondary-container border border-surface-container-lowest"></span>
-              </div>
 
               <button
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
-                className="lg:hidden p-2 text-on-surface-variant hover:text-on-surface bg-surface-container-low rounded-DEFAULT transition-colors"
+                className="lg:hidden p-2 text-on-surface-variant hover:text-on-surface bg-surface-container border border-outline/25 rounded-lg transition-colors"
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 type="button"
               >
@@ -519,21 +509,26 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      <footer className="w-full bg-surface-container-lowest py-space-xl text-on-surface mt-auto">
+      <footer className="w-full bg-surface-container-lowest/95 border-t border-outline/20 py-space-xl text-on-surface mt-auto bg-tech-grid">
         <div className="w-full px-margin-mobile lg:px-margin space-y-space-xl">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-space-lg pb-space-lg">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-space-lg pb-space-lg border-b border-surface-container-highest">
             <div className="space-y-space-xs">
-              <div className="flex items-center gap-space-xs">
-                <span className="font-headline-md text-headline-md font-bold tracking-tight text-on-surface">MIHORA</span>
-                <span className="font-label-md text-label-md text-secondary-container font-semibold tracking-widest">.TECH</span>
+              <div className="flex items-center gap-3">
+                <BrandLogo className="w-8 h-8" />
+                <div className="flex items-center tracking-tight">
+                  <span className="font-headline-md text-headline-md font-extrabold tracking-tight text-on-surface">MIHORA</span>
+                  <span className="font-label-md text-label-md text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-container font-black tracking-widest ml-1">.TECH</span>
+                </div>
               </div>
-              <p className="font-label-md text-label-md text-secondary-fixed-dim uppercase tracking-wider">Technology Engineered for the Real World.</p>
-              <p className="font-body-sm text-body-sm text-on-surface-variant">Operating Dual Engineering Hubs in the UK &amp; Pakistan. Deploying Worldwide. Sovereign Engineering &amp; Industrial Intelligence.</p>
+              <p className="font-label-md text-label-md text-secondary-container uppercase tracking-wider font-semibold">Technology Engineered for the Real World.</p>
+              <p className="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">Operating Synchronized Sovereign Engineering Command Hubs across London (UK) &amp; Islamabad (Pakistan). Deploying Worldwide with 24/7 Kinetic &amp; Digital Field Capabilities.</p>
             </div>
-            <div className="flex flex-wrap items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-space-md py-space-sm rounded-DEFAULT">
-              <div>UK (LON): <span className="text-secondary font-mono">UTC+0 ACTIVE</span></div>
-              <div>PK (ISB): <span className="text-secondary font-mono">UTC+5 ACTIVE</span></div>
-              <div>DISPATCH: <span className="text-on-surface font-mono">hr@mihora.tech</span></div>
+            <div className="flex flex-wrap items-center gap-3 font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low/90 border border-outline/20 px-4 py-3 rounded-xl shadow-lg">
+              <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>LON (UK): <span className="text-secondary font-mono font-bold">UTC+0 ACTIVE</span></div>
+              <span className="text-outline/40">|</span>
+              <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>ISB (PK): <span className="text-secondary font-mono font-bold">UTC+5 ACTIVE</span></div>
+              <span className="text-outline/40">|</span>
+              <div>DISPATCH: <a href="mailto:hr@mihora.tech" className="text-secondary hover:underline font-mono font-bold">hr@mihora.tech</a></div>
             </div>
           </div>
           
@@ -608,9 +603,14 @@ export default function Layout() {
           </div>
           
           <div className="pt-space-lg flex flex-col md:flex-row justify-between items-center gap-space-md text-on-surface-variant font-label-sm text-label-sm">
-            <div className="flex flex-col md:flex-row items-center gap-space-sm md:gap-space-lg text-center md:text-left"><div className="flex items-center gap-space-sm">
-              <span className="w-2 h-2 rounded-full bg-secondary-container"></span>
-              <span>© 2025 MIHORA.TECH (PRIVATE) LIMITED. ALL RIGHTS RESERVED.</span></div><div className="text-secondary font-mono tracking-widest uppercase">FOUNDED BY M.MATTI UL HASNAIN</div>
+            <div className="flex flex-col md:flex-row items-center gap-space-sm md:gap-space-lg text-center md:text-left">
+              <div className="flex items-center gap-space-sm">
+                <span className="w-2 h-2 rounded-full bg-secondary-container"></span>
+                <span>© 2025 MIHORA.TECH (PRIVATE) LIMITED. ALL RIGHTS RESERVED.</span>
+              </div>
+              <div className="text-secondary font-mono tracking-wider uppercase text-xs font-bold">
+                FOUNDED BY M. MATTI UL HASNAIN &amp; OMEMA IQBAL
+              </div>
             </div>
             <div className="flex items-center gap-space-lg">
               <Link to="/legal#privacy" className="hover:text-on-surface transition-colors">Privacy Policy</Link>
