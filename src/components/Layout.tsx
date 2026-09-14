@@ -45,7 +45,7 @@ const SEARCH_CATALOG: SearchItem[] = [
 export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [theme, setTheme] = useState<'desert' | 'cyber'>('cyber');
+  const [theme, setTheme] = useState<'cyber' | 'light'>('cyber');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchMode, setSearchMode] = useState<'catalog' | 'ai'>('catalog');
@@ -54,30 +54,25 @@ export default function Layout() {
   const [isAiProcessing, setIsAiProcessing] = useState(false);
 
   useEffect(() => {
-    // Load theme from localStorage if available, otherwise default to cyber
+    // Load theme from localStorage if available, otherwise default to cyber dark
     const savedTheme = localStorage.getItem('mihora-theme');
-    if (savedTheme === 'desert' || savedTheme === 'cyber') {
-      setTheme(savedTheme);
-      if (savedTheme === 'desert') {
-        document.documentElement.setAttribute('data-theme', 'desert');
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-      }
+    if (savedTheme === 'light' || savedTheme === 'titanium' || savedTheme === 'desert') {
+      setTheme('light');
+      document.documentElement.setAttribute('data-theme', 'light');
     } else {
-      // Default to cyber theme when user opens web
       setTheme('cyber');
       document.documentElement.removeAttribute('data-theme');
     }
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'cyber' ? 'desert' : 'cyber';
+    const newTheme = theme === 'cyber' ? 'light' : 'cyber';
     setTheme(newTheme);
     localStorage.setItem('mihora-theme', newTheme);
     if (newTheme === 'cyber') {
-      document.documentElement.removeAttribute('data-theme'); // default root is cyber
+      document.documentElement.removeAttribute('data-theme');
     } else {
-      document.documentElement.setAttribute('data-theme', 'desert');
+      document.documentElement.setAttribute('data-theme', 'light');
     }
   };
 
@@ -195,24 +190,33 @@ export default function Layout() {
             <div className="flex items-center gap-space-sm sm:gap-space-md">
               <button 
                 onClick={toggleTheme} 
-                className="flex items-center gap-space-xs px-3 py-2 bg-surface-container/90 hover:bg-surface-container-high border border-outline/25 text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer shadow-sm" 
+                className="flex items-center gap-1.5 px-3 py-2 bg-surface-container/90 hover:bg-surface-container-high border border-outline/30 hover:border-secondary/50 text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]" 
                 type="button" 
                 aria-label="Toggle Theme"
-                title={`Current theme: ${theme}. Click to switch.`}
+                title={`Theme: ${theme === 'cyber' ? 'Obsidian Cyber (Dark)' : 'Titanium Daylight (Light)'}. Click to switch.`}
               >
-                <Palette size={16} className="text-secondary" />
-                <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-mono text-[11px] font-bold">{theme}</span>
+                {theme === 'cyber' ? (
+                  <>
+                    <Moon size={15} className="text-secondary" />
+                    <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-mono text-[11px] font-bold text-secondary">DARK</span>
+                  </>
+                ) : (
+                  <>
+                    <Sun size={15} className="text-primary" />
+                    <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-mono text-[11px] font-bold text-primary">LIGHT</span>
+                  </>
+                )}
               </button>
 
               <button 
                 onClick={() => setSearchOpen(true)}
-                className="flex items-center gap-space-xs px-3 sm:px-3.5 py-2 bg-surface-container/90 hover:bg-surface-container-high border border-outline/25 hover:border-secondary/40 text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer shadow-sm" 
+                className="flex items-center gap-space-xs px-3 sm:px-3.5 py-2 bg-surface-container/90 hover:bg-surface-container-high border border-outline/30 hover:border-secondary/50 text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.15)]" 
                 type="button"
                 aria-label="Search Architecture"
               >
-                <Search size={16} className="text-secondary" />
+                <Search size={15} className="text-secondary" />
                 <span className="font-label-sm text-label-sm uppercase tracking-wider hidden sm:inline font-semibold">Search Arch</span>
-                <kbd className="hidden sm:inline-block px-1.5 py-0.5 bg-surface-container-highest border border-outline/30 text-on-surface rounded font-mono text-[10px]">⌘K</kbd>
+                <kbd className="hidden sm:inline-block px-1.5 py-0.5 bg-surface-container-highest border border-outline/40 text-on-surface rounded font-mono text-[10px]">⌘K</kbd>
               </button>
 
               <button

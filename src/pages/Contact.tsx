@@ -274,7 +274,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={formStatus === 'submitting'}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-space-sm px-space-xl py-3.5 bg-primary-container hover:bg-secondary-container text-on-primary hover:text-on-secondary font-label-md text-label-md uppercase tracking-widest font-bold rounded-DEFAULT transition-all shadow-[0_0_20px_var(--color-primary-container)] disabled:opacity-50"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-space-sm px-8 py-3.5 btn-primary-gradient font-label-md text-label-md uppercase tracking-widest font-bold rounded-xl transition-all disabled:opacity-50"
                     >
                       {formStatus === 'submitting' ? (
                         <>

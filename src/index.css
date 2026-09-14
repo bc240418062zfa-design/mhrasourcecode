@@ -74,118 +74,149 @@
 }
 
 :root {
-  /* Default: Cyber Theme */
-  --sys-on-secondary-fixed: #001f28;
-  --sys-inverse-surface: #e1e2ec;
-  --sys-error: #ffb4ab;
-  --sys-tertiary: #bac7dc;
-  --sys-on-tertiary: #253141;
-  --sys-outline: #8d90a1;
-  --sys-error-container: #93000a;
-  --sys-on-primary-fixed: #00164e;
-  --sys-inverse-primary: #0050e4;
-  --sys-on-secondary-fixed-variant: #004e60;
-  --sys-on-tertiary-fixed: #0f1c2b;
-  --sys-tertiary-fixed-dim: #bac7dc;
-  --sys-secondary: #a5e7ff;
-  --sys-primary-container: #0052ea;
-  --sys-on-surface-variant: #c3c5d8;
-  --sys-secondary-fixed: #b6ebff;
-  --sys-surface-container-low: #191b22;
-  --sys-background: #11131a;
-  --sys-surface-tint: #b5c4ff;
-  --sys-on-error-container: #ffdad6;
-  --sys-tertiary-container: #556273;
-  --sys-inverse-on-surface: #2e3038;
-  --sys-tertiary-fixed: #d6e3f8;
-  --sys-on-primary: #00287d;
+  /* ==========================================================================
+     PRIMARY THEME: "OBSIDIAN CYBER" (Ultra-High Contrast Sovereign Dark)
+     Inspired by Linear, Vercel, Stripe & the official MIHORA 3D Royal Emblem
+     ========================================================================== */
+  --sys-background: #030712;
+  --sys-surface-container-lowest: #020611;
+  --sys-surface: #050b18;
+  --sys-surface-container-low: #081226;
+  --sys-surface-container: #0d1a36;
+  --sys-surface-container-high: #132448;
+  --sys-surface-container-highest: #1a2f5a;
+  --sys-surface-dim: #030712;
+  --sys-surface-bright: #1f376a;
+  --sys-surface-variant: #101e3d;
+
+  /* Typography - Ultra-crisp slate whites and silvers (Eliminating muddy lavender) */
+  --sys-on-background: #f8fafc;
+  --sys-on-surface: #f8fafc;
+  --sys-on-surface-variant: #94a3b8;
+  --sys-inverse-surface: #f1f5f9;
+  --sys-inverse-on-surface: #090d16;
+
+  /* Primary Accent: Radiant Electric Royal Cobalt */
+  --sys-primary: #3b82f6;
+  --sys-primary-container: #1d4ed8;
+  --sys-on-primary: #ffffff;
+  --sys-on-primary-container: #dbeafe;
+  --sys-primary-fixed: #60a5fa;
+  --sys-primary-fixed-dim: #2563eb;
+  --sys-on-primary-fixed: #020617;
+  --sys-on-primary-fixed-variant: #1e40af;
+  --sys-inverse-primary: #0066ff;
+
+  /* Secondary Accent: Luminous Cyber Aqua / Neon Cyan */
+  --sys-secondary: #00f0ff;
   --sys-secondary-container: #00d2ff;
-  --sys-on-secondary: #003543;
-  --sys-surface-dim: #11131a;
-  --sys-secondary-fixed-dim: #47d6ff;
-  --sys-surface-variant: #32353c;
-  --sys-surface-container-highest: #32353c;
-  --sys-surface-container-lowest: #0b0e15;
-  --sys-surface-container-high: #272a31;
-  --sys-primary-fixed-dim: #b5c4ff;
-  --sys-on-primary-fixed-variant: #003baf;
-  --sys-on-background: #e1e2ec;
-  --sys-on-tertiary-fixed-variant: #3b4858;
-  --sys-surface-container: #1d1f26;
-  --sys-primary: #b5c4ff;
-  --sys-on-surface: #e1e2ec;
-  --sys-on-error: #690005;
-  --sys-surface: #11131a;
-  --sys-primary-fixed: #dce1ff;
-  --sys-on-tertiary-container: #d1def2;
-  --sys-on-secondary-container: #00566a;
-  --sys-surface-bright: #373941;
-  --sys-outline-variant: #434655;
-  --sys-on-primary-container: #d4dcff;
+  --sys-on-secondary: #030712;
+  --sys-on-secondary-container: #041b26;
+  --sys-secondary-fixed: #38bdf8;
+  --sys-secondary-fixed-dim: #0284c7;
+  --sys-on-secondary-fixed: #020617;
+  --sys-on-secondary-fixed-variant: #075985;
+
+  /* Tertiary Accent: Precision Emerald (Telemetry & Security) */
+  --sys-tertiary: #10b981;
+  --sys-tertiary-container: #064e3b;
+  --sys-on-tertiary: #ffffff;
+  --sys-on-tertiary-container: #a7f3d0;
+  --sys-tertiary-fixed: #34d399;
+  --sys-tertiary-fixed-dim: #059669;
+  --sys-on-tertiary-fixed: #022c22;
+  --sys-on-tertiary-fixed-variant: #047857;
+
+  /* Precision Architectural Hairline Outlines */
+  --sys-outline: #1e293b;
+  --sys-outline-variant: #334155;
+  --sys-surface-tint: #3b82f6;
+
+  /* Error & Alerts */
+  --sys-error: #f87171;
+  --sys-error-container: #7f1d1d;
+  --sys-on-error: #ffffff;
+  --sys-on-error-container: #fecaca;
 }
 
+:root[data-theme="titanium"],
+:root[data-theme="light"],
 :root[data-theme="desert"] {
-  /* Desert Premium Theme */
-  --sys-on-secondary-fixed: #271900;
-  --sys-inverse-surface: #e8e0d9;
-  --sys-error: #ffb4ab;
-  --sys-tertiary: #9aaba0;
-  --sys-on-tertiary: #051f15;
-  --sys-outline: #8e8179;
-  --sys-error-container: #93000a;
-  --sys-on-primary-fixed: #3d1700;
-  --sys-inverse-primary: #853700;
-  --sys-on-secondary-fixed-variant: #3a2400;
-  --sys-on-tertiary-fixed: #002113;
-  --sys-tertiary-fixed-dim: #9aaba0;
-  --sys-secondary: #cfa968;
-  --sys-primary-container: #7a3200;
-  --sys-on-surface-variant: #c5b8b0;
-  --sys-secondary-fixed: #eed59f;
-  --sys-surface-container-low: #1d1917;
-  --sys-background: #161311;
-  --sys-surface-tint: #d97746;
-  --sys-on-error-container: #ffdad6;
-  --sys-tertiary-container: #1f3529;
-  --sys-inverse-on-surface: #36302b;
-  --sys-tertiary-fixed: #b5c7bc;
-  --sys-on-primary: #3d1700;
-  --sys-secondary-container: #553600;
-  --sys-on-secondary: #3a2400;
-  --sys-surface-dim: #161311;
-  --sys-secondary-fixed-dim: #cfa968;
-  --sys-surface-variant: #50453f;
-  --sys-surface-container-highest: #36302b;
-  --sys-surface-container-lowest: #0d0b0a;
-  --sys-surface-container-high: #2b2622;
-  --sys-primary-fixed-dim: #d97746;
-  --sys-on-primary-fixed-variant: #5a2300;
-  --sys-on-background: #e8e0d9;
-  --sys-on-tertiary-fixed-variant: #1f3529;
-  --sys-surface-container: #231f1c;
-  --sys-primary: #d97746;
-  --sys-on-surface: #e8e0d9;
-  --sys-on-error: #690005;
-  --sys-surface: #161311;
-  --sys-primary-fixed: #ffdcc9;
-  --sys-on-tertiary-container: #b5c7bc;
-  --sys-on-secondary-container: #eed59f;
-  --sys-surface-bright: #36302b;
-  --sys-outline-variant: #50453f;
-  --sys-on-primary-container: #ffdcc9;
+  /* ==========================================================================
+     SECONDARY THEME: "TITANIUM DAYLIGHT" (Architectural Luxury Enterprise)
+     Clean, crisp executive daylight mode like Apple, Stripe, and Linear
+     ========================================================================== */
+  --sys-background: #f8fafc;
+  --sys-surface-container-lowest: #ffffff;
+  --sys-surface: #f1f5f9;
+  --sys-surface-container-low: #ffffff;
+  --sys-surface-container: #f8fafc;
+  --sys-surface-container-high: #ffffff;
+  --sys-surface-container-highest: #e2e8f0;
+  --sys-surface-dim: #e2e8f0;
+  --sys-surface-bright: #ffffff;
+  --sys-surface-variant: #e2e8f0;
+
+  /* High-legibility executive typography */
+  --sys-on-background: #0f172a;
+  --sys-on-surface: #0f172a;
+  --sys-on-surface-variant: #475569;
+  --sys-inverse-surface: #0f172a;
+  --sys-inverse-on-surface: #f8fafc;
+
+  /* Executive Deep Cobalt Primary */
+  --sys-primary: #0055ff;
+  --sys-primary-container: #0040c0;
+  --sys-on-primary: #ffffff;
+  --sys-on-primary-container: #eff6ff;
+  --sys-primary-fixed: #2563eb;
+  --sys-primary-fixed-dim: #1d4ed8;
+  --sys-on-primary-fixed: #ffffff;
+  --sys-on-primary-fixed-variant: #1e3a8a;
+  --sys-inverse-primary: #3b82f6;
+
+  /* Vibrant Sapphire / Sky Cyan Secondary */
+  --sys-secondary: #0284c7;
+  --sys-secondary-container: #0369a1;
+  --sys-on-secondary: #ffffff;
+  --sys-on-secondary-container: #f0f9ff;
+  --sys-secondary-fixed: #0ea5e9;
+  --sys-secondary-fixed-dim: #0284c7;
+  --sys-on-secondary-fixed: #ffffff;
+  --sys-on-secondary-fixed-variant: #075985;
+
+  /* Precision Forest Green */
+  --sys-tertiary: #059669;
+  --sys-tertiary-container: #064e3b;
+  --sys-on-tertiary: #ffffff;
+  --sys-on-tertiary-container: #ecfdf5;
+  --sys-tertiary-fixed: #10b981;
+  --sys-tertiary-fixed-dim: #059669;
+  --sys-on-tertiary-fixed: #ffffff;
+  --sys-on-tertiary-fixed-variant: #065f46;
+
+  /* Precision Crisp Slate Borders */
+  --sys-outline: #cbd5e1;
+  --sys-outline-variant: #e2e8f0;
+  --sys-surface-tint: #0055ff;
+
+  --sys-error: #dc2626;
+  --sys-error-container: #fee2e2;
+  --sys-on-error: #ffffff;
+  --sys-on-error-container: #7f1d1d;
 }
 
 @utility text-label-sm { font-size: 10px; line-height: 14px; font-weight: 600; }
 @utility text-label-lg { font-size: 14px; line-height: 20px; font-weight: 500; }
-@utility text-headline-sm { font-size: 20px; line-height: 28px; font-weight: 500; }
+@utility text-headline-sm { font-size: 20px; line-height: 28px; font-weight: 600; }
 @utility text-body-sm { font-size: 13px; line-height: 20px; font-weight: 400; }
-@utility text-headline-lg-mobile { font-size: 28px; line-height: 36px; font-weight: 600; }
-@utility text-headline-xl { font-size: 56px; line-height: 64px; font-weight: 700; }
-@utility text-headline-xl-mobile { font-size: 36px; line-height: 44px; font-weight: 700; }
+@utility text-headline-lg-mobile { font-size: 28px; line-height: 36px; font-weight: 700; }
+@utility text-headline-xl { font-size: 56px; line-height: 64px; font-weight: 800; }
+@utility text-headline-xl-mobile { font-size: 36px; line-height: 44px; font-weight: 800; }
 @utility text-body-lg { font-size: 18px; line-height: 28px; font-weight: 400; }
-@utility text-headline-md { font-size: 28px; line-height: 36px; font-weight: 600; }
-@utility text-label-md { font-size: 12px; line-height: 16px; font-weight: 500; }
-@utility text-headline-lg { font-size: 40px; line-height: 48px; font-weight: 600; }
+@utility text-headline-md { font-size: 28px; line-height: 36px; font-weight: 700; }
+@utility text-label-md { font-size: 12px; line-height: 16px; font-weight: 600; }
+@utility text-headline-lg { font-size: 40px; line-height: 48px; font-weight: 700; }
 @utility text-body-md { font-size: 15px; line-height: 24px; font-weight: 400; }
 
 @layer base {
@@ -195,6 +226,7 @@
   }
   body {
     overscroll-behavior: none;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
   main > :first-child {
     margin-top: 0 !important;
@@ -208,7 +240,7 @@
   display: none;
 }
 
-/* Custom animations from HTML */
+/* Custom animations */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
@@ -218,37 +250,50 @@
   animation: marquee 25s linear infinite;
 }
 
-/* Elite Architectural Effects */
+/* Ultra-Crisp Architectural Visual FX */
 .bg-tech-grid {
-  background-image: linear-gradient(to right, rgba(165, 231, 255, 0.04) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(165, 231, 255, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-image: linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
 }
 
 .bg-tech-dots {
-  background-image: radial-gradient(rgba(0, 210, 255, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(0, 240, 255, 0.18) 1.2px, transparent 1.2px);
   background-size: 24px 24px;
 }
 
 .glass-panel {
-  background: rgba(17, 19, 26, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(165, 231, 255, 0.12);
+  background: rgba(13, 26, 54, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(56, 189, 248, 0.18);
 }
 
 .glow-card {
   position: relative;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glow-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 36px -10px rgba(0, 82, 234, 0.35), 0 0 1px 1px rgba(0, 210, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px -12px rgba(0, 102, 255, 0.45), 0 0 1px 1px rgba(0, 240, 255, 0.45);
 }
 
 .neon-border {
-  border: 1px solid rgba(0, 210, 255, 0.25);
-  box-shadow: 0 0 15px rgba(0, 210, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
 }
 
+/* Premium Gradient Button Utility */
+.btn-primary-gradient {
+  background: linear-gradient(135deg, #0055ff 0%, #00d2ff 100%);
+  color: #ffffff;
+  box-shadow: 0 0 28px rgba(0, 102, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.25s ease;
+}
+
+.btn-primary-gradient:hover {
+  background: linear-gradient(135deg, #0066ff 0%, #00f0ff 100%);
+  box-shadow: 0 0 36px rgba(0, 240, 255, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}

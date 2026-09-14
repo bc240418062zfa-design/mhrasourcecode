@@ -178,11 +178,11 @@ export default function Home() {
                 MIHORA.TECH is an elite sovereign engineering authority operating synchronized command hubs across London (UK) and Islamabad (Pakistan). We architect resilient software networks, execute physical server infrastructures, deploy autonomous workflows, and command 24/7 global field operations across five continents.
               </p>
               <div className="pt-space-sm flex flex-wrap items-center gap-space-md">
-                <a href="mailto:hr@mihora.tech" className="inline-flex items-center gap-space-sm px-7 py-4 bg-primary-container hover:bg-secondary-container text-on-primary hover:text-on-secondary font-label-md text-label-md uppercase tracking-widest font-bold rounded-lg transition-all shadow-[0_0_28px_rgba(0,82,234,0.45)] hover:shadow-[0_0_36px_rgba(0,210,255,0.6)] hover:-translate-y-0.5">
+                <a href="mailto:hr@mihora.tech" className="inline-flex items-center gap-space-sm px-7 py-4 btn-primary-gradient font-label-md text-label-md uppercase tracking-widest font-bold rounded-xl transition-all">
                   <Terminal size={17} />
                   <span>DISPATCH: HR@MIHORA.TECH</span>
                 </a>
-                <Link to="/engineering" className="inline-flex items-center gap-space-sm px-6 py-4 bg-surface-container/80 hover:bg-surface-container-high border border-outline/30 hover:border-secondary/40 text-on-surface hover:text-secondary font-label-md text-label-md uppercase tracking-wider font-semibold rounded-lg backdrop-blur transition-all hover:-translate-y-0.5">
+                <Link to="/engineering" className="inline-flex items-center gap-space-sm px-6 py-4 bg-surface-container/90 hover:bg-surface-container-high border border-outline/40 hover:border-secondary text-on-surface hover:text-secondary font-label-md text-label-md uppercase tracking-wider font-semibold rounded-xl backdrop-blur-md transition-all hover:-translate-y-0.5 shadow-sm hover:shadow-[0_0_20px_rgba(0,240,255,0.25)]">
                   <Cpu size={18} className="text-secondary" />
                   <span>Explore Architecture</span>
                   <ArrowUpRight size={15} className="text-secondary" />
@@ -272,48 +272,48 @@ export default function Home() {
                 
                 {/* UK Hub */}
                 <g className="cursor-pointer group" onClick={() => setActiveNodeId('LON')}>
-                  <circle className="opacity-40 animate-ping" cx="480" cy="170" fill="var(--color-primary-container)" r="13"></circle>
-                  <circle cx="480" cy="170" fill="var(--color-secondary-container)" r="7.5"></circle>
+                  <circle className="opacity-40 animate-ping" cx="480" cy="170" fill="var(--color-primary)" r="13"></circle>
+                  <circle cx="480" cy="170" fill="var(--color-secondary)" r="7.5"></circle>
                   <circle cx="480" cy="170" fill="#ffffff" r="3"></circle>
-                  <text fill="#a5e7ff" fontFamily="JetBrains Mono" fontSize="11" fontWeight="700" x="410" y="148">UK HUB: LONDON</text>
-                  <text fill="#8d90a1" fontFamily="JetBrains Mono" fontSize="8" x="410" y="159">51.5074° N, 0.1278° W</text>
+                  <text fill="var(--color-secondary)" fontFamily="JetBrains Mono" fontSize="11" fontWeight="700" x="410" y="148">UK HUB: LONDON</text>
+                  <text fill="var(--color-on-surface-variant)" fontFamily="JetBrains Mono" fontSize="8" x="410" y="159">51.5074° N, 0.1278° W</text>
                 </g>
 
                 {/* Pakistan Hub */}
                 <g className="cursor-pointer group" onClick={() => setActiveNodeId('HQ')}>
-                  <circle className="opacity-40 animate-ping" cx="580" cy="240" fill="var(--color-primary-container)" r="14"></circle>
-                  <circle cx="580" cy="240" fill="var(--color-secondary-container)" r="8"></circle>
+                  <circle className="opacity-40 animate-ping" cx="580" cy="240" fill="var(--color-primary)" r="14"></circle>
+                  <circle cx="580" cy="240" fill="var(--color-secondary)" r="8"></circle>
                   <circle cx="580" cy="240" fill="#ffffff" r="3"></circle>
-                  <text fill="#a5e7ff" fontFamily="JetBrains Mono" fontSize="11" fontWeight="700" x="596" y="235">PK HUB: ISLAMABAD</text>
-                  <text fill="#8d90a1" fontFamily="JetBrains Mono" fontSize="8" x="596" y="247">33.6844° N, 73.0479° E</text>
+                  <text fill="var(--color-secondary)" fontFamily="JetBrains Mono" fontSize="11" fontWeight="700" x="596" y="235">PK HUB: ISLAMABAD</text>
+                  <text fill="var(--color-on-surface-variant)" fontFamily="JetBrains Mono" fontSize="8" x="596" y="247">33.6844° N, 73.0479° E</text>
                 </g>
                 <g className="cursor-pointer group" onClick={() => setActiveNodeId('DXB')}>
-                  <circle cx="520" cy="280" fill="#a5e7ff" r="5"></circle>
-                  <text fill="#e1e2ec" fontFamily="JetBrains Mono" fontSize="10" x="532" y="285">DUBAI (GCC)</text>
+                  <circle cx="520" cy="280" fill="var(--color-secondary)" r="5"></circle>
+                  <text fill="var(--color-on-surface)" fontFamily="JetBrains Mono" fontSize="10" x="532" y="285">DUBAI (GCC)</text>
                 </g>
                 <g className="cursor-pointer group" onClick={() => setActiveNodeId('SIN')}>
-                  <circle cx="730" cy="300" fill="#a5e7ff" r="5"></circle>
-                  <text fill="#e1e2ec" fontFamily="JetBrains Mono" fontSize="10" x="742" y="305">SINGAPORE (APAC)</text>
+                  <circle cx="730" cy="300" fill="var(--color-secondary)" r="5"></circle>
+                  <text fill="var(--color-on-surface)" fontFamily="JetBrains Mono" fontSize="10" x="742" y="305">SINGAPORE (APAC)</text>
                 </g>
                 <g className="cursor-pointer group" onClick={() => setActiveNodeId('NYC')}>
-                  <circle cx="250" cy="190" fill="#b5c4ff" r="5"></circle>
-                  <text fill="#e1e2ec" fontFamily="JetBrains Mono" fontSize="10" x="175" y="180">NEW YORK (NA-E)</text>
+                  <circle cx="250" cy="190" fill="var(--color-primary-fixed)" r="5"></circle>
+                  <text fill="var(--color-on-surface)" fontFamily="JetBrains Mono" fontSize="10" x="175" y="180">NEW YORK (NA-E)</text>
                 </g>
                 <g className="cursor-pointer group" onClick={() => setActiveNodeId('SFO')}>
-                  <circle cx="160" cy="210" fill="#8d90a1" r="4"></circle>
-                  <text fill="#c3c5d8" fontFamily="JetBrains Mono" fontSize="10" x="75" y="225">SAN FRANCISCO</text>
+                  <circle cx="160" cy="210" fill="var(--color-outline-variant)" r="4"></circle>
+                  <text fill="var(--color-on-surface-variant)" fontFamily="JetBrains Mono" fontSize="10" x="75" y="225">SAN FRANCISCO</text>
                 </g>
                 <g className="cursor-pointer group" onClick={() => setActiveNodeId('TYO')}>
-                  <circle cx="800" cy="200" fill="#a5e7ff" r="5"></circle>
-                  <text fill="#e1e2ec" fontFamily="JetBrains Mono" fontSize="10" x="812" y="205">TOKYO</text>
+                  <circle cx="800" cy="200" fill="var(--color-secondary)" r="5"></circle>
+                  <text fill="var(--color-on-surface)" fontFamily="JetBrains Mono" fontSize="10" x="812" y="205">TOKYO</text>
                 </g>
                 <g className="cursor-pointer group" onClick={() => setActiveNodeId('SYD')}>
-                  <circle cx="840" cy="390" fill="#8d90a1" r="4"></circle>
-                  <text fill="#c3c5d8" fontFamily="JetBrains Mono" fontSize="10" x="780" y="415">SYDNEY</text>
+                  <circle cx="840" cy="390" fill="var(--color-outline-variant)" r="4"></circle>
+                  <text fill="var(--color-on-surface-variant)" fontFamily="JetBrains Mono" fontSize="10" x="780" y="415">SYDNEY</text>
                 </g>
                 <g className="cursor-pointer group" onClick={() => setActiveNodeId('NBO')}>
-                  <circle cx="500" cy="390" fill="#8d90a1" r="4"></circle>
-                  <text fill="#c3c5d8" fontFamily="JetBrains Mono" fontSize="10" x="430" y="410">NAIROBI</text>
+                  <circle cx="500" cy="390" fill="var(--color-outline-variant)" r="4"></circle>
+                  <text fill="var(--color-on-surface-variant)" fontFamily="JetBrains Mono" fontSize="10" x="430" y="410">NAIROBI</text>
                 </g>
               </svg>
               
@@ -705,11 +705,11 @@ export default function Home() {
             Digital systems, infrastructure, automation, field engineering, or sovereign operations across global geographies.
           </p>
           <div className="pt-space-md flex flex-col sm:flex-row items-center justify-center gap-space-md">
-            <a href="mailto:hr@mihora.tech" className="w-full sm:w-auto inline-flex items-center justify-center gap-space-sm px-8 py-4 bg-primary-container hover:bg-secondary-container text-on-primary hover:text-on-secondary font-label-md text-label-md uppercase tracking-widest font-extrabold rounded-lg shadow-[0_0_30px_rgba(0,82,234,0.5)] hover:shadow-[0_0_40px_rgba(0,210,255,0.7)] transition-all hover:-translate-y-0.5">
+            <a href="mailto:hr@mihora.tech" className="w-full sm:w-auto inline-flex items-center justify-center gap-space-sm px-8 py-4 btn-primary-gradient font-label-md text-label-md uppercase tracking-widest font-extrabold rounded-xl transition-all">
               <Terminal size={18} />
               <span>DISPATCH: HR@MIHORA.TECH</span>
             </a>
-            <Link to="/contact" className="w-full sm:w-auto inline-flex items-center justify-center gap-space-sm px-7 py-4 bg-surface-container/90 hover:bg-surface-container-high border border-outline/30 text-on-surface hover:text-secondary font-label-md text-label-md uppercase tracking-wider font-semibold rounded-lg transition-all hover:-translate-y-0.5">
+            <Link to="/contact" className="w-full sm:w-auto inline-flex items-center justify-center gap-space-sm px-7 py-4 bg-surface-container/90 hover:bg-surface-container-high border border-outline/40 hover:border-secondary text-on-surface hover:text-secondary font-label-md text-label-md uppercase tracking-wider font-semibold rounded-xl backdrop-blur-md transition-all hover:-translate-y-0.5 shadow-sm hover:shadow-[0_0_20px_rgba(0,240,255,0.2)]">
               <span>View Global Labs</span>
               <ArrowUpRight size={16} className="text-secondary" />
             </Link>
