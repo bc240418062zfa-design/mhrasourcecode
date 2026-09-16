@@ -1,11 +1,12 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase, Sparkles, Sun, Moon, Bot, Zap, CornerDownLeft, Clock, Activity, Wifi } from 'lucide-react';
+import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase, Sparkles, Sun, Moon, Bot, Zap, CornerDownLeft, Clock, Activity, Wifi, Volume2, VolumeX } from 'lucide-react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
 import { BrandLogo } from './BrandLogo';
 import { SEOHead } from './SEOHead';
 import { queryAIEngine, type AIResponse } from './AIEngine';
+import { isSoundEnabled, toggleSound, subscribeSoundChange, playUiChime } from '../utils/audio';
 
 interface SearchItem {
   title: string;
@@ -59,6 +60,20 @@ export default function Layout() {
   const [timeIslamabad, setTimeIslamabad] = useState('');
   const [simulatedPing, setSimulatedPing] = useState(18.4);
   const [hudExpanded, setHudExpanded] = useState(false);
+  const [soundOn, setSoundOn] = useState(false);
+
+  useEffect(() => {
+    setSoundOn(isSoundEnabled());
+    const unsubscribe = subscribeSoundChange((enabled) => {
+      setSoundOn(enabled);
+    });
+    return unsubscribe;
+  }, []);
+
+  const handleToggleSound = () => {
+    const next = toggleSound();
+    setSoundOn(next);
+  };
 
 
   useEffect(() => {
@@ -263,6 +278,35 @@ export default function Layout() {
                 )}
               </button>
 
+              {/* Compact Interactive Tactile SFX Audio Synthesizer Toggle */}
+              <button 
+                id="sfx-toggle-header-btn"
+                onClick={handleToggleSound}
+                className={clsx(
+                  "shrink-0 flex items-center justify-center gap-1.5 px-2 py-1.5 border rounded-lg transition-all cursor-pointer shadow-sm active:scale-95 text-xs",
+                  soundOn 
+                    ? "bg-primary/10 border-primary/60 text-primary shadow-[0_0_10px_rgba(0,85,255,0.12)]" 
+                    : "bg-surface-container hover:bg-surface-container-high border-outline/50 hover:border-outline text-on-surface-variant hover:text-on-surface"
+                )}
+                type="button"
+                aria-label={soundOn ? "Mute interface audio effects" : "Enable interface audio"}
+                title={soundOn ? "Tactile SFX Active. Click to mute." : "Futuristic SFX Off. Click to activate interactive sound effects."}
+              >
+                {soundOn ? (
+                  <>
+                    <Volume2 size={14} className="text-primary shrink-0" />
+                    <span className="font-mono text-[10px] font-bold tracking-wider text-primary">SFX</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shrink-0"></span>
+                  </>
+                ) : (
+                  <>
+                    <VolumeX size={14} className="shrink-0 opacity-60" />
+                    <span className="font-mono text-[10px] font-medium tracking-wider opacity-70">SFX</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-outline/40 shrink-0"></span>
+                  </>
+                )}
+              </button>
+
               {/* Search Architecture Button */}
               <button 
                 onClick={() => setSearchOpen(true)}
@@ -317,6 +361,40 @@ export default function Layout() {
                 className="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest border border-outline text-xs font-mono font-bold text-on-surface transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
               >
                 <span>Switch to {theme === 'light' ? 'Dark' : 'White'}</span>
+              </button>
+            </div>
+
+            {/* Dedicated Compact SFX Tactile Audio Card for Mobile/Tablet */}
+            <div className="mb-2.5 p-2.5 rounded-xl bg-surface-container border border-outline/40 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className={clsx(
+                  "w-7 h-7 rounded-lg flex items-center justify-center border transition-all",
+                  soundOn ? "bg-primary/15 border-primary text-primary" : "bg-surface-container-high border-outline text-on-surface-variant"
+                )}>
+                  {soundOn ? <Volume2 size={15} /> : <VolumeX size={15} />}
+                </div>
+                <div>
+                  <div className="text-xs font-mono font-bold text-on-surface flex items-center gap-1.5">
+                    <span>SFX Audio</span>
+                    <span className={clsx("text-[9px] px-1 py-0.2 rounded font-bold uppercase", soundOn ? "bg-primary/20 text-primary" : "bg-outline/20 text-on-surface-variant")}>
+                      {soundOn ? "ON" : "OFF"}
+                    </span>
+                  </div>
+                  <div className="text-[10px] text-on-surface-variant font-mono">
+                    {soundOn ? "Tactile click effects active" : "Muted • Tap to activate"}
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={handleToggleSound}
+                className={clsx(
+                  "px-2.5 py-1 rounded-lg border text-xs font-mono font-bold transition-all flex items-center gap-1 cursor-pointer shadow-sm active:scale-95",
+                  soundOn 
+                    ? "bg-primary text-on-primary border-primary shadow-sm" 
+                    : "bg-surface-container-high border-outline text-on-surface hover:text-primary"
+                )}
+              >
+                <span>{soundOn ? "Mute" : "Enable"}</span>
               </button>
             </div>
 

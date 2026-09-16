@@ -200,12 +200,12 @@ export default function Home() {
 
     setTimeout(() => {
       setTraceStep(2);
-      playUiChime('switch');
+      playUiChime('trace');
     }, 450);
 
     setTimeout(() => {
       setTraceStep(3);
-      playUiChime('switch');
+      playUiChime('trace');
     }, 900);
 
     setTimeout(() => {
@@ -509,7 +509,7 @@ export default function Home() {
                 <circle className="opacity-40" cx="480" cy="170" fill="none" r="38" stroke="#0284c7" strokeWidth="0.75"></circle>
                 
                 {/* UK Hub Node */}
-                <g className="cursor-pointer group" onClick={() => handleSelectNode('LON')}>
+                <g className="cursor-pointer group" onClick={() => handleSelectNode('LON')} onMouseEnter={() => playUiChime('hover')}>
                   <circle className="opacity-30 animate-ping" cx="480" cy="170" fill="#0055ff" r="14"></circle>
                   <circle cx="480" cy="170" fill="#0055ff" r="8"></circle>
                   <circle cx="480" cy="170" fill="#ffffff" r="3.5"></circle>
@@ -518,7 +518,7 @@ export default function Home() {
                 </g>
 
                 {/* Pakistan Hub Node */}
-                <g className="cursor-pointer group" onClick={() => handleSelectNode('HQ')}>
+                <g className="cursor-pointer group" onClick={() => handleSelectNode('HQ')} onMouseEnter={() => playUiChime('hover')}>
                   <circle className="opacity-30 animate-ping" cx="580" cy="240" fill="#0055ff" r="15"></circle>
                   <circle cx="580" cy="240" fill="#0055ff" r="8.5"></circle>
                   <circle cx="580" cy="240" fill="#ffffff" r="3.5"></circle>
@@ -527,19 +527,19 @@ export default function Home() {
                 </g>
 
                 {/* Regional Gateways */}
-                <g className="cursor-pointer group" onClick={() => handleSelectNode('DXB')}>
+                <g className="cursor-pointer group" onClick={() => handleSelectNode('DXB')} onMouseEnter={() => playUiChime('hover')}>
                   <circle cx="520" cy="280" fill="#0284c7" r="5.5"></circle>
                   <text fill="currentColor" className="text-on-surface" fontFamily="JetBrains Mono" fontSize="10" x="532" y="285">DUBAI (GCC)</text>
                 </g>
-                <g className="cursor-pointer group" onClick={() => handleSelectNode('SIN')}>
+                <g className="cursor-pointer group" onClick={() => handleSelectNode('SIN')} onMouseEnter={() => playUiChime('hover')}>
                   <circle cx="730" cy="300" fill="#0284c7" r="5.5"></circle>
                   <text fill="currentColor" className="text-on-surface" fontFamily="JetBrains Mono" fontSize="10" x="742" y="305">SINGAPORE (APAC)</text>
                 </g>
-                <g className="cursor-pointer group" onClick={() => handleSelectNode('NYC')}>
+                <g className="cursor-pointer group" onClick={() => handleSelectNode('NYC')} onMouseEnter={() => playUiChime('hover')}>
                   <circle cx="250" cy="190" fill="#0055ff" r="5.5"></circle>
                   <text fill="currentColor" className="text-on-surface" fontFamily="JetBrains Mono" fontSize="10" x="170" y="180">NEW YORK (NA-E)</text>
                 </g>
-                <g className="cursor-pointer group" onClick={() => handleSelectNode('TYO')}>
+                <g className="cursor-pointer group" onClick={() => handleSelectNode('TYO')} onMouseEnter={() => playUiChime('hover')}>
                   <circle cx="800" cy="200" fill="#0284c7" r="5.5"></circle>
                   <text fill="currentColor" className="text-on-surface" fontFamily="JetBrains Mono" fontSize="10" x="812" y="205">TOKYO (JP)</text>
                 </g>
