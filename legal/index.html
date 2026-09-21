@@ -101,7 +101,9 @@
             "@id": "https://mihora.tech/#organization"
           },
           "sameAs": [
-            "https://mihora.tech/#/company"
+            "https://mihora.tech/company",
+            "https://mihora.tech/docs",
+            "https://mihora.tech/faq"
           ]
         },
         {
@@ -113,14 +115,16 @@
             "@id": "https://mihora.tech/#organization"
           },
           "sameAs": [
-            "https://mihora.tech/#/company"
+            "https://mihora.tech/company",
+            "https://mihora.tech/docs",
+            "https://mihora.tech/faq"
           ]
         },
         {
           "@type": "Organization",
           "@id": "https://mihora.tech/#organization",
           "name": "MIHORA.TECH",
-          "alternateName": ["MIHORA", "MIHORA TECH"],
+          "alternateName": ["MIHORA", "MIHORA TECH", "MIHORA.TECH (PRIVATE) LIMITED"],
           "url": "https://mihora.tech",
           "logo": "https://mihora.tech/mihora-logo.svg",
           "image": "https://mihora.tech/og-image.svg",
@@ -137,7 +141,7 @@
             {
               "@type": "Person",
               "name": "M. Matti ul Hasnain",
-              "jobTitle": "Founder & Principal Architect"
+              "jobTitle": "Founder & Principal Systems Architect"
             },
             {
               "@type": "Person",
@@ -149,28 +153,36 @@
             "Digital Engineering",
             "Physical Datacenter Infrastructure",
             "Network Engineering",
+            "Fiber Optic Fusion Splicing",
             "Site Reliability Engineering",
             "SCADA Systems",
             "Automation Pipelines",
             "Cloud Systems Architecture"
           ],
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Islamabad",
-            "addressCountry": "Pakistan"
-          },
+          "address": [
+            {
+              "@type": "PostalAddress",
+              "addressLocality": "London",
+              "addressCountry": "United Kingdom"
+            },
+            {
+              "@type": "PostalAddress",
+              "addressLocality": "Islamabad",
+              "addressCountry": "Pakistan"
+            }
+          ],
           "contactPoint": [
             {
               "@type": "ContactPoint",
               "contactType": "Executive Inquiries",
               "email": "hr@mihora.tech",
-              "url": "https://mihora.tech/#/contact"
+              "url": "https://mihora.tech/contact"
             },
             {
               "@type": "ContactPoint",
               "contactType": "Engineering Architecture Dispatch",
               "email": "dispatch@mihora.tech",
-              "url": "https://mihora.tech/#/contact"
+              "url": "https://mihora.tech/contact"
             }
           ]
         },
@@ -229,12 +241,42 @@
               }
             ]
           }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://mihora.tech/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is MIHORA.TECH and what does the company do?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MIHORA.TECH is an international sovereign engineering organization specializing in end-to-end mission-critical digital systems, physical datacenter infrastructure, event-driven automation pipelines, and 24/7 managed site reliability engineering (SRE)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who founded MIHORA.TECH?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MIHORA.TECH was founded by M. Matti ul Hasnain (Co-Founder & Principal Systems Architect) and Omema Iqbal (Co-Founder & Operations Director)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where is MIHORA.TECH located?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MIHORA.TECH operates dual command hubs located in London, United Kingdom and Islamabad, Pakistan, delivering 24/7 follow-the-sun continuous telemetry and sovereign datacenter engineering worldwide."
+              }
+            }
+          ]
         }
       ]
     }
     </script>
-    <script type="module" crossorigin src="/assets/index-CSa3TV6n.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CZyfquDr.css">
+    <script type="module" crossorigin src="/assets/index-u9nXMLLS.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BBr1Y9OZ.css">
   </head>
   <body class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary selection:text-on-secondary-fixed">
     <div id="root"></div>
