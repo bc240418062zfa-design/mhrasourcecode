@@ -284,11 +284,11 @@ export default function Home() {
               </div>
 
               <h1 className="font-headline-xl text-headline-xl text-on-surface tracking-tight uppercase font-extrabold max-w-4xl drop-shadow-sm">
-                Technology Without <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary-fixed">Boundaries.</span>
+                MIHORA &mdash; Sovereign Engineering
               </h1>
 
               <p className="font-headline-sm text-headline-sm text-primary font-medium max-w-2xl tracking-wide">
-                Digital systems. Physical infrastructure. Human engineering. Global delivery.
+                Technology Without Boundaries. Digital systems &bull; Physical infrastructure.
               </p>
 
               <p className="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
@@ -419,7 +419,7 @@ export default function Home() {
                   // INTERACTIVE OPTICAL ROUTE TRACER
                 </div>
                 <h2 className="font-headline-sm text-headline-sm text-on-surface uppercase font-extrabold tracking-tight">
-                  Global Telemetry Mesh &amp; Packet Routing
+                  MIHORA Global Telemetry Mesh &amp; Packet Routing
                 </h2>
               </div>
               
@@ -648,7 +648,7 @@ export default function Home() {
                 <span>FOUNDING VISION &amp; DUAL-HUB COMMAND</span>
               </div>
               <h2 className="font-headline-lg text-headline-lg text-on-surface font-extrabold uppercase tracking-tight">
-                Executive Leadership
+                MIHORA Executive Leadership
               </h2>
               <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl">
                 Founded by <strong>M. Matti ul Hasnain</strong> and <strong>Omema Iqbal</strong> to unite deep software systems engineering with real-world physical infrastructure and global operational governance.
@@ -963,7 +963,7 @@ export default function Home() {
         <div className="w-full px-margin-mobile lg:px-margin space-y-space-xl">
           <div className="text-center max-w-3xl mx-auto space-y-space-xs">
             <span className="font-label-sm text-label-sm uppercase tracking-widest text-primary font-mono">// ARCHITECTURAL UNION</span>
-            <h2 className="font-headline-lg text-headline-lg text-on-surface font-bold uppercase">The Dual-Hemisphere Model</h2>
+            <h2 className="font-headline-lg text-headline-lg text-on-surface font-bold uppercase">The MIHORA Dual-Hemisphere Model</h2>
             <p className="font-body-md text-body-md text-on-surface-variant">
               Where pure abstract code meets the kinetic reality of copper, fiber, steel, and physical field diagnostics.
             </p>
@@ -999,7 +999,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="w-full h-44 rounded-xl overflow-hidden relative border border-outline/30 shadow-inner">
-                <img className="w-full h-full object-cover" alt="Digital representation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNp2Ne9j3lWUFeehqctv-wkDuyehiZYdvANACNVnGHSL0NhH1hi6Vp_MWuSfsPmPpp82td5xAfJaCQx6z4VXMUTfemlFbnDdSoc0_v_rfrli6rttmgzJLEv2lYJqFjwyspiecKXgEfNr5w6QdsZ-vJtghmDahkyDKOSCaX2No32KFcikD6rejpB0-EeRUEtHOH6JZsKfK7OWh3VkBqVjHEbkjRXIHirrYh1fGq0Jb5-qJnzR4AJ46O4Q"/>
+                <img className="w-full h-full object-cover" alt="MIHORA digital systems architecture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNp2Ne9j3lWUFeehqctv-wkDuyehiZYdvANACNVnGHSL0NhH1hi6Vp_MWuSfsPmPpp82td5xAfJaCQx6z4VXMUTfemlFbnDdSoc0_v_rfrli6rttmgzJLEv2lYJqFjwyspiecKXgEfNr5w6QdsZ-vJtghmDahkyDKOSCaX2No32KFcikD6rejpB0-EeRUEtHOH6JZsKfK7OWh3VkBqVjHEbkjRXIHirrYh1fGq0Jb5-qJnzR4AJ46O4Q"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
               </div>
             </div>
@@ -1043,7 +1043,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="w-full h-44 rounded-xl overflow-hidden relative border border-outline/30 shadow-inner">
-                <img className="w-full h-full object-cover" alt="Physical infrastructure" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC71bPIEdSYxOU_7vxv4AAKlM6Dt8jGdirqqQ4InCa8vbu0pj2C3RnJLJdJD6j1XioqQ1td394C0CkNAD8VOOySNebOGc39ViFgs8wjTEgVpAzvzSKozZ69aJau6OpdvJd3HB55zQVJDYeNxUOwxGRM5C1KCS6qHndHEtzIf4AylEEMOcse7fqr1re4bZGcRP7p__CkHEtEFhO0JALIsxRLF5QeBorW02cQVRRX90-lrY1uCjyPAaIW7g"/>
+                <img className="w-full h-full object-cover" alt="MIHORA datacenter physical server infrastructure" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC71bPIEdSYxOU_7vxv4AAKlM6Dt8jGdirqqQ4InCa8vbu0pj2C3RnJLJdJD6j1XioqQ1td394C0CkNAD8VOOySNebOGc39ViFgs8wjTEgVpAzvzSKozZ69aJau6OpdvJd3HB55zQVJDYeNxUOwxGRM5C1KCS6qHndHEtzIf4AylEEMOcse7fqr1re4bZGcRP7p__CkHEtEFhO0JALIsxRLF5QeBorW02cQVRRX90-lrY1uCjyPAaIW7g"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
               </div>
             </div>
@@ -1057,7 +1057,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
             <div className="space-y-space-xs">
               <span className="font-label-sm text-label-sm uppercase tracking-widest text-primary font-mono">// DISCIPLINE MATRIX</span>
-              <h2 className="font-headline-lg text-headline-lg text-on-surface font-bold uppercase">Comprehensive Services</h2>
+              <h2 className="font-headline-lg text-headline-lg text-on-surface font-bold uppercase">MIHORA Comprehensive Services</h2>
             </div>
             <Link to="/services" onClick={() => playUiChime('click')} className="font-label-md text-label-md text-primary hover:text-primary-fixed uppercase tracking-wider font-semibold inline-flex items-center gap-1">
               <span>View All Service Specifications</span>
@@ -1167,7 +1167,7 @@ export default function Home() {
         <div className="w-full px-margin-mobile lg:px-margin space-y-space-lg">
           <div className="space-y-space-xs">
             <span className="font-label-sm text-label-sm uppercase tracking-widest text-primary font-mono">// FULL-STACK TOPOLOGY</span>
-            <h2 className="font-headline-lg text-headline-lg text-on-surface font-bold uppercase">The Unified Engineering Stack</h2>
+            <h2 className="font-headline-lg text-headline-lg text-on-surface font-bold uppercase">The MIHORA Unified Engineering Stack</h2>
             <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl">
               We operate simultaneously across every vertical stratum of computation. Expand each stratum to review technical layers.
             </p>
@@ -1249,7 +1249,7 @@ export default function Home() {
             </div>
             <div className="lg:col-span-6">
               <div className="w-full h-80 rounded-2xl overflow-hidden relative shadow-xl border border-outline">
-                <img className="w-full h-full object-cover" alt="Technical engineer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlyg3ubyBhu8Yekk0m3TxARabBPiz93GmZlx3hLfox8vekMDcg3XQ_oTYfNC-cAvUZqdxzjsOl3a1eY0JYcBLH6P7hLD-p1SFFybhlSruGL0Nf_2j3WxnFBmeOKr52Q52nKMIbVK0afleQJgY0A2UHAyEk1MvSkILANiK_V33Jfr8Nxrc2rQCJ3PfQCl9Eec17ZETuw1javPem25W3TTMEpMJogUWUjmM_kCjDNucFIMx7QPZrRfIrTg"/>
+                <img className="w-full h-full object-cover" alt="MIHORA principal systems engineer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlyg3ubyBhu8Yekk0m3TxARabBPiz93GmZlx3hLfox8vekMDcg3XQ_oTYfNC-cAvUZqdxzjsOl3a1eY0JYcBLH6P7hLD-p1SFFybhlSruGL0Nf_2j3WxnFBmeOKr52Q52nKMIbVK0afleQJgY0A2UHAyEk1MvSkILANiK_V33Jfr8Nxrc2rQCJ3PfQCl9Eec17ZETuw1javPem25W3TTMEpMJogUWUjmM_kCjDNucFIMx7QPZrRfIrTg"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
                 <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center bg-surface-container/95 backdrop-blur p-space-sm rounded-xl text-label-sm font-mono text-primary border border-outline/40 shadow-sm">
                   <span>FIELD RIG: TRUCK_UNIT_04</span>

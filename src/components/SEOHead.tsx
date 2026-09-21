@@ -10,8 +10,8 @@ interface SEOProps {
 
 const ROUTE_SEO: Record<string, { title: string; description: string; keywords?: string }> = {
   '/': {
-    title: 'MIHORA.TECH | Founded by M. Matti ul Hasnain & Omema Iqbal | Sovereign Engineering',
-    description: 'MIHORA.TECH, founded by M. Matti ul Hasnain and Omema Iqbal, engineers resilient digital systems, datacenter infrastructure, automation pipelines, and 24/7 global telemetry operations.',
+    title: 'MIHORA | Sovereign Systems & Digital Engineering',
+    description: 'MIHORA, founded by M. Matti ul Hasnain and Omema Iqbal, engineers resilient digital systems, datacenter infrastructure, automation pipelines, and 24/7 global telemetry operations.',
     keywords: 'MIHORA, MIHORA.TECH, M. Matti ul Hasnain, Omema Iqbal, founded by M. Matti ul Hasnain and Omema Iqbal, Matti ul Hasnain, Omema, sovereign engineering, digital infrastructure, Pakistan tech, cloud architecture',
   },
   '/company': {

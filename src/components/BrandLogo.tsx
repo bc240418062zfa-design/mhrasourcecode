@@ -87,7 +87,7 @@ export function BrandLogoFull({ className = "h-10" }: { className?: string }) {
   return (
     <img 
       src="/mihora-logo.svg" 
-      alt="MIHORA TECH - Founded by M. Matti ul Hasnain and Omema Iqbal" 
+      alt="MIHORA sovereign engineering and systems architecture logo" 
       className={`${className} w-auto object-contain`} 
     />
   );
