@@ -21,6 +21,28 @@
       })();
     </script>
 
+    <!-- GitHub Pages Single Page App Redirect Decoder & Legacy Hash URL Upgrader -->
+    <script>
+      (function(l) {
+        // 1. Decode redirect from 404.html if served by GitHub Pages for deep routes
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+        // 2. Automatically upgrade legacy hash-based URLs (e.g. /#/services) into clean canonical paths
+        if (l.hash && l.hash.indexOf('#/') === 0) {
+          var cleanRoute = l.hash.substring(2);
+          if (cleanRoute) {
+            window.history.replaceState(null, null, '/' + cleanRoute + l.search);
+          }
+        }
+      }(window.location));
+    </script>
+
     <!-- Primary SEO Meta Tags (Founders & Brand Heavy) -->
     <meta name="google-site-verification" content="googlefb6d7fd888a3a4a2" />
     <title>MIHORA.TECH | Founded by M. Matti ul Hasnain &amp; Omema Iqbal | Sovereign Engineering</title>

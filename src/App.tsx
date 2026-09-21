@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Engineering from './pages/Engineering';
@@ -13,12 +13,26 @@ import Contact from './pages/Contact';
 import Legal from './pages/Legal';
 import NotFound from './pages/NotFound';
 
+function LegacyHashRedirect() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    // Automatically convert legacy hash routes (e.g. /#/careers or /#/services) into clean canonical paths
+    if (typeof window !== 'undefined' && window.location.hash && window.location.hash.startsWith('#/')) {
+      const cleanPath = window.location.hash.slice(2);
+      if (cleanPath) {
+        navigate('/' + cleanPath, { replace: true });
+      }
+    }
+  }, [navigate]);
+  return null;
+}
+
 function ScrollManager() {
   const location = useLocation();
 
   useEffect(() => {
     // If there is a hash in the current location or query
-    if (location.hash) {
+    if (location.hash && !location.hash.startsWith('#/')) {
       const targetId = location.hash.replace('#', '');
       const element = document.getElementById(targetId);
       if (element) {
@@ -38,6 +52,7 @@ function ScrollManager() {
 export default function App() {
   return (
     <Router>
+      <LegacyHashRedirect />
       <ScrollManager />
       <Routes>
         <Route path="/" element={<Layout />}>
