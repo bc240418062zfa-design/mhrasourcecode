@@ -41,6 +41,8 @@ const SEARCH_CATALOG: SearchItem[] = [
   { title: "Technical Papers", category: "Insights", path: "/insights#technical-papers", description: "Peer-reviewed architectural analysis and whitepapers" },
   { title: "Join Engineering", category: "Careers", path: "/careers#join-engineering", description: "Open roles across systems design, software, and field engineering" },
   { title: "Direct Dispatch & Contact", category: "Contact", path: "/contact", description: "Engage architecture team, request dispatch or schedule consult" },
+  { title: "Technical Documentation Codex", category: "Docs", path: "/docs", description: "9-layer sovereign stack, fiber splicing specifications, and dual-hub telemetry" },
+  { title: "Official Entity FAQs & Knowledge Base", category: "FAQ", path: "/faq", description: "Frequently asked questions about MIHORA, co-founders Hasnain & Omema, and services" },
   { title: "Security & Compliance", category: "Legal", path: "/legal#security", description: "ISO 27001, SOC 2 Type II, and data sovereignty policies" }
 ];
 
@@ -192,6 +194,8 @@ export default function Layout() {
     { label: 'Solutions', path: '/solutions' },
     { label: 'Industries', path: '/industries' },
     { label: 'Engineering', path: '/engineering' },
+    { label: 'Docs', path: '/docs' },
+    { label: 'FAQ', path: '/faq' },
     { label: 'Company', path: '/company' },
     { label: 'Insights', path: '/insights' },
     { label: 'Careers', path: '/careers' },
@@ -876,6 +880,7 @@ export default function Layout() {
                 <li className="hover:text-on-surface"><Link to="/engineering#systems-design">Systems Design</Link></li>
                 <li className="hover:text-on-surface"><Link to="/engineering#hardware-software-stack">Hardware-Software Stack</Link></li>
                 <li className="hover:text-on-surface"><Link to="/engineering#reliability-telemetry">Reliability Telemetry</Link></li>
+                <li className="hover:text-on-surface"><Link to="/docs" className="text-secondary font-semibold">Technical Docs Codex</Link></li>
               </ul>
             </div>
             <div className="space-y-space-sm">
@@ -884,6 +889,7 @@ export default function Layout() {
                 <li className="hover:text-on-surface"><Link to="/company#about">About MIHORA</Link></li>
                 <li className="hover:text-on-surface"><Link to="/company#philosophy">Engineering Philosophy</Link></li>
                 <li className="hover:text-on-surface"><Link to="/company#global-operating-model">Global Operating Model</Link></li>
+                <li className="hover:text-on-surface"><Link to="/faq" className="text-secondary font-semibold">Verified Entity FAQ</Link></li>
                 <li className="hover:text-on-surface"><Link to="/contact">Offices &amp; Labs</Link></li>
               </ul>
             </div>

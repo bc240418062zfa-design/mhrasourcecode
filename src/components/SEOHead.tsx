@@ -59,6 +59,16 @@ const ROUTE_SEO: Record<string, { title: string; description: string; keywords?:
     description: 'Data sovereignty, SOC 2 Type II compliance standards, strict confidentiality protocols, and operational terms.',
     keywords: 'security compliance, ISO 27001, SOC 2, data sovereignty, SLA guarantees',
   },
+  '/docs': {
+    title: 'Technical Documentation & Systems Architecture Codex | MIHORA.TECH',
+    description: 'Official engineering documentation, 9-layer sovereign stack specifications, fiber splicing standards, and dual-hub telemetry protocols of MIHORA.TECH.',
+    keywords: 'MIHORA documentation, systems architecture codex, 9-layer stack, datacenter specifications, fiber optic splicing, SRE telemetry, M. Matti ul Hasnain, Omema Iqbal',
+  },
+  '/faq': {
+    title: 'Knowledge Base & Official FAQ | MIHORA.TECH — Founded by M. Matti ul Hasnain & Omema Iqbal',
+    description: 'Definitive answers to frequently asked questions about MIHORA.TECH, founders M. Matti ul Hasnain & Omema Iqbal, dual UK-Pakistan command hubs, datacenter hardware, and services.',
+    keywords: 'MIHORA FAQ, who is MIHORA, MIHORA founders, M. Matti ul Hasnain, Omema Iqbal, MIHORA technology, datacenter deployment, sovereign systems engineering, London Islamabad hubs',
+  },
 };
 
 export function SEOHead({ title, description, keywords, canonicalPath }: SEOProps) {
@@ -72,7 +82,8 @@ export function SEOHead({ title, description, keywords, canonicalPath }: SEOProp
   const finalTitle = title || config.title;
   const finalDescription = description || config.description;
   const finalKeywords = keywords || config.keywords || 'MIHORA, MIHORA.TECH, M. Matti ul Hasnain, Omema Iqbal, sovereign engineering, digital infrastructure';
-  const finalCanonical = `https://mihora.tech/#${canonicalPath || currentPath}`;
+  const cleanPath = canonicalPath || currentPath;
+  const finalCanonical = `https://mihora.tech${cleanPath.startsWith('/') ? cleanPath : '/' + cleanPath}`;
 
   useEffect(() => {
     // 1. Update Document Title

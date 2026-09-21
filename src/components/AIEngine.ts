@@ -107,6 +107,38 @@ const KNOWLEDGE_BASE: Array<{
       },
       telemetryCode: "SRE_MONITOR // GLOBAL_NODES: 142/142 ONLINE • MTTD: 42s • MTTR: 2.1m"
     }
+  },
+  {
+    keywords: ['docs', 'documentation', 'manual', 'specification', 'codex', 'standards', 'schema'],
+    response: {
+      summary: "MIHORA Systems Architecture & Engineering Codex delivers exhaustive technical specifications spanning physical datacenter cabling, optical fiber tolerances, synchronous dual-hub telemetry, and industrial SCADA bridges.",
+      architecturePoints: [
+        "Complete 9-Layer sovereign stack specifications with verified hardware parameters.",
+        "OTDR fiber splicing benchmarks with insertion loss strictly ≤ 0.05 dB.",
+        "London (UK) and Islamabad (PK) dual-command heartbeat synchronization protocol."
+      ],
+      recommendedAction: {
+        label: "Open Technical Documentation Codex",
+        path: "/docs"
+      },
+      telemetryCode: "CODEX_INDEX // TECHNICAL_DOCUMENTATION_V2025: VERIFIED"
+    }
+  },
+  {
+    keywords: ['faq', 'question', 'questions', 'what is mihora', 'about mihora', 'info', 'help'],
+    response: {
+      summary: "MIHORA.TECH is an international sovereign engineering organization founded by M. Matti ul Hasnain and Omema Iqbal, operating dual command hubs in London (UK) and Islamabad (Pakistan) with global physical and digital deployment capabilities.",
+      architecturePoints: [
+        "Founded by M. Matti ul Hasnain (Principal Systems Architect) & Omema Iqbal (Operations Director).",
+        "Dual command centers providing 24/7 follow-the-sun continuous telemetry and follow-the-sun SRE.",
+        "Full-span capability: bare-metal server racks, fiber splicing, and distributed microservices."
+      ],
+      recommendedAction: {
+        label: "View Verified Entity FAQs",
+        path: "/faq"
+      },
+      telemetryCode: "FAQ_GRAPH // KNOWLEDGE_BASE_ATTESTATION: VERIFIED [FOUNDERS_CONFIRMED]"
+    }
   }
 ];
 

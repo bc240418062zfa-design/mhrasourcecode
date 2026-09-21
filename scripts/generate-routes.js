@@ -78,6 +78,20 @@ const routes = [
     description: 'MIHORA.TECH governance, sovereign compliance, data privacy, intellectual property disclosures, and security terms.',
     heading: 'MIHORA.TECH — Legal, Governance & Sovereign Compliance',
     summary: 'Comprehensive legal documentation, data protection policies, SOC 2 / ISO 27001 compliance standards, and sovereign client governance.'
+  },
+  {
+    path: 'docs',
+    title: 'Technical Documentation & Systems Architecture Codex | MIHORA.TECH',
+    description: 'Official engineering documentation, 9-layer sovereign stack specifications, fiber splicing standards, and dual-hub telemetry protocols of MIHORA.TECH.',
+    heading: 'MIHORA.TECH — Technical Documentation & Architecture Codex',
+    summary: 'Exhaustive systems specifications: 9-layer sovereign architecture, datacenter hardware topologies, core-alignment fusion fiber splicing (loss ≤ 0.05 dB), Cat6A shielded cable dressing, and London-Islamabad dual command heartbeat telemetry.'
+  },
+  {
+    path: 'faq',
+    title: 'Knowledge Base & Official FAQ | MIHORA.TECH — Founded by M. Matti ul Hasnain & Omema Iqbal',
+    description: 'Definitive answers to frequently asked questions about MIHORA.TECH, founders M. Matti ul Hasnain & Omema Iqbal, dual UK-Pakistan command hubs, datacenter hardware, and services.',
+    heading: 'MIHORA.TECH — Verified Entity Knowledge Base & FAQ',
+    summary: 'Official answers regarding MIHORA.TECH: founded by M. Matti ul Hasnain and Omema Iqbal, operating dual command centers in London (UK) and Islamabad (Pakistan). Capabilities span digital systems engineering, physical server rack deployments, optical fiber, and 24/7 managed SRE.'
   }
 ];
 
