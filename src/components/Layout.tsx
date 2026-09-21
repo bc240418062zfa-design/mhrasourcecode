@@ -1,5 +1,10 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, Cpu, Building, Briefcase, Sparkles, Sun, Moon, Bot, Zap, CornerDownLeft, Clock, Activity, Wifi, Volume2, VolumeX } from 'lucide-react';
+import { 
+  Palette, Menu, X, Search, Terminal, ArrowRight, ShieldCheck, 
+  Cpu, Building, Briefcase, Sparkles, Sun, Moon, Bot, Zap, 
+  CornerDownLeft, Clock, Activity, Wifi, Volume2, VolumeX,
+  ChevronDown, Layers, BookOpen, HelpCircle, FileText, Globe, Server
+} from 'lucide-react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import clsx from 'clsx';
@@ -44,6 +49,27 @@ const SEARCH_CATALOG: SearchItem[] = [
   { title: "Technical Documentation Codex", category: "Docs", path: "/docs", description: "9-layer sovereign stack, fiber splicing specifications, and dual-hub telemetry" },
   { title: "Official Entity FAQs & Knowledge Base", category: "FAQ", path: "/faq", description: "Frequently asked questions about MIHORA, co-founders Hasnain & Omema, and services" },
   { title: "Security & Compliance", category: "Legal", path: "/legal#security", description: "ISO 27001, SOC 2 Type II, and data sovereignty policies" }
+];
+
+const NAV_LINKS = [
+  { label: 'Services', path: '/services' },
+  { label: 'Solutions', path: '/solutions' },
+  { label: 'Engineering', path: '/engineering' },
+  { label: 'Docs', path: '/docs' },
+  { label: 'Insights', path: '/insights' },
+  { label: 'Company', path: '/company' },
+  { label: 'FAQ', path: '/faq' },
+];
+
+const MOBILE_NAV_LINKS = [
+  { label: 'Services', path: '/services', icon: Server, desc: 'Digital, cloud & physical infrastructure' },
+  { label: 'Solutions', path: '/solutions', icon: Layers, desc: 'Enterprise transformation & automation' },
+  { label: 'Engineering', path: '/engineering', icon: Cpu, desc: '9-layer sovereign stack & reliability' },
+  { label: 'Documentation Codex', path: '/docs', icon: BookOpen, desc: 'Technical specifications & runbooks' },
+  { label: 'Insights & Whitepapers', path: '/insights', icon: FileText, desc: 'Architectural research & analysis' },
+  { label: 'Company & Leadership', path: '/company', icon: Building, desc: 'Founders, global hubs & mission' },
+  { label: 'Verified Entity FAQ', path: '/faq', icon: HelpCircle, desc: 'Common inquiries & governance' },
+  { label: 'Join Engineering (Careers)', path: '/careers', icon: Briefcase, desc: 'Open engineering positions' },
 ];
 
 export default function Layout() {
@@ -133,15 +159,15 @@ export default function Layout() {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         setSearchOpen((prev) => !prev);
-      } else if (e.key === 'Escape' && searchOpen) {
-        setSearchOpen(false);
+      } else if (e.key === 'Escape') {
+        if (searchOpen) setSearchOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [searchOpen]);
 
-  // Centralized smooth hash scrolling
+  // Centralized smooth hash scrolling & close mobile menu
   useEffect(() => {
     setMobileMenuOpen(false);
     if (location.hash) {
@@ -149,7 +175,7 @@ export default function Layout() {
         const id = location.hash.replace('#', '');
         const element = document.getElementById(id);
         if (element) {
-          const y = element.getBoundingClientRect().top + window.scrollY - 90;
+          const y = element.getBoundingClientRect().top + window.scrollY - 75;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
       }, 100);
@@ -189,49 +215,42 @@ export default function Layout() {
     }, 300);
   };
 
-  const navLinks = [
-    { label: 'Services', path: '/services' },
-    { label: 'Solutions', path: '/solutions' },
-    { label: 'Industries', path: '/industries' },
-    { label: 'Engineering', path: '/engineering' },
-    { label: 'Docs', path: '/docs' },
-    { label: 'FAQ', path: '/faq' },
-    { label: 'Company', path: '/company' },
-    { label: 'Insights', path: '/insights' },
-    { label: 'Careers', path: '/careers' },
-    { label: 'Contact', path: '/contact' },
-  ];
-
   return (
     <div className="flex flex-col w-full min-h-screen">
       {/* Route-Aware Dynamic SEO Head */}
       <SEOHead />
 
-      <header className="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-2xl border-b border-outline/30 shadow-sm transition-all">
-        <div className="w-full px-margin-mobile lg:px-margin">
-          <div className="h-20 flex items-center justify-between gap-2 sm:gap-space-md">
-            <div className="flex items-center gap-space-lg shrink-0">
-              <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group" onClick={() => setMobileMenuOpen(false)}>
-                <BrandLogo className="w-9 h-9 sm:w-10 sm:h-10 group-hover:scale-105 transition-transform shrink-0" />
+      <header className="fixed top-0 left-0 w-full z-50 bg-surface/85 backdrop-blur-xl border-b border-outline/25 transition-all">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="h-16 flex items-center justify-between gap-4">
+            {/* Brand Logo & Name */}
+            <div className="flex items-center gap-6 shrink-0">
+              <Link 
+                to="/" 
+                className="flex items-center gap-2.5 group" 
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <BrandLogo className="w-8 h-8 group-hover:scale-105 transition-transform shrink-0" />
                 <div className="flex items-center tracking-tight">
-                  <span className="font-headline-md text-headline-md font-extrabold text-on-surface tracking-tighter group-hover:text-primary transition-colors">MIHORA</span>
-                  <span className="font-label-md text-label-md text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-black tracking-widest ml-1">.TECH</span>
+                  <span className="font-bold text-lg text-on-surface tracking-tight">MIHORA</span>
+                  <span className="text-[11px] font-bold text-primary tracking-widest ml-1">.TECH</span>
                 </div>
               </Link>
             </div>
             
-            <nav className="hidden xl:flex items-center gap-1.5 2xl:gap-2">
-              {navLinks.map((item) => {
+            {/* Desktop Direct Clean Navigation */}
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+              {NAV_LINKS.map((item) => {
                 const isActive = location.pathname === item.path;
                 return (
                   <Link
                     key={item.path}
                     to={item.path}
                     className={clsx(
-                      "font-label-md text-label-md uppercase tracking-wider transition-all px-2.5 2xl:px-3 py-1.5 rounded-lg font-semibold whitespace-nowrap",
-                      isActive 
-                        ? 'text-primary bg-surface-container border border-primary/40 shadow-sm' 
-                        : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60'
+                      "text-xs xl:text-sm font-medium transition-colors px-3 py-1.5 rounded-lg whitespace-nowrap",
+                      isActive
+                        ? "text-primary font-semibold bg-primary/10"
+                        : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60"
                     )}
                   >
                     {item.label}
@@ -240,97 +259,53 @@ export default function Layout() {
               })}
             </nav>
 
-            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-              {/* Live Real-time Dual-Hub Clock Pill (Ultra-wide Desktop) */}
-              <div className="hidden 2xl:flex items-center gap-2 px-3 py-1.5 bg-surface-container/80 border border-outline/40 rounded-lg font-mono text-[11px] text-on-surface-variant shrink-0">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
-                  <span className="text-primary font-bold">LON:</span>
-                  <span className="text-on-surface">{timeLondon || '10:50:14'}</span>
-                </div>
-                <span className="text-outline/60">|</span>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
-                  <span className="text-secondary font-bold">ISB:</span>
-                  <span className="text-on-surface">{timeIslamabad || '15:50:14'}</span>
-                </div>
-              </div>
+            {/* Header Right Utilities */}
+            <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+              {/* Search Architecture Trigger */}
+              <button 
+                onClick={() => setSearchOpen(true)}
+                className="flex items-center gap-2 px-3 py-1.5 bg-surface-container/60 hover:bg-surface-container border border-outline/30 hover:border-primary/50 text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer text-xs" 
+                type="button"
+                aria-label="Search"
+              >
+                <Search size={14} className="text-primary shrink-0" />
+                <span className="hidden sm:inline font-medium">Search</span>
+                <kbd className="hidden md:inline-block px-1.5 py-0.5 bg-surface-container-highest border border-outline/30 text-on-surface-variant rounded font-mono text-[10px]">⌘K</kbd>
+              </button>
 
-              {/* Theme Toggle Button - Fully Visible Across ALL Screen Breakpoints */}
+              {/* Theme Toggle Button */}
               <button 
                 id="theme-toggle-header-btn"
                 onClick={toggleTheme} 
-                className="shrink-0 flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 bg-surface-container hover:bg-surface-container-high border border-outline hover:border-primary text-on-surface rounded-lg transition-all cursor-pointer shadow-sm hover:shadow-md active:scale-95" 
+                className="p-2 bg-surface-container/60 hover:bg-surface-container border border-outline/30 text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer" 
                 type="button" 
                 aria-label="Toggle Theme"
-                title={`Active Theme: ${theme === 'light' ? 'White Daylight' : 'Obsidian Dark'}. Click to switch.`}
+                title={`Theme: ${theme === 'light' ? 'Daylight' : 'Obsidian'}`}
               >
                 {theme === 'light' ? (
-                  <>
-                    <Sun size={17} className="text-amber-500 fill-amber-500/20 shrink-0" />
-                    <span className="font-label-sm text-label-sm uppercase tracking-wider hidden sm:inline font-mono text-[11px] font-bold text-on-surface whitespace-nowrap">
-                      WHITE
-                    </span>
-                  </>
+                  <Sun size={15} className="text-amber-500 shrink-0" />
                 ) : (
-                  <>
-                    <Moon size={17} className="text-secondary fill-secondary/20 shrink-0" />
-                    <span className="font-label-sm text-label-sm uppercase tracking-wider hidden sm:inline font-mono text-[11px] font-bold text-secondary whitespace-nowrap">
-                      DARK
-                    </span>
-                  </>
+                  <Moon size={15} className="text-secondary shrink-0" />
                 )}
               </button>
 
-              {/* Compact Interactive Tactile SFX Audio Synthesizer Toggle */}
-              <button 
-                id="sfx-toggle-header-btn"
-                onClick={handleToggleSound}
-                className={clsx(
-                  "shrink-0 flex items-center justify-center gap-1.5 px-2 py-1.5 border rounded-lg transition-all cursor-pointer shadow-sm active:scale-95 text-xs",
-                  soundOn 
-                    ? "bg-primary/10 border-primary/60 text-primary shadow-[0_0_10px_rgba(0,85,255,0.12)]" 
-                    : "bg-surface-container hover:bg-surface-container-high border-outline/50 hover:border-outline text-on-surface-variant hover:text-on-surface"
-                )}
-                type="button"
-                aria-label={soundOn ? "Mute interface audio effects" : "Enable interface audio"}
-                title={soundOn ? "Tactile SFX Active. Click to mute." : "Futuristic SFX Off. Click to activate interactive sound effects."}
+              {/* Direct Primary Contact Button */}
+              <Link
+                to="/contact"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary hover:bg-primary/90 text-white text-xs font-semibold shadow-sm transition-all active:scale-95 shrink-0"
               >
-                {soundOn ? (
-                  <>
-                    <Volume2 size={14} className="text-primary shrink-0" />
-                    <span className="font-mono text-[10px] font-bold tracking-wider text-primary">SFX</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shrink-0"></span>
-                  </>
-                ) : (
-                  <>
-                    <VolumeX size={14} className="shrink-0 opacity-60" />
-                    <span className="font-mono text-[10px] font-medium tracking-wider opacity-70">SFX</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-outline/40 shrink-0"></span>
-                  </>
-                )}
-              </button>
-
-              {/* Search Architecture Button */}
-              <button 
-                onClick={() => setSearchOpen(true)}
-                className="shrink-0 flex items-center gap-1.5 px-2.5 sm:px-3 py-2 bg-surface-container hover:bg-surface-container-high border border-outline hover:border-primary text-on-surface-variant hover:text-on-surface rounded-lg transition-all cursor-pointer shadow-sm active:scale-95" 
-                type="button"
-                aria-label="Search Architecture"
-              >
-                <Search size={16} className="text-primary shrink-0" />
-                <span className="font-label-sm text-label-sm uppercase tracking-wider hidden md:inline font-semibold whitespace-nowrap">Search</span>
-                <kbd className="hidden lg:inline-block px-1.5 py-0.5 bg-surface-container-highest border border-outline text-on-surface rounded font-mono text-[10px]">⌘K</kbd>
-              </button>
+                <span>Contact Us</span>
+                <ArrowRight size={13} />
+              </Link>
 
               {/* Mobile / Tablet Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
-                className="xl:hidden shrink-0 p-2 text-on-surface-variant hover:text-on-surface bg-surface-container border border-outline rounded-lg transition-colors active:scale-95"
+                className="lg:hidden p-2 text-on-surface-variant hover:text-on-surface bg-surface-container/60 border border-outline/30 rounded-lg transition-colors"
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 type="button"
               >
-                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
               </button>
             </div>
           </div>
@@ -338,96 +313,60 @@ export default function Layout() {
 
         {/* Mobile / Tablet Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="xl:hidden border-t border-outline/30 bg-surface-container-lowest/98 px-margin-mobile py-space-md shadow-2xl backdrop-blur-2xl animate-in fade-in slide-in-from-top-4 duration-200">
-            {/* Dedicated Theme Switcher Card for Mobile/Tablet */}
-            <div className="mb-3 p-3 rounded-xl bg-surface-container border border-outline/50 flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                {theme === 'light' ? (
-                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center border border-amber-500/30">
-                    <Sun size={18} className="text-amber-500" />
-                  </div>
-                ) : (
-                  <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center border border-secondary/30">
-                    <Moon size={18} className="text-secondary" />
-                  </div>
-                )}
-                <div>
-                  <div className="text-xs font-mono font-bold text-on-surface">
-                    {theme === 'light' ? 'Daylight (White Theme)' : 'Obsidian (Cyber Dark)'}
-                  </div>
-                  <div className="text-[10px] text-on-surface-variant font-mono">
-                    System Appearance
-                  </div>
-                </div>
-              </div>
-              <button
-                onClick={toggleTheme}
-                className="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest border border-outline text-xs font-mono font-bold text-on-surface transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
-              >
-                <span>Switch to {theme === 'light' ? 'Dark' : 'White'}</span>
-              </button>
-            </div>
-
-            {/* Dedicated Compact SFX Tactile Audio Card for Mobile/Tablet */}
-            <div className="mb-2.5 p-2.5 rounded-xl bg-surface-container border border-outline/40 flex items-center justify-between">
+          <div className="lg:hidden border-t border-outline/20 bg-surface/98 px-4 py-4 shadow-2xl backdrop-blur-2xl max-h-[85vh] overflow-y-auto space-y-3">
+            {/* Quick Search */}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setSearchOpen(true);
+              }}
+              className="w-full flex items-center justify-between px-3 py-2 bg-surface-container border border-outline/30 rounded-lg text-xs text-on-surface-variant"
+            >
               <div className="flex items-center gap-2">
-                <div className={clsx(
-                  "w-7 h-7 rounded-lg flex items-center justify-center border transition-all",
-                  soundOn ? "bg-primary/15 border-primary text-primary" : "bg-surface-container-high border-outline text-on-surface-variant"
-                )}>
-                  {soundOn ? <Volume2 size={15} /> : <VolumeX size={15} />}
-                </div>
-                <div>
-                  <div className="text-xs font-mono font-bold text-on-surface flex items-center gap-1.5">
-                    <span>SFX Audio</span>
-                    <span className={clsx("text-[9px] px-1 py-0.2 rounded font-bold uppercase", soundOn ? "bg-primary/20 text-primary" : "bg-outline/20 text-on-surface-variant")}>
-                      {soundOn ? "ON" : "OFF"}
-                    </span>
-                  </div>
-                  <div className="text-[10px] text-on-surface-variant font-mono">
-                    {soundOn ? "Tactile click effects active" : "Muted • Tap to activate"}
-                  </div>
-                </div>
+                <Search size={14} className="text-primary" />
+                <span>Search specs, services, or topics...</span>
               </div>
-              <button
-                onClick={handleToggleSound}
-                className={clsx(
-                  "px-2.5 py-1 rounded-lg border text-xs font-mono font-bold transition-all flex items-center gap-1 cursor-pointer shadow-sm active:scale-95",
-                  soundOn 
-                    ? "bg-primary text-on-primary border-primary shadow-sm" 
-                    : "bg-surface-container-high border-outline text-on-surface hover:text-primary"
-                )}
-              >
-                <span>{soundOn ? "Mute" : "Enable"}</span>
-              </button>
+              <kbd className="px-1.5 py-0.5 bg-surface-container-high rounded text-[10px] font-mono">⌘K</kbd>
+            </button>
+
+            {/* Links List */}
+            <div className="space-y-1">
+              {MOBILE_NAV_LINKS.map((item) => {
+                const Icon = item.icon;
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={clsx(
+                      "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all",
+                      isActive
+                        ? "bg-primary/10 text-primary font-semibold border border-primary/20"
+                        : "text-on-surface hover:bg-surface-container"
+                    )}
+                  >
+                    <Icon size={16} className={isActive ? "text-primary shrink-0" : "text-on-surface-variant shrink-0"} />
+                    <div className="flex-1">
+                      <div className="font-semibold text-xs sm:text-sm">{item.label}</div>
+                      <div className="text-[11px] text-on-surface-variant">{item.desc}</div>
+                    </div>
+                    <ArrowRight size={13} className="text-outline opacity-50 shrink-0" />
+                  </Link>
+                );
+              })}
             </div>
 
-            <div className="flex flex-col space-y-1 pb-space-sm font-label-md text-label-md uppercase tracking-wider">
-              {navLinks.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={clsx(
-                    "px-space-sm py-2.5 rounded-lg transition-colors flex items-center justify-between",
-                    location.pathname === item.path
-                      ? "bg-surface-container text-primary font-bold border border-primary/30"
-                      : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
-                  )}
-                >
-                  <span>{item.label}</span>
-                  <ArrowRight size={14} className="opacity-40" />
-                </Link>
-              ))}
-            </div>
-
-            <div className="pt-space-sm border-t border-outline/30 flex flex-col sm:flex-row gap-space-xs font-mono text-xs text-on-surface-variant">
-              <a
-                href="mailto:hr@mihora.tech"
-                className="w-full py-2.5 text-center bg-primary text-on-primary font-bold rounded-lg tracking-wider uppercase shadow-sm"
+            {/* Bottom Actions */}
+            <div className="pt-2 border-t border-outline/20 flex flex-col gap-2">
+              <Link
+                to="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-2.5 px-4 flex items-center justify-center gap-2 bg-primary text-white font-semibold rounded-lg text-xs shadow-sm"
               >
-                DISPATCH: HR@MIHORA.TECH
-              </a>
+                <span>Contact Engineering</span>
+                <ArrowRight size={13} />
+              </Link>
             </div>
           </div>
         )}
@@ -691,7 +630,7 @@ export default function Layout() {
       )}
     </AnimatePresence>
 
-      <main className="w-full pt-20 bg-surface min-h-screen flex-1 overflow-x-hidden">
+      <main className="w-full pt-16 bg-surface min-h-screen flex-1 overflow-x-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
