@@ -1,12 +1,7 @@
+# RFC 9309 compliant robots.txt for MIHORA.TECH
 User-agent: *
 Allow: /
 Disallow: /api/
 
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-Host: https://mihora.tech
+# Sitemap location
 Sitemap: https://mihora.tech/sitemap.xml
