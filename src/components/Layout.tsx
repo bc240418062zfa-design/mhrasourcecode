@@ -227,13 +227,14 @@ export default function Layout() {
             <div className="flex items-center gap-6 shrink-0">
               <Link 
                 to="/" 
-                className="flex items-center gap-2.5 group" 
+                className="flex items-center gap-2.5 sm:gap-3 group shrink-0 select-none py-1" 
                 onClick={() => setMobileMenuOpen(false)}
+                aria-label="MIHORA Systems Homepage"
               >
-                <BrandLogo className="w-8 h-8 group-hover:scale-105 transition-transform shrink-0" />
-                <div className="flex items-center tracking-tight">
-                  <span className="font-bold text-lg text-on-surface tracking-tight">MIHORA</span>
-                  <span className="text-[11px] font-bold text-primary tracking-widest ml-1">.TECH</span>
+                <BrandLogo className="h-8 sm:h-9 w-auto aspect-[368/236] group-hover:scale-105 transition-transform shrink-0" />
+                <div className="flex items-baseline tracking-tight">
+                  <span className="font-bold text-xl sm:text-2xl text-on-surface tracking-tight font-headline leading-none">MIHORA</span>
+                  <span className="text-xs sm:text-sm font-extrabold text-primary tracking-widest ml-1 leading-none">.TECH</span>
                 </div>
               </Link>
             </div>
@@ -750,10 +751,10 @@ export default function Layout() {
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-space-lg pb-space-lg border-b border-surface-container-highest">
             <div className="space-y-space-xs">
               <div className="flex items-center gap-3">
-                <BrandLogo className="w-8 h-8" />
-                <div className="flex items-center tracking-tight">
-                  <span className="font-headline-md text-headline-md font-extrabold tracking-tight text-on-surface">MIHORA</span>
-                  <span className="font-label-md text-label-md text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-container font-black tracking-widest ml-1">.TECH</span>
+                <BrandLogo className="h-9 sm:h-10 w-auto aspect-[368/236] shrink-0" />
+                <div className="flex items-baseline tracking-tight">
+                  <span className="font-headline-md text-headline-md font-extrabold tracking-tight text-on-surface leading-none">MIHORA</span>
+                  <span className="font-label-md text-label-md text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-container font-black tracking-widest ml-1 leading-none">.TECH</span>
                 </div>
               </div>
               <p className="font-label-md text-label-md text-secondary-container uppercase tracking-wider font-semibold">Technology Engineered for the Real World.</p>

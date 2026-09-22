@@ -22,8 +22,8 @@ export default function Company() {
               Operating dual engineering hubs across the United Kingdom and Pakistan, delivering globally. MIHORA.TECH is built on a simple thesis: the most complex problems require mastery of both code and the physical world.
             </p>
             <div className="pt-2 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-surface-container border border-outline/30 flex items-center justify-center">
-                <BrandLogo className="w-6 h-6" />
+              <div className="h-11 px-2.5 rounded-lg bg-surface-container border border-outline/30 flex items-center justify-center">
+                <BrandLogo className="h-6 w-auto aspect-[368/236]" />
               </div>
               <div>
                 <p className="font-mono text-xs text-secondary font-bold tracking-wider uppercase">Founded by M. Matti ul Hasnain &amp; Omema Iqbal</p>

@@ -1,12 +1,12 @@
-export function BrandLogo({ className = "w-8 h-8", showText = false }: { className?: string; showText?: boolean }) {
+export function BrandLogo({ className = "h-8 w-auto aspect-[368/236]", showText = false }: { className?: string; showText?: boolean }) {
   return (
-    <div className={`relative flex items-center justify-center ${className} shrink-0`}>
+    <div className={`relative inline-flex items-center justify-center ${className} shrink-0`}>
       {/* Official MIHORA Multi-Faceted M Emblem with Constellation Network Mesh */}
       <svg 
-        viewBox="0 0 400 320" 
+        viewBox="16 16 368 236" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg" 
-        className="w-full h-full filter drop-shadow-[0_0_12px_rgba(0,102,255,0.45)] hover:drop-shadow-[0_0_18px_rgba(0,180,255,0.7)] transition-all duration-300"
+        className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(0,102,255,0.45)] hover:drop-shadow-[0_0_18px_rgba(0,180,255,0.7)] transition-all duration-300"
       >
         <defs>
           {/* 3D Facet dynamic gradients */}

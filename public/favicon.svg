@@ -1,60 +1,90 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
   <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="favBg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#050811"/>
-      <stop offset="100%" stop-color="#090d16"/>
-    </linearGradient>
-
-    <!-- 3D Facet Left Wing -->
-    <linearGradient id="favBlue" x1="12" y1="8" x2="32" y2="44" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#0066FF"/>
-      <stop offset="50%" stop-color="#0052E0"/>
+    <!-- Left Royal Electric Blue 3D Gradient -->
+    <linearGradient id="favLeftFacet" x1="60" y1="86" x2="200" y2="286" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0080FF"/>
+      <stop offset="50%" stop-color="#0055E5"/>
       <stop offset="100%" stop-color="#0035A0"/>
     </linearGradient>
 
-    <!-- 3D Facet Right Wing -->
-    <linearGradient id="favNavy" x1="52" y1="8" x2="32" y2="44" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#0B357A"/>
-      <stop offset="60%" stop-color="#061E47"/>
-      <stop offset="100%" stop-color="#020C1F"/>
+    <!-- Right Midnight Deep Navy 3D Gradient -->
+    <linearGradient id="favNavyFacet" x1="340" y1="86" x2="200" y2="286" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F4299"/>
+      <stop offset="55%" stop-color="#082559"/>
+      <stop offset="100%" stop-color="#04122C"/>
     </linearGradient>
+
+    <!-- Electric Cyan/Blue Outer Glow for Dark & Light Tab Visibility -->
+    <filter id="favGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="nodeGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="nodeBlur" />
+      <feMerge>
+        <feMergeNode in="nodeBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
 
-  <rect width="64" height="64" rx="14" fill="url(#favBg)" />
-  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" stroke="#0066FF" stroke-width="1.5" stroke-opacity="0.5" />
+  <!-- High-Contrast Subtle Glow Background for Universal Browser Tab Clarity -->
+  <g filter="url(#favGlow)" opacity="0.45">
+    <polygon points="60,86 200,246 150,291 20,136" fill="#0066FF" />
+    <polygon points="340,86 200,246 250,291 380,136" fill="#0066FF" />
+    <polygon points="20,136 60,86 60,306 20,266" fill="#0055FF" />
+    <polygon points="380,136 340,86 340,306 380,266" fill="#0055FF" />
+  </g>
 
-  <!-- MIHORA Real Geometric M Logo Structure -->
-  <g transform="translate(6, 4) scale(0.13)">
-    <!-- Left Wing -->
-    <polygon points="60,20 200,180 150,225 20,70" fill="url(#favBlue)" />
-    <polygon points="20,70 60,20 60,240 20,200" fill="#061A3C" />
-    <polygon points="150,225 200,180 200,248 150,225" fill="#003794" />
+  <!-- --- MIHORA 3D GEOMETRIC M STRUCTURE (EXACT REAL BRAND LOGO) --- -->
+  <g id="mihora-m-structure">
+    <!-- Left Wing Facet (Bright Royal Electric Blue) -->
+    <polygon points="60,86 200,246 150,291 20,136" fill="url(#favLeftFacet)" />
+    
+    <!-- Left Vertical Deep Navy Pillar -->
+    <polygon points="20,136 60,86 60,306 20,266" fill="#061A3C" stroke="#0055FF" stroke-width="2" stroke-opacity="0.4" />
 
-    <!-- Right Wing -->
-    <polygon points="340,20 200,180 250,225 380,70" fill="url(#favNavy)" />
-    <polygon points="380,70 340,20 340,240 380,200" fill="#020C1F" />
-    <polygon points="250,225 200,180 200,248 250,225" fill="#020917" />
+    <!-- Left Center Inner Fold -->
+    <polygon points="150,291 200,246 200,314 150,291" fill="#003794" />
 
-    <!-- Constellation Net -->
-    <g stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="50" y1="125" x2="85" y2="108" opacity="0.9" />
-      <line x1="85" y1="108" x2="135" y2="145" opacity="0.9" />
-      <line x1="135" y1="145" x2="175" y2="190" opacity="0.95" />
-      <line x1="175" y1="190" x2="200" y2="148" opacity="0.95" />
-      <line x1="200" y1="148" x2="265" y2="108" opacity="0.95" />
-      <line x1="265" y1="108" x2="350" y2="125" opacity="0.9" />
-      <line x1="175" y1="190" x2="285" y2="185" opacity="0.9" />
-      <line x1="200" y1="148" x2="285" y2="185" opacity="0.9" />
+    <!-- Right Wing Facet (Deep Ocean Midnight Blue) -->
+    <polygon points="340,86 200,246 250,291 380,136" fill="url(#favNavyFacet)" />
 
-      <circle cx="50" cy="125" r="9" fill="#FFFFFF" />
-      <circle cx="85" cy="108" r="10" fill="#FFFFFF" />
-      <circle cx="135" cy="145" r="10" fill="#FFFFFF" />
-      <circle cx="175" cy="190" r="12" fill="#00D2FF" />
-      <circle cx="200" cy="148" r="11" fill="#FFFFFF" />
-      <circle cx="265" cy="108" r="12" fill="#00D2FF" />
-      <circle cx="285" cy="185" r="10" fill="#FFFFFF" />
-      <circle cx="350" cy="125" r="9" fill="#FFFFFF" />
-    </g>
+    <!-- Right Vertical Dark Pillar with Subtle Highlighting for Dark Mode Tabs -->
+    <polygon points="380,136 340,86 340,306 380,266" fill="#020C1F" stroke="#0077FF" stroke-width="3" stroke-opacity="0.65" />
+    
+    <!-- Right Center Inner Fold -->
+    <polygon points="250,291 200,246 200,314 250,291" fill="#020917" />
+  </g>
+
+  <!-- --- CONSTELLATION NETWORK MESH (WHITE INTERCONNECTED DATA NODES) --- -->
+  <g id="mihora-constellation-network" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Fiber & Data Routing lines -->
+    <line x1="50" y1="191" x2="85" y2="174" opacity="0.95" />
+    <line x1="85" y1="174" x2="135" y2="211" opacity="0.95" />
+    <line x1="135" y1="211" x2="175" y2="256" opacity="0.95" />
+    <line x1="85" y1="174" x2="110" y2="251" opacity="0.85" />
+    <line x1="110" y1="251" x2="175" y2="256" opacity="0.9" />
+    <line x1="175" y1="256" x2="200" y2="214" opacity="0.95" />
+    <line x1="200" y1="214" x2="265" y2="174" opacity="0.95" />
+    <line x1="265" y1="174" x2="285" y2="251" opacity="0.9" />
+    <line x1="200" y1="214" x2="285" y2="251" opacity="0.95" />
+    <line x1="285" y1="251" x2="350" y2="191" opacity="0.95" />
+    <line x1="265" y1="174" x2="350" y2="191" opacity="0.85" />
+
+    <!-- Core Glowing White/Cyan Data Terminals -->
+    <circle cx="50" cy="191" r="7" fill="#FFFFFF" />
+    <circle cx="85" cy="174" r="8" fill="#FFFFFF" />
+    <circle cx="110" cy="251" r="7" fill="#FFFFFF" />
+    <circle cx="135" cy="211" r="8" fill="#FFFFFF" />
+    <circle cx="175" cy="256" r="9.5" fill="#FFFFFF" filter="url(#nodeGlow)" />
+    <circle cx="200" cy="214" r="9" fill="#FFFFFF" />
+    <circle cx="265" cy="174" r="9.5" fill="#FFFFFF" filter="url(#nodeGlow)" />
+    <circle cx="285" cy="251" r="8" fill="#FFFFFF" />
+    <circle cx="350" cy="191" r="7" fill="#FFFFFF" />
   </g>
 </svg>
