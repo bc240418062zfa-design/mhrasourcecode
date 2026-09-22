@@ -3,10 +3,20 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
+# Explicit Bot Allowances
 User-agent: bingbot
 Allow: /
 
 User-agent: msnbot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: DuckDuckBot
 Allow: /
 
 # Sitemap location
