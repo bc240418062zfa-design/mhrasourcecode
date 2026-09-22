@@ -8,6 +8,7 @@ import {
   Terminal, BarChart3, CheckCircle2
 } from 'lucide-react';
 import { playUiChime } from '../utils/audio';
+import { LiveIndustryNews } from '../components/LiveIndustryNews';
 
 interface InsightArticle {
   id: string;
@@ -413,6 +414,9 @@ Summary: ${article.summary}`;
           </div>
         </div>
       </section>
+
+      {/* Real-time Google Search Industry Dispatches & Whitepapers (Last 30 Days) */}
+      <LiveIndustryNews />
 
       {/* Technical Papers Section */}
       <section id="technical-papers" className="w-full bg-surface px-margin-mobile lg:px-margin py-space-xl scroll-mt-28 border-b border-outline/20">
