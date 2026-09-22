@@ -18,16 +18,16 @@ const templateHtml = fs.readFileSync(indexHtmlPath, 'utf8');
 const routes = [
   {
     path: 'engineering',
-    title: 'Engineering Capabilities | MIHORA.TECH — Physical & Digital Systems',
-    description: 'Deep-stack engineering from physical datacenter racks and fiber splicing to high-availability distributed microservices and 24/7 global SRE telemetry.',
-    heading: 'MIHORA.TECH — Sovereign Engineering Capabilities',
+    title: 'Sovereign Engineering & Datacenter Infrastructure | MIHORA.TECH',
+    description: 'Deep-stack sovereign engineering from physical datacenter infrastructure and fiber splicing to high-availability distributed microservices and SRE.',
+    heading: 'MIHORA.TECH — Sovereign Engineering & Datacenter Infrastructure',
     summary: 'MIHORA.TECH delivers 9-layer full-span engineering: physical datacenter infrastructure, enterprise cabling, low-latency microservices, SCADA hardware, and 24/7 telemetry monitoring across London UK and Islamabad Pakistan command centers.'
   },
   {
     path: 'services',
-    title: 'Services & Systems Architecture | MIHORA.TECH',
-    description: 'Comprehensive engineering services: Datacenter deployment, cloud architectures, automation pipelines, and round-the-clock site reliability engineering.',
-    heading: 'MIHORA.TECH — Specialized Systems Engineering Services',
+    title: 'Datacenter Infrastructure & Sovereign Engineering Services | MIHORA.TECH',
+    description: 'Comprehensive engineering services: physical datacenter infrastructure, server racks, cloud architectures, automation, and 24/7 reliability.',
+    heading: 'MIHORA.TECH — Datacenter Infrastructure & Sovereign Engineering',
     summary: 'Our service divisions encompass Digital Systems Architecture, Physical Infrastructure & Data Center Splicing, Event-Driven Automation Pipelines, and Managed Reliability 24/7 SRE operations.'
   },
   {

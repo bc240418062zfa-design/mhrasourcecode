@@ -144,14 +144,14 @@ export default function Engineering() {
             <div className="lg:col-span-8 space-y-space-md">
               <div className="inline-flex items-center gap-space-xs px-2.5 py-1 bg-surface-container-high rounded font-label-sm text-label-sm text-secondary tracking-widest uppercase">
                 <SlidersHorizontal size={14} />
-                The Engineering Foundation
+                Sovereign Engineering &amp; Datacenter Infrastructure
               </div>
               <h1 className="font-headline-xl text-headline-xl text-on-surface uppercase tracking-tight leading-none font-bold">
                 Where Digital <br/>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-container via-primary to-primary-fixed">Meets Physical.</span>
               </h1>
               <p className="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
-                Most technology firms write code and walk away. Traditional contractors install cables without understanding software architecture. MIHORA bridges the chasm: we engineer software from the silicon to the cloud, and physical infrastructure from the bedrock to the rack.
+                Most technology firms write code and walk away. Traditional contractors install cables without understanding software architecture. MIHORA bridges the chasm: we engineer sovereign engineering systems from the silicon to the cloud, and physical datacenter infrastructure from the bedrock to the rack.
               </p>
             </div>
             

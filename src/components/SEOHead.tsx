@@ -10,9 +10,9 @@ interface SEOProps {
 
 const ROUTE_SEO: Record<string, { title: string; description: string; keywords?: string }> = {
   '/': {
-    title: 'MIHORA | Sovereign Systems & Digital Engineering',
+    title: 'MIHORA | Sovereign Engineering & Datacenter Infrastructure',
     description: 'MIHORA.TECH, founded by M. Matti ul Hasnain and Omema Iqbal, engineers resilient digital systems, physical server infrastructure, automation pipelines, and 24/7 global telemetry operations across Pakistan, UK, and worldwide.',
-    keywords: 'MIHORA, MIHORA.TECH, M. Matti ul Hasnain, Omema Iqbal, founded by M. Matti ul Hasnain and Omema Iqbal, Matti ul Hasnain, Omema, sovereign engineering, digital infrastructure, Pakistan tech, cloud architecture',
+    keywords: 'sovereign engineering, datacenter infrastructure, MIHORA, MIHORA.TECH, M. Matti ul Hasnain, Omema Iqbal, founded by M. Matti ul Hasnain and Omema Iqbal, Matti ul Hasnain, Omema, physical datacenter, digital infrastructure, cloud architecture',
   },
   '/company': {
     title: 'Leadership & Founders | M. Matti ul Hasnain & Omema Iqbal | MIHORA.TECH',
@@ -20,14 +20,14 @@ const ROUTE_SEO: Record<string, { title: string; description: string; keywords?:
     keywords: 'M. Matti ul Hasnain, Omema Iqbal, MIHORA founders, founded by M. Matti ul Hasnain, Omema Iqbal MIHORA, MIHORA leadership, tech company Pakistan, sovereign systems, dual hub engineering',
   },
   '/engineering': {
-    title: '9-Layer Engineering Architecture | MIHORA.TECH',
-    description: 'Silicon to cloud sovereign engineering stack, physical telemetry, hardware-software integration, and production reliability axioms by MIHORA.TECH.',
-    keywords: '9-layer stack, hardware-software stack, SCADA, telemetry, site reliability, infrastructure engineering, MIHORA engineering',
+    title: 'Sovereign Engineering & Datacenter Infrastructure | MIHORA.TECH',
+    description: 'Silicon to cloud sovereign engineering stack, physical datacenter infrastructure, hardware-software integration, and 24/7 reliability axioms.',
+    keywords: 'sovereign engineering, datacenter infrastructure, 9-layer stack, physical datacenter, hardware-software stack, SCADA, telemetry, site reliability, MIHORA engineering',
   },
   '/services': {
-    title: 'Engineering Services & Infrastructure Solutions | MIHORA.TECH',
-    description: 'Digital engineering, automation & intelligence, physical infrastructure, on-site field engineering, and 24/7 managed SRE by MIHORA.TECH.',
-    keywords: 'digital engineering, server racks, fiber splicing, automation orchestration, managed SRE, enterprise switches, MIHORA services',
+    title: 'Datacenter Infrastructure & Sovereign Engineering Services | MIHORA.TECH',
+    description: 'Physical datacenter infrastructure, digital systems, automation pipelines, on-site field engineering, and 24/7 managed SRE by MIHORA.TECH.',
+    keywords: 'datacenter infrastructure, sovereign engineering, server racks, fiber splicing, automation orchestration, managed SRE, enterprise switches, MIHORA services',
   },
   '/solutions': {
     title: 'Sovereign Technical Solutions & Modernization | MIHORA.TECH',

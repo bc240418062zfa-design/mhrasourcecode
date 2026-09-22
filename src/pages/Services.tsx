@@ -145,7 +145,7 @@ const serviceNodes: ServiceNode[] = [
     deliverables: ['High-IOPS bare-metal Proxmox / KVM hypervisor cluster', 'Self-healing Ceph storage pool with automated rebalancing', 'Air-gapped LTO tape backup automation robot', 'Continuous SMART drive telemetry alerting']
   },
   { 
-    id: '3.3', division: 'infra', intents: ['DEPLOY'], name: 'Data Center Services', 
+    id: '3.3', division: 'infra', intents: ['DEPLOY'], name: 'Datacenter Infrastructure', 
     desc: 'Rack elevation engineering, hot/cold aisle containment, redundant PDU busway distribution, and carrier-grade cross-connects.', 
     icon: Building, tags: ['TIER III & IV RATED'],
     latency: 'PUE Target < 1.18', redundancy: '2N UPS + Dual Generator Backup', sla: '99.999%',

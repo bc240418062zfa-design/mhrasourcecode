@@ -1,4 +1,4 @@
-// Instant IndexNow submission script for Microsoft Bing & Search Engines
+// Instant IndexNow submission script for Microsoft Bing, Yandex & Global Search Engines
 import https from 'https';
 
 const payload = JSON.stringify({
@@ -21,33 +21,49 @@ const payload = JSON.stringify({
   ]
 });
 
-const options = {
-  hostname: 'api.indexnow.org',
-  port: 443,
-  path: '/indexnow',
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json; charset=utf-8',
-    'Content-Length': Buffer.byteLength(payload)
-  }
-};
+const endpoints = [
+  { name: 'IndexNow Central', hostname: 'api.indexnow.org', path: '/indexnow' },
+  { name: 'Microsoft Bing', hostname: 'www.bing.com', path: '/indexnow' },
+  { name: 'Yandex', hostname: 'yandex.com', path: '/indexnow' }
+];
 
-const req = https.request(options, (res) => {
-  console.log(`[IndexNow] Response Status: ${res.statusCode} (${res.statusMessage})`);
-  let data = '';
-  res.on('data', (chunk) => { data += chunk; });
-  res.on('end', () => {
-    if (res.statusCode === 200 || res.statusCode === 202) {
-      console.log('[IndexNow] Success: All MIHORA.TECH URLs submitted to Bing & IndexNow for instant crawling!');
-    } else {
-      console.log(`[IndexNow] Notice: HTTP ${res.statusCode}. ${data}`);
-    }
+async function submitToEndpoint(ep) {
+  return new Promise((resolve) => {
+    const options = {
+      hostname: ep.hostname,
+      port: 443,
+      path: ep.path,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => { data += chunk; });
+      res.on('end', () => {
+        console.log(`[IndexNow -> ${ep.name}] Status: ${res.statusCode} (${res.statusMessage})`);
+        resolve(res.statusCode);
+      });
+    });
+
+    req.on('error', (e) => {
+      console.warn(`[IndexNow -> ${ep.name}] Error: ${e.message}`);
+      resolve(null);
+    });
+
+    req.write(payload);
+    req.end();
   });
-});
+}
 
-req.on('error', (e) => {
-  console.error(`[IndexNow] Error submitting: ${e.message}`);
-});
+async function run() {
+  console.log('[IndexNow] Submitting 12 URLs across Bing, Yandex & Global IndexNow engines...');
+  for (const ep of endpoints) {
+    await submitToEndpoint(ep);
+  }
+}
 
-req.write(payload);
-req.end();
+run();
