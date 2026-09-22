@@ -3,5 +3,11 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
+User-agent: bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
 # Sitemap location
 Sitemap: https://mihora.tech/sitemap.xml
