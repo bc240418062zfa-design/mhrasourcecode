@@ -8,6 +8,7 @@ import {
   ArrowRight, Activity, Database, CheckCircle2, ChevronRight
 } from 'lucide-react';
 import { playUiChime } from '../utils/audio';
+import { SovereignRfpBuilder } from '../components/SovereignRfpBuilder';
 
 interface Bottleneck {
   id: string;
@@ -820,6 +821,9 @@ Dispatch to: hr@mihora.tech`;
           </div>
         )}
       </AnimatePresence>
+
+      {/* Enterprise Architecture & RFP Specification Engine */}
+      <SovereignRfpBuilder />
 
       {/* CTA */}
       <section className="w-full bg-surface-container-lowest px-margin-mobile lg:px-margin py-space-xl border-t border-outline/20">

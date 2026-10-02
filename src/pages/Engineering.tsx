@@ -6,6 +6,7 @@ import {
   SlidersHorizontal, ChevronRight, ShieldCheck, Gauge, ArrowRight, 
   Network, Globe, Shield, Pointer, Activity
 } from 'lucide-react';
+import { SubseaCableExplorer } from '../components/SubseaCableExplorer';
 
 const layerData: Record<number, any> = {
   1: {
@@ -521,6 +522,9 @@ export default function Engineering() {
           </div>
         </div>
       </section>
+
+      {/* Global Subsea Cable & Terrestrial Dark Fiber Route Explorer */}
+      <SubseaCableExplorer />
 
       {/* CTA */}
       <section className="w-full bg-surface py-space-xl lg:py-28 relative overflow-hidden">

@@ -13,6 +13,7 @@ import Contact from './pages/Contact';
 import Legal from './pages/Legal';
 import Docs from './pages/Docs';
 import Faq from './pages/Faq';
+import Status from './pages/Status';
 import NotFound from './pages/NotFound';
 
 function LegacyHashRedirect() {
@@ -69,6 +70,7 @@ export default function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="docs" element={<Docs />} />
           <Route path="faq" element={<Faq />} />
+          <Route path="status" element={<Status />} />
           <Route path="legal" element={<Legal />} />
           <Route path="*" element={<NotFound />} />
         </Route>

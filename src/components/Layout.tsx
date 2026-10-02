@@ -47,6 +47,10 @@ const SEARCH_CATALOG: SearchItem[] = [
   { title: "Join Engineering", category: "Careers", path: "/careers#join-engineering", description: "Open roles across systems design, software, and field engineering" },
   { title: "Direct Dispatch & Contact", category: "Contact", path: "/contact", description: "Engage architecture team, request dispatch or schedule consult" },
   { title: "Technical Documentation Codex", category: "Docs", path: "/docs", description: "9-layer sovereign stack, fiber splicing specifications, and dual-hub telemetry" },
+  { title: "Infrastructure Mission Control & Telemetry", category: "Status", path: "/status", description: "Real-time system health, PUE, DWDM optical jitter, and 90-day SLA performance across London and Islamabad hubs" },
+  { title: "Subsea Cable & Terrestrial Fiber Explorer", category: "Engineering", path: "/engineering#subsea-cable-explorer", description: "Interactive global maritime optical cables, PEACE, SMW5, and terrestrial sovereign dark fiber rings" },
+  { title: "Sovereign Proposal & RFP Builder", category: "Solutions", path: "/solutions#sovereign-rfp-builder", description: "Instant architecture BOM, rack power estimator, and proposal dispatch" },
+  { title: "Field Deployments & Case Studies", category: "Insights", path: "/insights#field-case-studies", description: "National interbank RTGS transition, 1,400km 800G DWDM re-splicing, and defense SCADA air-gaps" },
   { title: "Official Entity FAQs & Knowledge Base", category: "FAQ", path: "/faq", description: "Frequently asked questions about MIHORA, co-founders Hasnain & Omema, and services" },
   { title: "Security & Compliance", category: "Legal", path: "/legal#security", description: "ISO 27001, SOC 2 Type II, and data sovereignty policies" }
 ];
@@ -58,6 +62,7 @@ const NAV_LINKS = [
   { label: 'Docs', path: '/docs' },
   { label: 'Insights', path: '/insights' },
   { label: 'Company', path: '/company' },
+  { label: 'Status', path: '/status' },
   { label: 'FAQ', path: '/faq' },
 ];
 
@@ -68,6 +73,7 @@ const MOBILE_NAV_LINKS = [
   { label: 'Documentation Codex', path: '/docs', icon: BookOpen, desc: 'Technical specifications & runbooks' },
   { label: 'Insights & Whitepapers', path: '/insights', icon: FileText, desc: 'Architectural research & analysis' },
   { label: 'Company & Leadership', path: '/company', icon: Building, desc: 'Founders, global hubs & mission' },
+  { label: 'Infrastructure Status', path: '/status', icon: Activity, desc: 'Live SLA, telemetry & heartbeat' },
   { label: 'Verified Entity FAQ', path: '/faq', icon: HelpCircle, desc: 'Common inquiries & governance' },
   { label: 'Join Engineering (Careers)', path: '/careers', icon: Briefcase, desc: 'Open engineering positions' },
 ];
@@ -799,6 +805,7 @@ export default function Layout() {
                 <li className="hover:text-on-surface"><Link to="/solutions#remote-operations">Remote Operations</Link></li>
                 <li className="hover:text-on-surface"><Link to="/solutions#technical-operations">Technical Operations</Link></li>
                 <li className="hover:text-on-surface"><Link to="/solutions#custom-engineering">Custom Engineering</Link></li>
+                <li className="hover:text-on-surface"><Link to="/solutions#sovereign-rfp-builder" className="text-secondary font-semibold">RFP Spec Builder</Link></li>
               </ul>
             </div>
             <div className="space-y-space-sm">
@@ -820,6 +827,8 @@ export default function Layout() {
                 <li className="hover:text-on-surface"><Link to="/engineering#systems-design">Systems Design</Link></li>
                 <li className="hover:text-on-surface"><Link to="/engineering#hardware-software-stack">Hardware-Software Stack</Link></li>
                 <li className="hover:text-on-surface"><Link to="/engineering#reliability-telemetry">Reliability Telemetry</Link></li>
+                <li className="hover:text-on-surface"><Link to="/engineering#subsea-cable-explorer" className="text-secondary font-semibold">Subsea Cable Explorer</Link></li>
+                <li className="hover:text-on-surface"><Link to="/status" className="text-emerald-500 font-semibold flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span><span>System Status (99.999%)</span></Link></li>
                 <li className="hover:text-on-surface"><Link to="/docs" className="text-secondary font-semibold">Technical Docs Codex</Link></li>
               </ul>
             </div>
@@ -837,7 +846,8 @@ export default function Layout() {
               <div className="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Insights</div>
               <ul className="space-y-1.5 font-body-sm text-body-sm text-on-surface-variant">
                 <li className="hover:text-on-surface"><Link to="/insights#technical-papers">Technical Papers</Link></li>
-                <li className="hover:text-on-surface"><Link to="/insights#case-studies">Case Studies</Link></li>
+                <li className="hover:text-on-surface"><Link to="/insights#field-case-studies" className="text-primary font-semibold">Field Case Studies</Link></li>
+                <li className="hover:text-on-surface"><Link to="/insights#case-studies">Deep Research</Link></li>
                 <li className="hover:text-on-surface"><Link to="/insights#industrial-analysis">Industrial Analysis</Link></li>
               </ul>
             </div>

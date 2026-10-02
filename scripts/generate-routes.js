@@ -92,6 +92,13 @@ const routes = [
     description: 'Definitive answers to frequently asked questions about MIHORA.TECH, founders M. Matti ul Hasnain & Omema Iqbal, dual UK-Pakistan command hubs, datacenter hardware, and services.',
     heading: 'MIHORA.TECH — Verified Entity Knowledge Base & FAQ',
     summary: 'Official answers regarding MIHORA.TECH: founded by M. Matti ul Hasnain and Omema Iqbal, operating dual command centers in London (UK) and Islamabad (Pakistan). Capabilities span digital systems engineering, physical server rack deployments, optical fiber, and 24/7 managed SRE.'
+  },
+  {
+    path: 'status',
+    title: 'Live Infrastructure Telemetry & Status | MIHORA.TECH',
+    description: 'Real-time telemetry, 99.999% SLA uptime metrics, optical DWDM health, and NOC alert feeds across London and Islamabad hubs.',
+    heading: 'MIHORA.TECH — Infrastructure Mission Control & Telemetry',
+    summary: 'Live health status, PUE, network jitter, and incident logs across London (UK) and Islamabad (PK) command clusters.'
   }
 ];
 

@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { playUiChime } from '../utils/audio';
 import { LiveIndustryNews } from '../components/LiveIndustryNews';
+import { CaseStudiesSection } from '../components/CaseStudiesSection';
 
 interface InsightArticle {
   id: string;
@@ -606,6 +607,9 @@ Summary: ${article.summary}`;
           </div>
         </div>
       </section>
+
+      {/* Enterprise Field Deployments & Case Studies */}
+      <CaseStudiesSection />
 
       {/* Comprehensive Research Article Modal */}
       <AnimatePresence>
