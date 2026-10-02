@@ -65,8 +65,8 @@ export default function Company() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 rounded-full blur-2xl group-hover:bg-secondary/20 transition-all"></div>
               <div className="relative z-10 space-y-space-md">
                 <div className="flex items-center justify-between">
-                  <div className="w-14 h-14 rounded-xl bg-surface-container border border-secondary/40 flex items-center justify-center text-secondary font-mono font-bold text-xl shadow-[0_0_15px_rgba(0,210,255,0.2)]">
-                    MH
+                  <div className="w-16 h-16 rounded-xl overflow-hidden border-2 border-secondary/40 shadow-[0_0_15px_rgba(0,210,255,0.2)] shrink-0">
+                    <img src="/founder-matti.jpg" alt="M. Matti ul Hasnain" className="w-full h-full object-cover" />
                   </div>
                   <span className="font-mono text-xs px-3 py-1 bg-secondary/10 text-secondary border border-secondary/30 rounded-full font-bold uppercase tracking-wider">
                     Co-Founder &bull; Principal Architect
@@ -96,8 +96,8 @@ export default function Company() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all"></div>
               <div className="relative z-10 space-y-space-md">
                 <div className="flex items-center justify-between">
-                  <div className="w-14 h-14 rounded-xl bg-surface-container border border-primary/40 flex items-center justify-center text-primary font-mono font-bold text-xl shadow-[0_0_15px_rgba(0,102,255,0.2)]">
-                    OI
+                  <div className="w-16 h-16 rounded-xl overflow-hidden border-2 border-primary/40 shadow-[0_0_15px_rgba(0,102,255,0.2)] shrink-0">
+                    <img src="/founder-omema.jpg" alt="Omema Iqbal" className="w-full h-full object-cover" />
                   </div>
                   <span className="font-mono text-xs px-3 py-1 bg-primary/10 text-primary border border-primary/30 rounded-full font-bold uppercase tracking-wider">
                     Co-Founder &bull; Operations Director

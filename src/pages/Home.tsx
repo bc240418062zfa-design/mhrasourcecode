@@ -671,8 +671,8 @@ export default function Home() {
               <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all pointer-events-none"></div>
 
               <div className="flex items-center justify-between">
-                <div className="w-14 h-14 rounded-2xl bg-surface-container border border-primary/40 flex items-center justify-center text-primary font-mono font-bold text-xl shadow-sm group-hover:scale-105 transition-transform">
-                  MH
+                <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-primary/40 shadow-sm group-hover:scale-105 transition-transform shrink-0">
+                  <img src="/founder-matti.jpg" alt="M. Matti ul Hasnain" className="w-full h-full object-cover" />
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-mono text-xs px-3 py-1 bg-primary/10 text-primary border border-primary/30 rounded-full font-bold uppercase tracking-wider">
@@ -712,8 +712,8 @@ export default function Home() {
               <div className="absolute top-0 right-0 w-40 h-40 bg-secondary/10 rounded-full blur-3xl group-hover:bg-secondary/20 transition-all pointer-events-none"></div>
 
               <div className="flex items-center justify-between">
-                <div className="w-14 h-14 rounded-2xl bg-surface-container border border-secondary/40 flex items-center justify-center text-secondary font-mono font-bold text-xl shadow-sm group-hover:scale-105 transition-transform">
-                  OI
+                <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-secondary/40 shadow-sm group-hover:scale-105 transition-transform shrink-0">
+                  <img src="/founder-omema.jpg" alt="Omema Iqbal" className="w-full h-full object-cover" />
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="font-mono text-xs px-3 py-1 bg-secondary/10 text-secondary border border-secondary/30 rounded-full font-bold uppercase tracking-wider">
